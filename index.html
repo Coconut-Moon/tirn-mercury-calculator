@@ -1,134 +1,179 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <title>Seafood health and sustainability calculator</title>
+    <!-- Font families -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Open+Sans:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
 
+    <style type="text/css">
+    /*
+      Colors
+        Brand
+        - Primary (blue) : #014494
+        - Secondary (green) : #309303
 
-  <title></title>
-  <style type="text/css">
-  </style>
-  <script>
+        UI
+        - Light gray : #D8D8D8
 
-var fish = {
-    "anchovies" : {
-        Anchovies,,
-        "mercury_ppm" : 0.103,
-	},
-	"bass_chilean" : {
-		Bass - Chilean,,
-        "mercury_ppm" : 0.357,
-	}
-}
+        Type
+        - Readable active : #292929
+        - Readable disabled : #585858
+        - Highlight blue : #95F5FF
+    */
 
-    Anchovies, 0.103,gm,
-    Bass - Chilean, 0.357,gm,
-    Bass - Freshwater, 0.170,gm,
-    Bass - Saltwater, Black, White, Striped, 0.288,gm,
-    Bluefish, 0.351,gm,
-    Butterfish, 0.054,gm,
-    Buffalofish, 0.19,gm,
-    Carp, 0.156,gm,
-    Catfish, 0.118,gm,
-    Clams - Hard, 0.047,gm,
-    Clams - Geoduck, 0.030,gm,
-    Clams - Cockle, 0.054,gm,
-    Clams - Pacific Littleneck, 0.022,gm,
-    Clams - Softshell, 0.016,gm,
-    Cod - Atlantic, 0.070,gm,
-    Cod - Pacific, 0.144,gm,
-    Crab - Blue, 0.110,gm,
-    Crab - Dungeness, 0.120,gm,
-    Crab - King, 0.027,gm,
-    Crab - Snow, 0.110,gm,
-    Crawfish, 0.034,gm,
-    Croaker - Atlantic, 0.069,gm,
-    Croaker - White, Pacific, 0.169,gm,
-    Cuttlefish, 0.134,gm,
-    Eel, 0.186,gm,
-    Flatfish, 0.110,gm,
-    Flounder - Summer, 0.121,gm,
-    Flounder - Windowpane, 0.152,gm,
-    Freshwater Perch, 0.141,gm,
-    Grouper, 0.417,gm,
-    Haddock, 0.164,gm,
-    Hake, 0.146,gm,
-    Halibut - Pacific, 0.261,gm,
-    Halibut - Greenland, 0.183,gm,
-    Herring - Atlantic, 0.037,gm,
-    Herring - Pacific, 0.060,gm,
-    Jacksmelt, 0.108,gm,
-    Lingcod, 0.363,gm,
-    Lobster - American, 0.200,gm,
-    Lobster - Spiny, 0.100,gm,
-    Mackerel - Atlantic, 0.045,gm,
-    Mackerel - Chub, 0.099,gm,
-    Mackerel - King, 1.101,gm,
-    Mackerel - Spanish, 0.440,gm,
-    Mahi Mahi, 0.16, "This data is an average value from FDA data published at: http://www.cfsan.fda.gov/~frf/seamehg2.html",
-    Marlin - Blue, 2.465,gm,
-    Marlin - Striped, 0.861,gm,
-    Marlin - White, 0.695,gm,
-    Monkfish, 0.174,gm,
-    Mullet, 0.050,gm,
-    Mussels, 0.028,gm,
-    Orange Roughy, 0.513, "In addition to being high in mercury, Orange Roughy has seen dramatic declines in many fisheries. From a sustainability perspective it is best to avoid eating orange roughy.",
-    Oysters - Eastern, 0.018,gm,
-    Oysters - Pacific, 0.039,gm,
-    Perch - Freshwater, 0.14,gm,
-    Perch - Ocean, 0.117,gm,
-    Pike, 0.404,gm,
-    Plaice, 0.148,gm,
-    Pollock - Atlantic, 0.160,gm,
-    Pollock - Pacific/Alaska, 0.050,gm,
-    Porgy, 0.065,gm,
-    Sablefish, 0.243,gm,
-    Salmon - Atlantic, 0.058, "While salmon tends to be low in mercury, farmed salmon contain higher levels of PCB's. Salmon farms are extremely harmful to coastal ocean ecosystems - Avoid farmed salmon.,,
-    Salmon - Chinook, 0.067, "While salmon tends to be low in mercury, farmed salmon contain higher levels of PCB's. Salmon farms are extremely harmful to coastal ocean ecosystems - Avoid farmed salmon.,,
-    Salmon - Chum, 0.046,"While salmon tends to be low in mercury, farmed salmon contain higher levels of PCB's. Salmon farms are extremely harmful to coastal ocean ecosystems - Avoid farmed salmon.,,
-    Salmon - Coho, 0.044,"While salmon tends to be low in mercury, farmed salmon contain higher levels of PCB's. Salmon farms are extremely harmful to coastal ocean ecosystems - Avoid farmed salmon.,,
-    Salmon - Pink, 0.037,"While salmon tends to be low in mercury, farmed salmon contain higher levels of PCB's. Salmon farms are extremely harmful to coastal ocean ecosystems - Avoid farmed salmon.,,
-    Salmon - Sockeye, 0.039,"While salmon tends to be low in mercury, farmed salmon contain higher levels of PCB's. Salmon farms are extremely harmful to coastal ocean ecosystems - Avoid farmed salmon.,,
-    Salmon - Canned, 0.035,"While salmon tends to be low in mercury, farmed salmon contain higher levels of PCB's. Salmon farms are extremely harmful to coastal ocean ecosystems - Avoid farmed salmon.,,
-    Sardine, 0.079,gm,
-    Scallop, 0.040, "Scallop dredges cause severe damage to seafloor habitat. In addition, endangered sea turtles and other species can be caught incidentally and are discarded, often dead or dying, as bycatch,,
-    Scorpionfish, 0.286,gm,
-    Shad, 0.077,gm,
-    Shark - Blacktip, 0.882, "In addition to being high in mercury, many species of shark are being decimated by longline fishing fleets.",
-    Shark - Blue, 0.664, "In addition to being high in mercury, many species of shark are being decimated by longline fishing fleets.",
-    Shark - Mako, 1.259, "In addition to being high in mercury, many species of shark are being decimated by longline fishing fleets.",
-    Shark - Sandbar, 0.869, "In addition to being high in mercury, many species of shark are being decimated by longline fishing fleets.",
-    Shark - Thresher, 0.622, "In addition to being high in mercury, many species of shark are being decimated by longline fishing fleets.",
-    Sheepshead, 0.166,gm,
-    Shrimp - Brown, 0.077, "The majority of shrimp sold in the US comes from environmentally destructive aquaculture facilities in Asia.",
-    Shrimp - Pink, 0.083, "The majority of shrimp sold in the US comes from environmentally destructive aquaculture facilities in Asia.",
-    Shrimp - White, 0.057, "The majority of shrimp sold in the US comes from environmentally destructive aquaculture facilities in Asia.",
-    Skate, 0.138,gm,
-    Smelt, 0.025,gm,
-    Snapper - Gray, 0.233,gm,
-    Snapper - Red, 0.243,gm,
-    Sole, 0.086,gm,
-    Squid, 0.044,gm,
-    Swordfish, 0.893, "Swordfishing longline fleets are one of the worlds greatest threats to sea turtles, putting some species at risk of extinction over the next 10 years.",
-    Tilapia, 0.019,gm,
-    Tilefish - Atlantic, 0.171,gm,
-    Tilefish - Gulf of Mexico, 1.445,gm,
-    Trout, 0.344,gm,
-    Tuna - Albacore, 0.317, "Albacore tuna is caught using longline fishing methods that capture or kill millions of whales, dolphins, sharks and sea turtles per year.",
-    Tuna - Albacore Canned, 0.328, "Albacore tuna is caught using longline fishing methods that capture or kill millions of whales, dolphins, sharks and sea turtles per year.",
-    Tuna - Atlantic Bonito, 0.499,gm,
-    Tuna - Bigeye, 0.582,gm,
-    Tuna - Blackfin, 0.856,gm,
-    Tuna - Bluefin, 0.796,gm,
-    Tuna - Skipjack, 0.198,gm,
-    Tuna - Yellowfin, 0.270,gm,
-    Tuna - Yellowfin Canned, 0.143,gm,
-    Tuna - Light Canned, 0.118,gm,
-    Weakfish/Seatrout, 0.361,gm,
-    Whitefish, 0.106,gm,
-    Whiting, 0.040,gm
-  </script>
-</head>
-<body>
-</body>
+    /*
+      Typography
+        Headers : font-family: 'Fjalla One', sans-serif;
+        Body : font-family: 'Open Sans', sans-serif;
+    */
+      body, button, input {
+        color: #292929;
+        font-family: "Open Sans", sans-serif;
+        font-size: 16px;
+      }
+
+      main {
+        height: 100vh;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Fjalla One", sans-serif;
+      }
+
+      /* Workflow helpers */
+      .question-box.display-none {
+        display: none;
+      }
+
+      /* Inputs */
+      label {
+        margin-bottom: 1.25em;
+      }
+      input {
+        height: 48px;
+        border: 3px solid #d8d8d8;
+        border-radius: 2px;
+        margin-bottom: 1em;
+        box-sizing: border-box;
+      }
+
+      /* Buttons and Button Groups */
+
+      .btn {
+        font-weight: bold;
+        border: none;
+      }
+
+      .btn-primary {
+        background-color: #014494;
+        color: #ffffff;
+        margin-top: 64px;
+        padding: 24px 36px;
+        font-size: 1.125em;
+        border-radius: 6px;
+        width: 100%;
+      }
+
+      .btn-group button {
+        background-color: #d8d8d8;
+        color: #585858;
+        /*border: 1px solid #309303;*/
+        border-radius: 6px;
+        height: 48px;
+        padding: 12px 21px;
+        cursor: pointer;
+        float: left;
+      }
+
+      .btn-group button:not(:last-child) {
+        border-right: none; /* Prevent double borders */
+      }
+
+      .btn-group button:last-child {
+        border-radius: 0 6px 6px 0;
+      }
+
+      .btn-group button:first-child {
+        border-radius: 6px 0 0 6px;
+      }
+
+      /* Clear floats (clearfix hack) */
+      .btn-group:after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+
+      .btn-group button.active {
+        background-color: #309303;
+        color: white;
+      }
+
+      /* Add a background color on hover */
+      .btn-group button:hover {
+        /* background-color: #3e8e41; */
+      }
+
+      .question-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .question-one input {
+        width: 144px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Seafood health and sustainability calculator</h1>
+
+      <form>
+
+        <div class="question-box question-one" id="questionOne">
+          <p>
+            <strong>Are your seafood choices safe and sustainable?</strong>
+            <br><br>
+            Answer two questions to find out.
+          </p>
+          <br>
+          <label for="weight">What is your weight?</label>
+          <input type="number" id="weight" name="weight" />
+          <div class="btn-group">
+            <button class="btn active">Lbs</button>
+            <button class="btn">Kgs</button>
+          </div>
+          <button class="btn btn-primary"> Next question</button>
+        </div>
+
+        <div class="question-box question-two display-none" id="questionTwo">
+          <p>
+            What types of seafood do you eat in <strong>one week</strong>?
+          </p>
+        </div>
+
+        <div class="question-box results display-none" id="results">
+          <h2>Mercury exposure per week</h2>
+        </div>
+
+      </form>
+    </main>
+    <footer>
+      <div>
+        <a href="#">About this calculator</a>
+      </div>
+      <div>
+        <a href="#">Calculadora en Español</a>
+      </div>
+    </footer>
+  </body>
 </html>
