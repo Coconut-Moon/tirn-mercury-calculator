@@ -1,25 +1,25 @@
 @import url(https://fonts.googleapis.com/css2?family=Fjalla+One&family=Open+Sans:wght@300;400;700&display=swap);
 
 /*
-      Colors
-        Brand
-        - Primary (blue) : #014494
-        - Secondary (green) : #309303
+  Colors
+    Brand
+    - Primary (blue) : #014494
+    - Secondary (green) : #309303
 
-        UI
-        - Light gray : #D8D8D8
+    UI
+    - Light gray : #D8D8D8
 
-        Type
-        - Readable active : #292929
-        - Readable disabled : #585858
-        - Highlight blue : #95F5FF
-    */
+    Type
+    - Readable active : #292929
+    - Readable disabled : #585858
+    - Highlight blue : #95F5FF
+*/
 
 /*
-      Typography
-        Headers : font-family: 'Fjalla One', sans-serif;
-        Body : font-family: 'Open Sans', sans-serif;
-    */
+  Typography
+    Headers : font-family: 'Fjalla One', sans-serif;
+    Body : font-family: 'Open Sans', sans-serif;
+*/
 
 body,
 button,
@@ -37,6 +37,7 @@ h1,
 h2,
 h3 {
   font-family: "Fjalla One", sans-serif;
+  text-align: center;
 }
 
 /* Workflow helpers */
@@ -45,10 +46,9 @@ h3 {
 }
 
 /* Inputs */
-label {
-  margin-bottom: 1.25em;
-}
-input {
+
+
+input[type="text"]{
   height: 48px;
   border: 3px solid #d8d8d8;
   border-radius: 2px;
@@ -71,6 +71,11 @@ input {
   font-size: 1.125em;
   border-radius: 6px;
   width: 100%;
+}
+
+.btn-primary:hover {
+  background-color: #00224a;
+  cursor: pointer;
 }
 
 .btn-group {
@@ -135,4 +140,62 @@ input {
 /* Spacing helpers */
 .y-1 {
   margin-bottom: 0.5em;
+}
+
+.y-3 {
+margin-bottom: 1.25em;
+}
+
+/* Fish selector */
+
+#filterFish {
+  background-image: url('/icons/search-solid.svg');
+  background-repeat: no-repeat;
+  background-position: 16px 10px;
+  padding-left: 54px;
+  background-size: 24px;
+  margin-bottom: -3px;
+  z-index: 1;
+}
+
+#selectFish {
+  max-height: 31vh;
+  padding: 0;
+  border: 3px solid #d8d8d8;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+#filterFish, #selectFish {
+  width: 50%;
+}
+
+.header-fishlist {
+  margin-bottom: 0;
+  padding: 0 16px;
+}
+
+#fishList {
+  list-style-type: none;
+  margin: 0;
+  overflow: scroll;
+  max-height: 30vh;
+  padding: 16px;
+  box-sizing: border-box;
+  width: 100%;
+
+}
+
+#fishList li {
+  height: 32px;
+}
+
+#fishList li:hover {
+  background-color: aliceblue;
+  cursor: pointer;
+
+}
+
+#fishList .mercury-exposure {
+  float: right;
 }

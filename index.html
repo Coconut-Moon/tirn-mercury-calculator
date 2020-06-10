@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Style-Type" content="text/css" />
     <title>Seafood health and sustainability calculator</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-   
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.js"></script>
     <link rel="stylesheet" type="text/css" href="main.css" />
   </head>
   <body>
@@ -57,43 +57,51 @@
       <div class="question-box question-two" id="questionTwo">
         <p>What types of seafood do you eat in <strong>one week</strong>?</p>
 
-        <!-- <div class="selector-fish">
-          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-          <label for="vehicle1"> <span>Fish 1</span></label><br>
-          <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-          <label for="vehicle2"> <span>Fish 2</span></label><br>
-          <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-          <label for="vehicle3"> Fish 3</label><br>
-        </div> -->
+        <input type="text" id="filterFish" onkeyup="filterFish()" placeholder="Search for names..">
 
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+        <div id="selectFish">
+          <p class="header-fishlist"><b>Seafood<span style="float: right;">Mercury Level</span></b></p>
+          <ul id="fishList">
+            Loading...
+          </ul>
+        </div>
 
-<ul id="myUL">
-  <li><a href="#">Adele</a></li>
-  <li><a href="#">Agnes</a></li>
+        <script id="template" type="text/template">
+          {{#fishlist}}
+          <li>
+            <input class="fish" type="checkbox" id="fish{{ index }}" name="fish" value="{{ name }}">
+            <label for="fish{{ index }}">{{ name }}<span class="mercury-exposure">{{ mercury }}</span></label>
+          </li>
+          {{/fishlist}}
+        </script>
 
-  <li><a href="#">Billy</a></li>
-  <li><a href="#">Bob</a></li>
+        <h2>Choose serving sizes</h2>
+        <a href="#">One serving is 6 to 8 ounces</a>
 
-  <li><a href="#">Calvin</a></li>
-  <li><a href="#">Christina</a></li>
-  <li><a href="#">Cindy</a></li>
-  <li>
-    <input type="checkbox" id="fish1" name="fish1" value="Salmon">
-    <label for="fish1"><span>Salmon - Pink</span></label>
-  </li>
-  <li>
-    <input type="checkbox" id="fish2" name="fish2" value="Anchovies">
-    <label for="fish2"><span>Anchovies</span></label>
-  </li>
-  <li>
-    <input type="checkbox" id="fish3" name="vehicle3" value="Tuna - Albacore">
-    <label for="fish3">Tuna - Albacore</label>
-  </li>
+        <ul id="selectedFish" class="selected-fish">
+          Loading...
+        </ul>
 
-</ul>
+        <script id="selectedFishTemplate" type="text/template">
+          {{#selectedFish}}
+          <li id="{{.}}" class="servings">
+            <label for="{{.}}">{{.}}</label>
+            <input type="number">
+            <select name="serving-size" id="{{.}}Serving">
+              <option value="6">Filet (6 oz)</option>
+              <option value="6">Can (6 oz)</option>
+              <option value="2">Sushi roll (2 oz)</option>
+              <option value="1">Ounces</option>
+              <option value="28.35">Grams</option>
+            </select>
+          </li>
+          {{/selectedFish}}
+      </script>
 
-       
+        <button class="btn btn-primary" onclick="storeWeight()">
+          Next question
+        </button>
+
       </div>
 
       <div class="question-box results display-none" id="results">
