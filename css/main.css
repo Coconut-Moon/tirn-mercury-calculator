@@ -87,7 +87,7 @@
 
 /* Add a background color on hover */
 .btn-group button:hover {
-  /* background-color: #3e8e41; */
+  background-color: #3e8e41;
 }
 
 .question-box {
@@ -127,39 +127,45 @@ margin-bottom: 1.25em;
   z-index: 1;
 }
 
-#selectFish {
+.list-wrapper {
   max-height: 31vh;
-  padding: 0;
   border: 3px solid #d8d8d8;
-  box-sizing: border-box;
   overflow: hidden;
+  overflow: scroll;
+  box-sizing: border-box;
 }
 
-#filterFish, #selectFish, #selectedFish {
+#fishList {
+  width: 100%;
+
+}
+
+#filterFish, .list-wrapper, #selectedFish {
   width: 50%;
 }
 
 .header-fishlist {
   margin-bottom: 0;
-  padding: 0 16px;
+  padding: .25em;
+  text-align: left;
+  font-weight: bold;
 }
 
-#fishList {
-  list-style-type: none;
-  margin: 0;
-  overflow: scroll;
-  max-height: 30vh;
-  padding: 16px;
-  box-sizing: border-box;
-  width: 100%;
-
+.header-fishlist th:nth-child(2) {
+  text-align: right;
 }
 
-#fishList li {
+#fishList tr {
   height: 32px;
 }
 
-#fishList li:hover {
+#fishList td,
+#fishList th
+ {
+  padding: .25em;
+}
+
+#fishList tr:hover {
   background-color: aliceblue;
   cursor: pointer;
 

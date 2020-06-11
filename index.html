@@ -60,19 +60,25 @@
 
         <input class="input input-lg input-text" type="text" id="filterFish" onkeyup="filterFish()" placeholder="Search for names..">
 
-        <div id="selectFish">
-          <p class="header-fishlist"><b>Seafood<span style="float: right;">Mercury Level</span></b></p>
-          <ul id="fishList">
-            Loading...
-          </ul>
+        <div class="list-wrapper">
+          <table id="fishList">
+
+          </table>
         </div>
 
         <script id="template" type="text/template">
+          <tr class="header-fishlist">
+            <th onclick="sortTable(0)">Fish</th>
+            <th onclick="sortTable(1)">Mercury level</th>
+          </tr>
           {{#fishlist}}
-          <li>
-            <input class="fish" type="checkbox" id="fish{{ index }}" name="fish" value="{{ name }}">
-            <label for="fish{{ index }}">{{ name }}<span class="mercury-exposure">{{ mercury }}</span></label>
-          </li>
+          <tr>
+            <td>
+              <input class="fish" type="checkbox" id="fish{{ index }}" name="fish" value="{{ name }}">
+              <label for="fish{{ index }}">{{ name }}</label>
+            </td>
+            <td><span class="mercury-exposure">{{ mercury }}</span></td>
+          </tr>
           {{/fishlist}}
         </script>
 
@@ -104,7 +110,7 @@
       </script>
 
         <button class="btn btn-primary" onclick="storeWeight()">
-          Next question
+          Show results
         </button>
         <a href="#" id="backToStart">BACK</a>
 
@@ -116,12 +122,9 @@
     </div>
     </main>
     <footer class="flex-grid">
-      <div>
-        <a href="#">About this calculator</a>
-      </div>
-      <div>
-        <a href="#">Calculadora en Español</a>
-      </div>
+      <a href="#">About this calculator</a>
+      <br>
+      <a href="#">Calculadora en Español</a>
     </footer>
   </body>
 </html>
