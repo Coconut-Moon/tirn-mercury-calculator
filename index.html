@@ -6,11 +6,12 @@
     <title>Seafood health and sustainability calculator</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.js"></script>
-    <link rel="stylesheet" type="text/css" href="main.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
   </head>
   <body>
     <script src="main.js"></script>
-    <main>
+    <main class="flex-grid">
+      <div class="col">
       <h1>Seafood health and sustainability calculator</h1>
 
       <div class="question-box question-one display-none" id="questionOne">
@@ -27,7 +28,7 @@
           name="weight"
           min="1"
           max="999"
-          class="y-1"
+          class="input input-number y-1"
         />
         <div class="btn-group">
           <input
@@ -49,7 +50,7 @@
           />
           <label for="Kgs" class="btn">Kgs</label>
         </div>
-        <button class="btn btn-primary" onclick="storeWeight()">
+        <button id="NextQuestion" class="btn btn-primary" onclick="storeWeight()">
           Next question
         </button>
       </div>
@@ -57,7 +58,7 @@
       <div class="question-box question-two" id="questionTwo">
         <p>What types of seafood do you eat in <strong>one week</strong>?</p>
 
-        <input type="text" id="filterFish" onkeyup="filterFish()" placeholder="Search for names..">
+        <input class="input input-lg input-text" type="text" id="filterFish" onkeyup="filterFish()" placeholder="Search for names..">
 
         <div id="selectFish">
           <p class="header-fishlist"><b>Seafood<span style="float: right;">Mercury Level</span></b></p>
@@ -75,25 +76,29 @@
           {{/fishlist}}
         </script>
 
-        <h2>Choose serving sizes</h2>
-        <a href="#">One serving is 6 to 8 ounces</a>
+        <h2 class="mb-0">Choose serving sizes</h2>
+        <p class="mb-small"><a href="#">One serving is 6 to 8 ounces</a></p>
 
         <ul id="selectedFish" class="selected-fish">
-          Loading...
+          Select a fish above.
         </ul>
 
         <script id="selectedFishTemplate" type="text/template">
           {{#selectedFish}}
-          <li id="{{.}}" class="servings">
-            <label for="{{.}}">{{.}}</label>
-            <input type="number">
-            <select name="serving-size" id="{{.}}Serving">
-              <option value="6">Filet (6 oz)</option>
-              <option value="6">Can (6 oz)</option>
-              <option value="2">Sushi roll (2 oz)</option>
-              <option value="1">Ounces</option>
-              <option value="28.35">Grams</option>
-            </select>
+          <li id="{{.}}" class="servings row">
+            <span class="col col-2 col-self-baseline">
+              <label for="{{.}}">{{.}}</label>
+            </span>
+            <span class="col col-2 col-self-baseline col-contents-right">
+              <input class="input input-number" type="number" min="1" value="1">
+              <select class="input input-select" name="serving-size" id="{{.}}Serving">
+                <option value="6">Filet (6 oz)</option>
+                <option value="6">Can (6 oz)</option>
+                <option value="2">Sushi roll (2 oz)</option>
+                <option value="1">Ounces</option>
+                <option value="28.35">Grams</option>
+              </select>
+            </span>
           </li>
           {{/selectedFish}}
       </script>
@@ -101,14 +106,16 @@
         <button class="btn btn-primary" onclick="storeWeight()">
           Next question
         </button>
+        <a href="#" id="backToStart">BACK</a>
 
       </div>
 
       <div class="question-box results display-none" id="results">
         <h2>Mercury exposure per week</h2>
       </div>
+    </div>
     </main>
-    <footer>
+    <footer class="flex-grid">
       <div>
         <a href="#">About this calculator</a>
       </div>

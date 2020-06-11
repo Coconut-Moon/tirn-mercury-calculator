@@ -1,3 +1,18 @@
+// Navigate
+$(function(){
+  $("#NextQuestion").click(function(){
+    $(".question-one").addClass("display-none")
+    $(".question-two").removeClass("display-none")
+  });
+});
+
+$(function(){
+  $("#backToStart").click(function(){
+    $(".question-two").addClass("display-none")
+    $(".question-one").removeClass("display-none")
+  });
+});
+
 // Store user's weight and units
 function storeWeight() {
   var weight = document.getElementById('weight').value;
@@ -93,6 +108,11 @@ $(document).on('change', '.fish', function () {
   render();
 
 
+});
+
+// Select all input text when we focus
+$("input[type='number']").on("click", function () {
+  $(this).select();
 });
 
 

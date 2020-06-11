@@ -15,45 +15,14 @@
     - Highlight blue : #95F5FF
 */
 
-/*
-  Typography
-    Headers : font-family: 'Fjalla One', sans-serif;
-    Body : font-family: 'Open Sans', sans-serif;
-*/
-
-body,
-button,
-input {
-  color: #292929;
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
-}
-
-main {
-  height: 100vh;
-}
-
-h1,
-h2,
-h3 {
-  font-family: "Fjalla One", sans-serif;
-  text-align: center;
-}
+@import 'reset.css';
+@import 'typography.css';
+@import 'grid.css';
+@import 'inputs.css';
 
 /* Workflow helpers */
 .question-box.display-none {
   display: none;
-}
-
-/* Inputs */
-
-
-input[type="text"]{
-  height: 48px;
-  border: 3px solid #d8d8d8;
-  border-radius: 2px;
-  margin-bottom: 1em;
-  box-sizing: border-box;
 }
 
 /* Buttons and Button Groups */
@@ -66,11 +35,11 @@ input[type="text"]{
 .btn-primary {
   background-color: #014494;
   color: #ffffff;
-  margin-top: 64px;
-  padding: 24px 36px;
+  margin: 2em 0;
+  padding: 1.5em 2.25em;
   font-size: 1.125em;
   border-radius: 6px;
-  width: 100%;
+  width: 50%;
 }
 
 .btn-primary:hover {
@@ -166,7 +135,7 @@ margin-bottom: 1.25em;
   overflow: hidden;
 }
 
-#filterFish, #selectFish {
+#filterFish, #selectFish, #selectedFish {
   width: 50%;
 }
 
@@ -198,4 +167,8 @@ margin-bottom: 1.25em;
 
 #fishList .mercury-exposure {
   float: right;
+}
+
+.selected-fish .input-number {
+  width: 2.5em;
 }

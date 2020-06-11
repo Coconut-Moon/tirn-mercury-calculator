@@ -1,0 +1,38 @@
+.flex-grid,
+.row {
+  display: flex;
+}
+.col {
+  flex: 1;
+}
+
+.col-2 {
+  flex: 2;
+}
+
+.col-self-baseline {
+  align-self: baseline;
+}
+
+.col-contents-right {
+  text-align: end;
+  flex: 1;
+}
+
+/* Spacing helpers */
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.mb-small {
+  margin-bottom: .5em;
+}
+
+.mb-1 {
+  margin-bottom: 1em;
+}
+
+footer {
+  margin: 1em 0;
+}
