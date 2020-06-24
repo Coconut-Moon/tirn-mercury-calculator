@@ -3,6 +3,7 @@
     Headers : font-family: 'Fjalla One', sans-serif;
     Body : font-family: 'Open Sans', sans-serif;
 */
+
 html,
 body,
 button,
@@ -30,12 +31,12 @@ h1 {
 
 h2 {
   font-size: 2em;
-  margin: 0.75em 0;
+  margin: .75em 0;
 }
 
 h3 {
   font-size: 1.5em;
-  margin: 0.5em 0;
+  margin: .5em 0;
 }
 
 p, label, li {
@@ -43,11 +44,9 @@ p, label, li {
 }
 
 p {
-  margin: 0.5em 0;
+  margin: .5em 0;
 }
 
 strong {
   font-weight: bold;
 }
-
-/*# sourceMappingURL=typography.css.map */

@@ -1,15 +1,12 @@
 * + * {
-  margin-top: 1.5em;
+	margin-top: 1.5em;
 }
 
 .flex-grid {
+  // Small devices (landscape phones, 576px and up)
+  @media (min-width: 576px) { width: 50%; }
   margin: 0 auto;
   padding: 1em;
-}
-@media (min-width: 576px) {
-  .flex-grid {
-    width: 50%;
-  }
 }
 
 .flex-grid,
@@ -45,12 +42,13 @@
 }
 
 /* Spacing helpers */
+
 .mb-0 {
   margin-bottom: 0;
 }
 
 .mb-small {
-  margin-bottom: 0.5em;
+  margin-bottom: .5em;
 }
 
 .mb-1 {
@@ -69,11 +67,10 @@ footer.flex-grid {
 }
 
 /* Misc */
+
 form {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
-/*# sourceMappingURL=grid.css.map */

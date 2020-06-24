@@ -7,8 +7,22 @@ $(function(){
 });
 
 $(function(){
-  $("#backToStart").click(function(){
+  $("#backToWeight").click(function(){
     $(".question-two").addClass("display-none")
+    $(".question-one").removeClass("display-none")
+  });
+});
+
+$(function(){
+  $("#showResults").click(function(){
+    $(".question-two").addClass("display-none")
+    $(".results").removeClass("display-none")
+  });
+});
+
+$(function(){
+  $("#backToStart").click(function(){
+    $(".results").addClass("display-none")
     $(".question-one").removeClass("display-none")
   });
 });
@@ -35,8 +49,10 @@ function storeWeight() {
 }
 
 // Render list of fish from json
-$(function () {
+
+
   var data = {};
+
   $.getJSON("fish-list.json")
     .done(function (dat) {
       data = dat;
@@ -55,7 +71,85 @@ $(function () {
     var html = Mustache.to_html(template, data);
     $('#fishList').html(html);
   }
-});
+
+  //Render serving selector for each selected fish
+  // The box's status has changed.
+  $(document).on('change', '.fish', function () {
+
+    // Prevent the default action
+    event.preventDefault();
+
+    // Grab the name of the
+    var selectedFishData = $("#fishList input:checkbox:checked").map(function(){
+        return $(this).val();
+    }).get();
+
+    // TODO: Find the value of an object in the array, otherwise undefined is returned.
+    var result = Object.values(data).find(obj => {
+      return obj.name === selectedFishData
+    });
+
+    //console.log(result);
+
+    function render() {
+      var template = $("#selectedFishTemplate").html();
+      var html = Mustache.render(template, selectedFishData);
+      $('#selectedFish').html(html);
+    }
+
+    render();
+
+    // Get selected data into a format we can use to generate our final template.
+
+    // Attempt 1
+    $.fn.serializeObject = function()
+    {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+
+    console.log($('form').serializeObject());
+
+    $(function() {
+        $('#result').text(JSON.stringify($('form').serializeObject()));
+        return false;
+    });
+
+
+    //Attempt 3
+
+    function getFormData($form){
+      var unindexed_array = $form.serializeArray();
+      var indexed_array = {};
+
+      $.map(unindexed_array, function(n, i){
+          indexed_array[n['name']] = n['value'];
+      });
+
+      return indexed_array;
+    }
+
+    var $form = $("form");
+    var formdata = getFormData($form);
+
+    $(function() {
+      $('#result3').text(JSON.stringify(formdata));
+      return false;
+    });
+
+
+  });
 
 // Filter list of fish
 function filterFish() {
@@ -90,12 +184,12 @@ function sortTable(n) {
     //start by saying: no switching is done:
     switching = false;
     rows = table.rows;
-    /*Loop through all table rows (except the
+    /* Loop through all table rows (except the
     first, which contains table headers):*/
     for (i = 1; i < (rows.length - 1); i++) {
       //start by saying there should be no switching:
       shouldSwitch = false;
-      /*Get the two elements you want to compare,
+      /* Get the two elements you want to compare,
       one from current row and one from the next:*/
       x = rows[i].getElementsByTagName("TD")[n];
       y = rows[i + 1].getElementsByTagName("TD")[n];
@@ -133,38 +227,43 @@ function sortTable(n) {
   }
 }
 
-// Select a fish by clicking anywhere in the row {
+ // Attempt 2
+ $(function(){
+   $("#listFish").click(function () {
 
-//Render serving selector for each selected fish
+    var fishArray = [];
 
-// The box's status has changed.
-$(document).on('change', '.fish', function () {
-  //Get checked values
-  event.preventDefault();
-  var searchIDs = $("#fishList input:checkbox:checked").map(function(){
-    return $(this).val();
-  }).get(); // <----
+    $("#servingSize li").each(function() {
 
-  var chosenFish = {
-      selectedFish: searchIDs
-  };
+      fish = {name : $("input[name='fish-name']").val(), servings : $("input[name='serving-amount']").val(), ounces : $("input[name='serving-size']").val() };
 
-  function render() {
-    var template = $("#selectedFishTemplate").html();
-    var html = Mustache.render(template, chosenFish);
-    $('#selectedFish').html(html);
-  }
 
-  render();
+      fishArray.push(fish);
 
+    });
+
+    console.log(fishArray);
+    $('#result2').text(JSON.stringify(fishArray));
+
+  })
 
 });
 
-// Select all input text when we focus
+// TODO Select all input text when we focus
 $("input[type='number']").on("click", function () {
   $(this).select();
 });
 
+// TODO Select a fish by clicking anywhere in the row
+$("#fishList td").on("click", function () {
+  $(this).select();
+});
+
+function storeWeight() {
+  // Prevent the default action
+  event.preventDefault();
+
+}
 
 
 
