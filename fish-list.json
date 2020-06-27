@@ -1,28 +1,30 @@
 
 [{
+
   "name" : "Anchovies",
   "mercury" : "0.103",
-  "index" : 0
+  "message" : "It is best to avoid anchovy caught in the Mediterranean due to them being caught at a rate that is too high for them to replenish, a phenomenon known as overfishing.",
+  "index" : "0"
 },
 {
   "name" : "Bass - Chilean",
   "mercury" : "0.357",
-  "index" : 1
+  "index" : "1"
 },
 {
   "name" : "Bass - Freshwater",
   "mercury" : "0.170",
-  "index" : 2
+  "index" : "2"
 },
 {
   "name" : "Bass - Saltwater, Black, White, Striped",
   "mercury" : "0.288",
-  "index" : 3
+  "index" : "3"
 },
 {
   "name" : "Bluefish",
   "mercury" : "0.351",
-  "index" : 4
+  "index" : "4"
 },
 {
   "name" : "Butterfish",

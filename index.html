@@ -90,8 +90,7 @@
             {{#.}}
             <tr>
               <td>
-                <input class="fish" type="checkbox" id="fish{{ index }}" name="fish" value="{{ name }}">
-                <input type="hidden" value="{{ index }}">
+                <input class="fish" type="checkbox" id="fish{{ index }}" name="fish" value="{{ name }}" data-index="{{ index }}">
                 <label for="fish">{{ name }}</label>
               </td>
               <td><span class="mercury-exposure">{{ mercury }}</span></td>
