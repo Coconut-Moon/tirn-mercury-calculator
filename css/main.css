@@ -219,13 +219,14 @@ form {
 }
 
 .btn-primary {
-  background-color: #014494;
-  color: #ffffff;
+  width: 75%;
   margin: 2em 0;
   padding: 1.5em 2.25em;
   font-size: 1.125em;
+  border: none;
   border-radius: 6px;
-  width: 75%;
+  background-color: #014494;
+  color: #ffffff;
 }
 
 .btn-primary:hover {
@@ -389,9 +390,6 @@ form {
   justify-content: space-between;
   display: flex;
 }
-.selected-fish .input-number {
-  width: 2.5em;
-}
 
 /* Cards */
 .card {
@@ -490,6 +488,10 @@ form {
   background-position: center center;
   background-size: auto 70%;
   width: 100%;
+}
+
+.apexcharts-canvas {
+  margin: 0 auto;
 }
 
 /*# sourceMappingURL=main.css.map */

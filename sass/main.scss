@@ -18,13 +18,19 @@
 }
 
 .btn-primary {
-  background-color: $brand-01;
-  color: #ffffff;
+  width: 75%;
+
   margin: 2em 0;
   padding: 1.5em 2.25em;
+
   font-size: 1.125em;
+
+  border: none;
   border-radius: 6px;
-  width: 75%;
+
+  background-color: $brand-01;
+  color: #ffffff;
+
 }
 
 .btn-primary:hover {
@@ -192,12 +198,6 @@ margin-bottom: 1.25em;
     justify-content: space-between;
     display: flex;
   }
-
-  .input-number {
-    width: 2.5em;
-  }
-
-
 }
 
 
@@ -315,4 +315,8 @@ margin-bottom: 1.25em;
   background-position: center center;
   background-size: auto 70%;
   width: 100%;
+}
+
+.apexcharts-canvas {
+  margin:0 auto;
 }

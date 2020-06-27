@@ -22,4 +22,4 @@ Use Sass to generate CSS files.
 
 * Integrate into client wordpress site
 * Add support for spanish language version
-* Add support for Google Sheets - client should be able to update in sheets
+* Add support for Google Sheets - client should be able to update fish list in sheets
