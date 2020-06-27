@@ -35,6 +35,7 @@ h2 {
 
 h3 {
   font-size: 1.5em;
+  line-height: 1.25em;
   margin: 0.5em 0;
 }
 
@@ -48,6 +49,10 @@ p {
 
 strong {
   font-weight: bold;
+}
+
+.font-small {
+  font-size: 0.8em;
 }
 
 /*# sourceMappingURL=typography.css.map */

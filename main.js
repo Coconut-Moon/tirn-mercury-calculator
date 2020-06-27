@@ -104,19 +104,19 @@ function storeWeight() {
     // Attempt 1
     $.fn.serializeObject = function()
     {
-        var o = {};
-        var a = this.serializeArray();
-        $.each(a, function() {
-            if (o[this.name] !== undefined) {
-                if (!o[this.name].push) {
-                    o[this.name] = [o[this.name]];
+        var individualFishObject = {};
+        var arrayOfFishResults = this.serializeArray();
+        $.each(arrayOfFishResults, function() {
+            if (individualFishObject[this.name] !== undefined) {
+                if (!individualFishObject[this.name].push) {
+                  individualFishObject[this.name] = [individualFishObject[this.name]];
                 }
-                o[this.name].push(this.value || '');
+                individualFishObject[this.name].push(this.value || '');
             } else {
-                o[this.name] = this.value || '';
+              individualFishObject[this.name] = this.value || '';
             }
         });
-        return o;
+        return individualFishObject;
     };
 
     console.log($('form').serializeObject());
@@ -235,7 +235,7 @@ function sortTable(n) {
 
     $("#servingSize li").each(function() {
 
-      fish = {name : $("input[name='fish-name']").val(), servings : $("input[name='serving-amount']").val(), ounces : $("input[name='serving-size']").val() };
+      fish = {name : $("input[name='fish-name']").val(), servings : $("input[name='serving-amount']").val(), ounces : $("select[name='serving-size']").val() };
 
 
       fishArray.push(fish);
@@ -265,6 +265,229 @@ function storeWeight() {
 
 }
 
+// Le chart
+$(function(){
 
+        var options = {
+          series: [{
+          data: [50]
+        }],
+          chart: {
+          type: 'bar',
+          stacked: true,
+          stackType: '100%',
+          height: 350,
+          width: "100%"
+        },
+        annotations: {
+          yaxis: [{
+            y: 100,
+            borderColor: '#00E396',
+            label: {
+              borderColor: '#00E396',
+              style: {
+                color: '#fff',
+                background: '#00E396',
+              },
+              text: 'Y annotation'
+            }
+          }]
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+          }
+        },
+        dataLabels: {
+          enabled: true
+        },
+        xaxis: {
+          categories: ['Mercury'],
+        },
+        grid: {
+          xaxis: {
+            lines: {
+              show: true
+            }
+          }
+        },
+        yaxis: {
+          reversed: false,
+          axisTicks: {
+            show: true
+          }
+        }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+
+});
+
+
+// Le chart attempt 2
+
+/*
+$(function(){
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+          datasets: [{
+              label: '# of Votes',
+              data: [12, 19, 3, 5, 2, 3],
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }]
+          }
+      }
+  });
+});
+*/
+
+// Show the final list with data
+$(document).ready(function(){
+
+  var fishResults = [{
+    "name" : "Anchovies",
+    "serving-amount" : "6",
+    "serving-measure" : "ounces",
+    "mercury" : "0.103",
+    "mercury-exposure" : "25%",
+    "message" : "It is best to avoid anchovy caught in the Mediterranean due to them being caught at a rate that is too high for them to replenish, a phenomenon known as overfishing.",
+    "index" : "0"
+  },
+  {
+    "name" : "Bass - Freshwater",
+    "serving-amount" : "6",
+    "serving-measure" : "ounces",
+    "mercury" : "0.17",
+    "mercury-exposure" : "25%",
+    "message" : "Largemouth bass are one of the top recreational ﬁsh species in the U.S., resulting in being stocked throughout the U.S. to provide recreational fishing opportunities outside of their native range. Some countries have reported negative impacts resulting from the introduction of largemouth bass in non-native waters.",
+    "index" : "2"
+  },
+  {
+    "name" : "Mahi Mahi - Dorado - Dolphinfish",
+    "serving-amount" : "6",
+    "serving-measure" : "ounces",
+    "mercury" : "0.16",
+    "mercury-exposure" : "50%",
+    "bycatch-level" : "High impact on other species",
+    "bycatch-message" : "Most fisheries utilize longlines to catch Mahi Mahi -- a fishing method that is notorius for accidentally catching and injuring sea turtles, sharks, and seabirds.",
+    "message" : "Although Mahi Mahi is considered to have low to moderate mercury levels, most of the U.S. commercial harvest of Pacific mahi mahi comes from the Hawaii longline fishing fleet, the conditions of which have been likened to human trafficking, slavery and human rights abuses.",
+    "index" : "44"
+  },
+  {
+    "name" : "Monkfish",
+    "serving-amount" : "6",
+    "serving-measure" : "ounces",
+    "mercury" : "0.174",
+    "mercury-exposure" : "50%",
+    "bycatch-level" : "High impact on other species",
+    "bycatch-message" : "Monkfish are caught via bottom trawls or set gillnets in the U.S. These methods catch large rates of other species including at-risk fish species like Atlantic cod, flounder, and Atlantic sturgeon. Fishing limits are frequently exceeded."
+  },
+  {
+    "name" : "Orange Roughy - Red Roughy, Slimehead, Deep Sea Perch",
+    "serving-amount" : "6",
+    "serving-measure" : "ounces",
+    "mercury" : "0.513",
+    "mercury-exposure" : "50%",
+    "bycatch-level" : "High impact on other species",
+    "bycatch-message" : "Orange Roughy is caught by bottom trawls where ancient seamounts live, destroying this habitat in New Zealand and capturing high amounts of coral as well as black oreos and smooth oreos, vulnerable fish species.",
+    "message" : "It is best to avoid eating Orange Roughy. In addition to being high in mercury, Orange Roughy has seen dramatic declines in many fisheries."
+  },
+  {
+    "name" : "Oysters - Pacific",
+    "serving-amount" : "6",
+    "serving-measure" : "ounces",
+    "mercury" : "0.513",
+    "mercury-exposure" : "50%",
+    "microplastics-message" : "Filter feeders such as oysters draw in and filter out particles in seawater. Studies of microplastics in the deep sea found plastic particles in every single filter feeder that was studied.",
+    "message" : "Oysters can contain a higher amount of heavy metals in their bodies because they mainly grow on the ocean floor and can accumulate heavy metals from industrial pollution that have sunk to the bottom of the ocean."
+  },
+  {
+    "name" : "Sardine",
+    "serving-amount" : "6",
+    "serving-measure" : "ounces",
+    "mercury" : "0.079",
+    "mercury-exposure" : "50%",
+    "message" : "The Pacific sardine fishery was at one time the largest fishery in North America, but seasons have been continually postponed due to population collapse. Scientists worry that it could be a long road to sardine population recovery."
+  },
+  {
+    "name" : "Scallop",
+    "serving-amount" : "6",
+    "serving-measure" : "ounces",
+    "mercury" : "0.04",
+    "mercury-exposure" : "50%",
+    "microplastics-message" : "Filter feeders such as scallops draw in and filter out particles in seawater. Studies of microplastics in the deep sea found plastic particles in every single filter feeder that was studied.",
+    "message" : "Scallop dredges cause severe damage to seafloor habitat. In addition, endangered sea turtles and other species can be caught incidentally and are discarded, often dead or dying, as bycatch."
+  },
+  {
+    "name" : "Sole",
+    "serving-amount" : "6",
+    "serving-measure" : "ounces",
+    "mercury" : "0.086",
+    "mercury-exposure" : "50%",
+    "bycatch-level" : "High impact to other species and ocean floor",
+    "bycatch-message" : "Wild-caught sole is caught by bottom trawls, a non selective form of fishing that results in seafloor destruction. Bycatch includes some species that are depleted. Management is better in the U.S. than Canadian sources. farmed sole with wastewater treatment is the best choice",
+    "message" : "Because of high amounts of pollution and industrial waste, flatfish varieties like sole fish are more likely to contain dangerous contaminants that build up in the tissues of fish."
+  },
+  {
+    "name" : "Squid",
+    "serving-amount" : "6",
+    "serving-measure" : "ounces",
+    "mercury" : "0.044",
+    "mercury-exposure" : "50%",
+    "bycatch-level" : "High impact to other species",
+    "bycatch-message" : "Squid is caught off the California coast via purse seine, a non-selective fishing method that captures everything that it surrounds, including protected species like sea turtles. Squid is caught in Japan via purse seine and jig, or a ring of thin, very sharp barbless wire hooks. Rather than hooking the squid in the mouth, the wire hooks snag the squid's tentacles as the squid attacks the lure.",
+    "message" : "Many international squid fisheries are responsible for depleting squid at rates too high for the species to replenish, or are likely to catch these diminishing populations. Avoid squid caught in China, Indonesia, Thailand, and Argentina. "
+  },
+  {
+    "name" : "Tilapia",
+    "serving-amount" : "6",
+    "serving-measure" : "ounces",
+    "mercury" : "0.019",
+    "mercury-exposure" : "25%",
+    "message" : "Tilapia is a farmed fish. Avoid any Tilapia from China due to illegal use of antibiotics, invasiveness risk, and disease issues.",
+    "microplastics-message" : "Tilapia has been found to ingest microplastics.",
+    "index" : 67
+  }];
+
+  console.log(fishResults);
+
+function render() {
+
+  var template = $("#fishResultsTemplate").html();
+  var html = Mustache.render(template, fishResults);
+  $('#fishResults').html(html);
+}
+
+render();
+
+});
 
 

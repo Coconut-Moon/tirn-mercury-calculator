@@ -90,6 +90,7 @@ h2 {
 
 h3 {
   font-size: 1.5em;
+  line-height: 1.25em;
   margin: 0.5em 0;
 }
 
@@ -103,6 +104,10 @@ p {
 
 strong {
   font-weight: bold;
+}
+
+.font-small {
+  font-size: 0.8em;
 }
 
 * + * {
@@ -206,7 +211,7 @@ form {
 /* Buttons and Button Groups */
 .btn {
   font-weight: bold;
-  border: none;
+  text-align: center;
 }
 
 .btn-primary {
@@ -222,6 +227,23 @@ form {
 .btn-primary:hover {
   background-color: #00224a;
   cursor: pointer;
+}
+
+.btn-secondary {
+  border: 2px solid #014494;
+  color: #014494;
+  margin: 2em 0;
+  padding: 1em 2em;
+  font-size: 1em;
+  border-radius: 6px;
+  width: 75%;
+}
+
+.btn-secondary:hover {
+  color: #ffffff;
+  background-color: #00224a;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .btn-group {
@@ -369,35 +391,101 @@ form {
 
 /* Cards */
 .card {
-  box-shadow: 0px 2px 16px 0px #787878;
-  padding: 1em;
   border-radius: 8px;
+  box-shadow: 0px 4px 8px 0px #787878;
+  margin-top: 1.5em;
+  padding: 1.5em 2em;
 }
 .card h3, .card h4 {
   text-align: left;
+}
+.card .message {
+  display: flex;
+  margin: 0 auto 1em;
+}
+.card .message p:first-child {
+  margin-top: 0;
+}
+.card .message .message-content {
+  width: 100%;
+}
+.card .message .message-main {
+  font-size: 1.25em;
+}
+.card .message:first-child {
+  margin-top: 0;
+}
+.card .message:last-child {
+  margin-bottom: 0;
+}
+
+#fishResults .card:first-child {
+  margin-top: 0;
 }
 
 .close {
   background-image: url("/icons/close.svg");
   background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 16px;
   display: inline-block;
   width: 18px;
   height: 18px;
   margin-left: 1em;
 }
+.close:hover {
+  background-color: #c2c1c1;
+}
 
-.toxin {
-  background-image: url(/icons/toxin.svg);
-  background-repeat: no-repeat;
-  display: inline-block;
-  background-size: 24px;
+.icon {
+  flex: 0 0 40px;
   width: 40px;
   height: 40px;
-  float: left;
+  background-position: 9px;
+  background-repeat: no-repeat;
+  background-size: 24px;
   border-radius: 40px;
   border: thin solid black;
-  background-position: 8px;
   margin-right: 1em;
+}
+.icon.toxin {
+  background-image: url(/icons/toxin.svg);
+}
+.icon.microplastics {
+  background-image: url(/icons/microplastics.svg);
+}
+.icon.bycatch {
+  background-image: url(/icons/bycatch.svg);
+}
+
+.mercury-level-wrapper {
+  width: 100%;
+  border: thin solid gray;
+  height: 7px;
+  border-radius: 7px;
+  /* The animation code */
+}
+@keyframes width {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 25%;
+  }
+}
+.mercury-level-wrapper .mercury-level-percent {
+  background-color: #309303;
+  animation-name: example;
+  animation-duration: 4s;
+  height: 100%;
+}
+
+#chart {
+  background-image: url("/icons/human.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: auto 70%;
+  width: 100%;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -8,6 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src=https://cdn.jsdelivr.net/npm/chart.js></script>
     <link rel="stylesheet" type="text/css" href="css/main.css" />
   </head>
   <body>
@@ -63,7 +64,7 @@
 
         </div>
 
-        <div class="question-box question-two" id="questionTwo">
+        <div class="question-box question-two display-none" id="questionTwo">
 
           <p>
             What types of seafood do you eat <strong class="highlight"> in one week?</strong>
@@ -151,34 +152,96 @@
           <a id="backToWeight">BACK</a>
         </div>
 
-        <div class="question-box results display-none" id="results">
+        <div class="question-box results" id="results">
           <h2>Results</h2>
 
-          <div class="results__display"></div>
+          <p>Your mercury exposure is <span class="highlight">50% over</span> the safe limit</p>
 
-          <div class="card">
-            <div class="row-2col">
+          <div id="chart"></div>
+          <!--<canvas id="myChart" width="400" height="400"></canvas>-->
 
-              <span class="col col-2 col-self-baseline"><h3>Salmon</h3></span>
+          <p>Based on a weight of [X] [units]. <a href="#">Edit</a> <p>
 
-              <span class="col col-2 col-self-baseline col-contents-right">
-                <a href="#">1 6 oz filet</a>
-                <a class="close" title="Remove fish" href="#"></a>
-              </span>
+            <h2>Your choices</h2>
 
-            </div>
+          <div id="fishResults">
 
-            <div class="message">
-              <div class="icon toxin"></div>
-              <p><strong>Toxins</strong></p>
-              <p>
-                While salmon tends to be low in mercury, farmed salmon contain
-                higher levels of <abbr title="Polychlorinated biphenyl - a contaminant banned in 1979">PCB</abbr>'s.
-              </p>
-            </div>
           </div>
 
-          <a id="backToStart">BACK</a>
+          <script id="fishResultsTemplate" type="text/template">
+            {{#.}}
+            <div class="card">
+              <div class="row-2col">
+
+                <span style="flex:3" class="col col-2 col-self-baseline"><h3>{{name}}</h3></span>
+
+                <span class="col col-2 col-self-baseline col-contents-right">
+                  <a href="#">{{serving-amount}} {{serving-measure}}</a>
+                  <a class="close" title="Remove fish" href="#"></a>
+                </span>
+
+              </div>
+
+              {{#message}}
+                <div class="message">
+                  <div class="message-content message-main">
+                    <p>
+                      {{message}}
+                    </p>
+                  </div>
+                </div>
+              {{/message}}
+
+              <div class="message">
+                <div class="icon toxin"></div>
+                <div class="message-content">
+                  <p><strong>Mercury</strong></p>
+                  <p>
+                   {{mercury-exposure}} of total mercury exposure
+                  </p>
+                  <div class="mercury-level-wrapper">
+                    <div style="width:{{mercury-exposure}};" class="mercury-level-percent"></div>
+                  </div>
+                </div>
+              </div>
+
+              {{#bycatch-message}}
+                <div class="message">
+                  <div class="icon bycatch"></div>
+                  <div class="message-content">
+                    <p><strong>{{bycatch-level}}</strong></p>
+                    <p>
+                      {{bycatch-message}}
+                    </p>
+                  </div>
+                </div>
+              {{/bycatch-message}}
+
+              {{#microplastics-message}}
+                <div class="message">
+                  <div class="icon microplastics"></div>
+                  <div class="message-content">
+                    <p><strong>Microplastics</strong></p>
+                    <p>
+                      {{microplastics-message}}
+                    </p>
+                  </div>
+                </div>
+              {{/microplastics-message}}
+
+              {{#footnote}}
+                <hr>
+                <p class="font-small">
+                  {{footnote}}
+                </p>
+              {{/footnote}}
+
+            </div>
+
+            {{/.}}
+          </script>
+
+          <a class="btn btn-secondary" id="backToStart">BACK</a>
         </div>
       </div>
     </main>
