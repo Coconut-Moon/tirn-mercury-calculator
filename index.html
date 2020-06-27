@@ -3,110 +3,251 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seafood health and sustainability calculator</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-   
-    <link rel="stylesheet" type="text/css" href="main.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src=https://cdn.jsdelivr.net/npm/chart.js></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
   </head>
   <body>
     <script src="main.js"></script>
-    <main>
-      <h1>Seafood health and sustainability calculator</h1>
+    <main class="flex-grid">
+      <div class="col">
+        <h1>What's the catch?</h1>
 
-      <div class="question-box question-one display-none" id="questionOne">
-        <p>
-          <strong>Are your seafood choices safe and sustainable?</strong>
-          <br /><br />
-          Answer two questions to find out.
-        </p>
-        <br />
-        <label for="weight" class="y-1">What is your weight?</label>
-        <input
-          type="number"
-          id="weight"
-          name="weight"
-          min="1"
-          max="999"
-          class="y-1"
-        />
-        <div class="btn-group">
+        <div class="question-box question-one display-none" id="questionOne">
+          <p>
+            <strong>Are your seafood choices safe and sustainable?</strong>
+            <br /><br />
+            Answer two questions to find out.
+          </p>
+          <br />
+          <label for="weight" class="y-1">What is your weight?</label>
           <input
-            type="radio"
-            class="btn-group-input"
-            name="weightUnits"
-            id="Lbs"
-            value="lbs"
-            checked
+            type="number"
+            id="weight"
+            name="weight"
+            min="1"
+            max="999"
+            class="input input-number y-1"
           />
-          <label for="Lbs" class="btn">Lbs</label>
+          <div class="btn-group">
+            <input
+              type="radio"
+              class="btn-group-input"
+              name="weightUnits"
+              id="Lbs"
+              value="lbs"
+              checked
+            />
+            <label for="Lbs" class="btn">Lbs</label>
 
-          <input
-            type="radio"
-            class="btn-group-input"
-            name="weightUnits"
-            id="Kgs"
-            value="kgs"
-          />
-          <label for="Kgs" class="btn">Kgs</label>
+            <input
+              type="radio"
+              class="btn-group-input"
+              name="weightUnits"
+              id="Kgs"
+              value="kgs"
+            />
+            <label for="Kgs" class="btn">Kgs</label>
+          </div>
+          <button
+            id="NextQuestion"
+            class="btn btn-primary"
+            onclick="storeWeight()"
+          >
+            Next question
+          </button>
+
+
         </div>
-        <button class="btn btn-primary" onclick="storeWeight()">
-          Next question
-        </button>
-      </div>
 
-      <div class="question-box question-two" id="questionTwo">
-        <p>What types of seafood do you eat in <strong>one week</strong>?</p>
+        <div class="question-box question-two display-none" id="questionTwo">
 
-        <!-- <div class="selector-fish">
-          <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-          <label for="vehicle1"> <span>Fish 1</span></label><br>
-          <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-          <label for="vehicle2"> <span>Fish 2</span></label><br>
-          <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-          <label for="vehicle3"> Fish 3</label><br>
-        </div> -->
+          <p>
+            What types of seafood do you eat <strong class="highlight"> in one week?</strong>
+          </p>
 
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+          <input
+            class="input input-lg input-text"
+            type="text"
+            id="filterFish"
+            onkeyup="filterFish()"
+            placeholder="Search for names.."
+          />
 
-<ul id="myUL">
-  <li><a href="#">Adele</a></li>
-  <li><a href="#">Agnes</a></li>
+          <div class="list-wrapper">
+            <table id="fishList"></table>
+          </div>
 
-  <li><a href="#">Billy</a></li>
-  <li><a href="#">Bob</a></li>
+          <script id="template" type="text/template">
+            <tr class="header-fishlist">
+              <th onclick="sortTable(0)">Fish</th>
+              <th onclick="sortTable(1)">Mercury per oz</th>
+            </tr>
+            {{#.}}
+            <tr>
+              <td>
+                <input class="fish" type="checkbox" id="fish{{ index }}" name="fish" value="{{ name }}">
+                <input type="hidden" value="{{ index }}">
+                <label for="fish">{{ name }}</label>
+              </td>
+              <td><span class="mercury-exposure">{{ mercury }}</span></td>
+            </tr>
+            {{/.}}
+          </script>
 
-  <li><a href="#">Calvin</a></li>
-  <li><a href="#">Christina</a></li>
-  <li><a href="#">Cindy</a></li>
-  <li>
-    <input type="checkbox" id="fish1" name="fish1" value="Salmon">
-    <label for="fish1"><span>Salmon - Pink</span></label>
-  </li>
-  <li>
-    <input type="checkbox" id="fish2" name="fish2" value="Anchovies">
-    <label for="fish2"><span>Anchovies</span></label>
-  </li>
-  <li>
-    <input type="checkbox" id="fish3" name="vehicle3" value="Tuna - Albacore">
-    <label for="fish3">Tuna - Albacore</label>
-  </li>
+          <form id="servingSize" class="calculate-results">
+            <h2 class="mb-0">Choose serving sizes</h2>
+            <p class="mb-1"><a href="#">One serving is 6 to 8 ounces</a></p>
 
-</ul>
+            <ul id="selectedFish" class="selected-fish">
+              Select a fish above.
+            </ul>
 
-       
-      </div>
+            <script id="selectedFishTemplate" type="text/template">
+              {{#.}}
+              <li id="fish-{{.}}" class="servings">
+                <span class="col col-2">
+                  <label for="{{.}}">{{.}}</label>
+                  <input type="hidden" name="fish-name" value="{{.}}">
+                </span>
+                <span class="col col-2 col-contents-right">
+                  <input name="serving-amount" class="input input-number" type="number" min="1" value="1">
+                  <select class="input input-select" name="serving-size" id="{{.}}Serving">
+                    <option value="6">Filet (6 oz)</option>
+                    <option value="6">Can (6 oz)</option>
+                    <option value="2">Sushi roll (2 oz)</option>
+                    <option value="1">Ounces</option>
+                    <option value="28.35">Grams</option>
+                  </select>
+                </span>
+              </li>
+              {{/.}}
+            </script>
 
-      <div class="question-box results display-none" id="results">
-        <h2>Mercury exposure per week</h2>
+          </form>
+          <p>Result 1</p>
+          <div id="result"></div>
+
+          <div><br><br><br></div>
+          <p>Result 2</p>
+          <div id="result2"></div>
+          <a id="listFish">Calculate result 2</a>
+
+          <div><br><br><br></div>
+          <p>Result 3</p>
+          <div id="result3"></div>
+
+          <div><br><br><br></div>
+          <p>Result 4</p>
+          <div id="result4" class="results__display"></div>
+
+          <button id="showResults"  onclick="return calculateResults()" class="btn btn-primary show-results">
+            Show results
+          </button>
+
+          <a id="backToWeight">BACK</a>
+        </div>
+
+        <div class="question-box results" id="results">
+          <h2>Results</h2>
+
+          <p>Your mercury exposure is <span class="highlight">50% over</span> the safe limit</p>
+
+          <div id="chart"></div>
+          <!--<canvas id="myChart" width="400" height="400"></canvas>-->
+
+          <p>Based on a weight of [X] [units]. <a href="#">Edit</a> <p>
+
+            <h2>Your choices</h2>
+
+          <div id="fishResults">
+
+          </div>
+
+          <script id="fishResultsTemplate" type="text/template">
+            {{#.}}
+            <div class="card">
+              <div class="row-2col">
+
+                <span style="flex:3" class="col col-2 col-self-baseline"><h3>{{name}}</h3></span>
+
+                <span class="col col-2 col-self-baseline col-contents-right">
+                  <a href="#">{{serving-amount}} {{serving-measure}}</a>
+                  <a class="close" title="Remove fish" href="#"></a>
+                </span>
+
+              </div>
+
+              {{#message}}
+                <div class="message">
+                  <div class="message-content message-main">
+                    <p>
+                      {{message}}
+                    </p>
+                  </div>
+                </div>
+              {{/message}}
+
+              <div class="message">
+                <div class="icon toxin"></div>
+                <div class="message-content">
+                  <p><strong>Mercury</strong></p>
+                  <p>
+                   {{mercury-exposure}} of total mercury exposure
+                  </p>
+                  <div class="mercury-level-wrapper">
+                    <div style="width:{{mercury-exposure}};" class="mercury-level-percent"></div>
+                  </div>
+                </div>
+              </div>
+
+              {{#bycatch-message}}
+                <div class="message">
+                  <div class="icon bycatch"></div>
+                  <div class="message-content">
+                    <p><strong>{{bycatch-level}}</strong></p>
+                    <p>
+                      {{bycatch-message}}
+                    </p>
+                  </div>
+                </div>
+              {{/bycatch-message}}
+
+              {{#microplastics-message}}
+                <div class="message">
+                  <div class="icon microplastics"></div>
+                  <div class="message-content">
+                    <p><strong>Microplastics</strong></p>
+                    <p>
+                      {{microplastics-message}}
+                    </p>
+                  </div>
+                </div>
+              {{/microplastics-message}}
+
+              {{#footnote}}
+                <hr>
+                <p class="font-small">
+                  {{footnote}}
+                </p>
+              {{/footnote}}
+
+            </div>
+
+            {{/.}}
+          </script>
+
+          <a class="btn btn-secondary" id="backToStart">BACK</a>
+        </div>
       </div>
     </main>
-    <footer>
-      <div>
-        <a href="#">About this calculator</a>
-      </div>
-      <div>
-        <a href="#">Calculadora en Español</a>
-      </div>
+    <footer class="flex-grid">
+      <p><a href="#">About this calculator</a></p>
+      <p><a href="#">Calculadora en Español</a></p>
     </footer>
   </body>
 </html>

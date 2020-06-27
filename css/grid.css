@@ -1,0 +1,79 @@
+* + * {
+  margin-top: 1.5em;
+}
+
+.flex-grid {
+  margin: 0 auto;
+  padding: 1em;
+}
+@media (min-width: 576px) {
+  .flex-grid {
+    width: 50%;
+  }
+}
+
+.flex-grid,
+.row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.row-2col {
+  justify-content: space-between;
+  display: flex;
+}
+
+.col {
+  flex: 1;
+}
+
+.col-2 {
+  flex: 2;
+}
+
+.col-self-baseline {
+  align-self: baseline;
+}
+
+.col-self-center {
+  align-self: center;
+}
+
+.col-contents-right {
+  text-align: end;
+}
+
+/* Spacing helpers */
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.mb-small {
+  margin-bottom: 0.5em;
+}
+
+.mb-1 {
+  margin-bottom: 1em;
+}
+
+footer.flex-grid {
+  margin-top: 1em;
+  flex-flow: column;
+  align-items: end;
+}
+
+/* Alignment helpers */
+.text-center {
+  text-align: center;
+}
+
+/* Misc */
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*# sourceMappingURL=grid.css.map */

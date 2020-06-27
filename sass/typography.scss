@@ -1,0 +1,57 @@
+/*
+  Typography
+    Headers : font-family: 'Fjalla One', sans-serif;
+    Body : font-family: 'Open Sans', sans-serif;
+*/
+
+html,
+body,
+button,
+input,
+select {
+  color: #292929;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Fjalla One", sans-serif;
+  text-align: center;
+  letter-spacing: 0.015em;
+  color: #292929;
+}
+
+h1 {
+  font-size: 3em;
+  margin: 1em 0;
+}
+
+h2 {
+  font-size: 2em;
+  margin: .75em 0;
+}
+
+h3 {
+  font-size: 1.5em;
+  line-height: 1.25em;
+  margin: .5em 0;
+}
+
+p, label, li {
+  line-height: 1.5em;
+}
+
+p {
+  margin: .5em 0;
+}
+
+strong {
+  font-weight: bold;
+}
+
+.font-small {
+  font-size: .8em;
+}

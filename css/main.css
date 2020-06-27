@@ -1,0 +1,491 @@
+@import url(https://fonts.googleapis.com/css2?family=Fjalla+One&family=Open+Sans:wght@300;400;700&display=swap);
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*
+  Typography
+    Headers : font-family: 'Fjalla One', sans-serif;
+    Body : font-family: 'Open Sans', sans-serif;
+*/
+html,
+body,
+button,
+input,
+select {
+  color: #292929;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Fjalla One", sans-serif;
+  text-align: center;
+  letter-spacing: 0.015em;
+  color: #292929;
+}
+
+h1 {
+  font-size: 3em;
+  margin: 1em 0;
+}
+
+h2 {
+  font-size: 2em;
+  margin: 0.75em 0;
+}
+
+h3 {
+  font-size: 1.5em;
+  line-height: 1.25em;
+  margin: 0.5em 0;
+}
+
+p, label, li {
+  line-height: 1.5em;
+}
+
+p {
+  margin: 0.5em 0;
+}
+
+strong {
+  font-weight: bold;
+}
+
+.font-small {
+  font-size: 0.8em;
+}
+
+* + * {
+  margin-top: 1.5em;
+}
+
+.flex-grid {
+  margin: 0 auto;
+  padding: 1em;
+}
+@media (min-width: 576px) {
+  .flex-grid {
+    width: 50%;
+  }
+}
+
+.flex-grid,
+.row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.row-2col {
+  justify-content: space-between;
+  display: flex;
+}
+
+.col {
+  flex: 1;
+}
+
+.col-2 {
+  flex: 2;
+}
+
+.col-self-baseline {
+  align-self: baseline;
+}
+
+.col-self-center {
+  align-self: center;
+}
+
+.col-contents-right {
+  text-align: end;
+}
+
+/* Spacing helpers */
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.mb-small {
+  margin-bottom: 0.5em;
+}
+
+.mb-1 {
+  margin-bottom: 1em;
+}
+
+footer.flex-grid {
+  margin-top: 1em;
+  flex-flow: column;
+  align-items: end;
+}
+
+/* Alignment helpers */
+.text-center {
+  text-align: center;
+}
+
+/* Misc */
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Inputs */
+.input.input-text,
+.input.input-number,
+.input.input-select {
+  border: 3px solid #d8d8d8;
+  border-radius: 2px;
+  margin-bottom: 1em;
+  box-sizing: border-box;
+  height: 2.5em;
+}
+
+.input.input-lg {
+  height: 3em;
+}
+
+/* Workflow helpers */
+.question-box.display-none {
+  display: none;
+}
+
+/* Buttons and Button Groups */
+.btn {
+  font-weight: bold;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: #014494;
+  color: #ffffff;
+  margin: 2em 0;
+  padding: 1.5em 2.25em;
+  font-size: 1.125em;
+  border-radius: 6px;
+  width: 75%;
+}
+
+.btn-primary:hover {
+  background-color: #00224a;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  border: 2px solid #014494;
+  color: #014494;
+  margin: 2em 0;
+  padding: 1em 2em;
+  font-size: 1em;
+  border-radius: 6px;
+  width: 75%;
+}
+
+.btn-secondary:hover {
+  color: #ffffff;
+  background-color: #00224a;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-group {
+  display: flex;
+}
+
+.btn-group .btn-group-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.btn-group .btn {
+  background-color: #d8d8d8;
+  color: #585858;
+  /*border: 1px solid #309303;*/
+  border-radius: 6px;
+  padding: 14px 23px;
+  cursor: pointer;
+}
+
+.btn-group .btn:not(:last-child) {
+  border-right: none;
+  /* Prevent double borders */
+}
+
+.btn-group .btn:last-child {
+  border-radius: 0 6px 6px 0;
+}
+
+.btn-group .btn:nth-child(2) {
+  border-radius: 6px 0 0 6px;
+}
+
+.btn-group input[type=radio]:checked + label {
+  background-color: #309303;
+  color: white;
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #3e8e41;
+}
+
+.question-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.question-one input {
+  width: 144px;
+  text-align: center;
+}
+
+/* Weight validation */
+#weight:invalid {
+  border-color: red;
+}
+
+/* Spacing helpers */
+.y-1 {
+  margin-bottom: 0.5em;
+}
+
+.y-3 {
+  margin-bottom: 1.25em;
+}
+
+/* Misc */
+.highlight {
+  background-color: #FFEF9A;
+  font-weight: bold;
+  color: #00224a;
+}
+
+/* Fish selector */
+#filterFish {
+  background-image: url("/icons/search-solid.svg");
+  background-repeat: no-repeat;
+  background-position: 16px 10px;
+  padding-left: 54px;
+  background-size: 24px;
+  margin-bottom: -3px;
+  width: 100%;
+  z-index: 1;
+}
+
+.list-wrapper {
+  max-height: 31vh;
+  border: 3px solid #d8d8d8;
+  overflow: scroll;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+#fishList {
+  width: 100%;
+}
+
+.header-fishlist {
+  margin-bottom: 0;
+  padding: 0.25em;
+  text-align: left;
+  font-weight: bold;
+}
+
+.header-fishlist th:nth-child(2) {
+  text-align: right;
+}
+
+#fishList tr {
+  height: 32px;
+}
+
+#fishList th {
+  padding: 1em;
+}
+
+#fishList td {
+  padding: 0.25em 1em;
+}
+
+#fishList tr:hover {
+  background-color: aliceblue;
+  cursor: pointer;
+}
+
+#fishList .mercury-exposure {
+  float: right;
+}
+
+.selected-fish {
+  width: 100%;
+}
+.selected-fish li {
+  justify-content: space-between;
+  display: flex;
+}
+.selected-fish .input-number {
+  width: 2.5em;
+}
+
+/* Cards */
+.card {
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px 0px #787878;
+  margin-top: 1.5em;
+  padding: 1.5em 2em;
+}
+.card h3, .card h4 {
+  text-align: left;
+}
+.card .message {
+  display: flex;
+  margin: 0 auto 1em;
+}
+.card .message p:first-child {
+  margin-top: 0;
+}
+.card .message .message-content {
+  width: 100%;
+}
+.card .message .message-main {
+  font-size: 1.25em;
+}
+.card .message:first-child {
+  margin-top: 0;
+}
+.card .message:last-child {
+  margin-bottom: 0;
+}
+
+#fishResults .card:first-child {
+  margin-top: 0;
+}
+
+.close {
+  background-image: url("/icons/close.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 16px;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-left: 1em;
+}
+.close:hover {
+  background-color: #c2c1c1;
+}
+
+.icon {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  background-position: 9px;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  border-radius: 40px;
+  border: thin solid black;
+  margin-right: 1em;
+}
+.icon.toxin {
+  background-image: url(/icons/toxin.svg);
+}
+.icon.microplastics {
+  background-image: url(/icons/microplastics.svg);
+}
+.icon.bycatch {
+  background-image: url(/icons/bycatch.svg);
+}
+
+.mercury-level-wrapper {
+  width: 100%;
+  border: thin solid gray;
+  height: 7px;
+  border-radius: 7px;
+  /* The animation code */
+}
+@keyframes width {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 25%;
+  }
+}
+.mercury-level-wrapper .mercury-level-percent {
+  background-color: #309303;
+  animation-name: example;
+  animation-duration: 4s;
+  height: 100%;
+}
+
+#chart {
+  background-image: url("/icons/human.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: auto 70%;
+  width: 100%;
+}
+
+/*# sourceMappingURL=main.css.map */
