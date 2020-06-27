@@ -203,6 +203,10 @@ form {
   height: 3em;
 }
 
+.input-number-small {
+  width: 2.5em;
+}
+
 /* Workflow helpers */
 .question-box.display-none {
   display: none;

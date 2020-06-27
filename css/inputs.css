@@ -1,5 +1,4 @@
 /* Inputs */
-
 .input.input-text,
 .input.input-number,
 .input.input-select {
@@ -13,3 +12,9 @@
 .input.input-lg {
   height: 3em;
 }
+
+.input-number-small {
+  width: 2.5em;
+}
+
+/*# sourceMappingURL=inputs.css.map */

@@ -17,7 +17,7 @@
       <div class="col">
         <h1>What's the catch?</h1>
 
-        <div class="question-box question-one display-none" id="questionOne">
+        <div class="question-box question-one" id="questionOne">
           <p>
             <strong>Are your seafood choices safe and sustainable?</strong>
             <br /><br />
@@ -64,7 +64,7 @@
 
         </div>
 
-        <div class="question-box question-two display-none" id="questionTwo">
+        <div class="question-box question-two" id="questionTwo">
 
           <p>
             What types of seafood do you eat <strong class="highlight"> in one week?</strong>
@@ -115,7 +115,7 @@
                   <input type="hidden" name="fish-name" value="{{.}}">
                 </span>
                 <span class="col col-2 col-contents-right">
-                  <input name="serving-amount" class="input input-number" type="number" min="1" value="1">
+                  <input name="serving-amount" class="input input-number input-number-small" type="number" min="1" value="1">
                   <select class="input input-select" name="serving-size" id="{{.}}Serving">
                     <option value="6">Filet (6 oz)</option>
                     <option value="6">Can (6 oz)</option>
@@ -176,7 +176,14 @@
                 <span style="flex:3" class="col col-2 col-self-baseline"><h3>{{name}}</h3></span>
 
                 <span class="col col-2 col-self-baseline col-contents-right">
-                  <a href="#">{{serving-amount}} {{serving-measure}}</a>
+                  <input name="serving-amount" class="input input-number input-number-small" type="number" min="1" value="1">
+                  <select class="input input-select" name="serving-size" id="{{.}}Serving">
+                    <option value="6">Filet (6 oz)</option>
+                    <option value="6">Can (6 oz)</option>
+                    <option value="2">Sushi roll (2 oz)</option>
+                    <option value="1">Ounces</option>
+                    <option value="28.35">Grams</option>
+                  </select>
                   <a class="close" title="Remove fish" href="#"></a>
                 </span>
 
