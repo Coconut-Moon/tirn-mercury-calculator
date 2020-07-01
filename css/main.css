@@ -110,10 +110,6 @@ strong {
   font-size: 0.8em;
 }
 
-* + * {
-  margin-top: 1.5em;
-}
-
 .flex-grid {
   margin: 0 auto;
   padding: 1em;

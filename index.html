@@ -70,12 +70,7 @@
             What types of seafood do you eat <strong class="highlight"> in one week?</strong>
           </p>
 
-          <input
-            class="input input-lg input-text"
-            type="text"
-            id="filterFish"
-            onkeyup="filterFish()"
-            placeholder="Search for names.."
+          <input class="input input-lg input-text" type="text" id="filterFish" onkeyup="filterFishList()" placeholder="Search for fish.."
           />
 
           <div class="list-wrapper">
@@ -108,14 +103,13 @@
 
             <script id="selectedFishTemplate" type="text/template">
               {{#.}}
-              <li id="fish-{{.}}" class="servings">
+              <li id="fish-{{ index }}" class="servings" data-index="{{ index }}">
                 <span class="col col-2">
-                  <label for="{{.}}">{{.}}</label>
-                  <input type="hidden" name="fish-name" value="{{.}}">
+                  <label for="{{ name }}">{{ name }}</label>
                 </span>
                 <span class="col col-2 col-contents-right">
-                  <input name="serving-amount" class="input input-number input-number-small" type="number" min="1" value="1">
-                  <select class="input input-select" name="serving-size" id="{{.}}Serving">
+                  <input name="serving-amount" class="input input-number input-number-small" type="number" min="1" value="1" data-index="{{ index }}">
+                  <select class="input input-select" name="serving-size" data-index="{{ index }}">
                     <option value="6">Filet (6 oz)</option>
                     <option value="6">Can (6 oz)</option>
                     <option value="2">Sushi roll (2 oz)</option>
@@ -128,23 +122,8 @@
             </script>
 
           </form>
-          <p>Result 1</p>
-          <div id="result"></div>
 
-          <div><br><br><br></div>
-          <p>Result 2</p>
-          <div id="result2"></div>
-          <a id="listFish">Calculate result 2</a>
-
-          <div><br><br><br></div>
-          <p>Result 3</p>
-          <div id="result3"></div>
-
-          <div><br><br><br></div>
-          <p>Result 4</p>
-          <div id="result4" class="results__display"></div>
-
-          <button id="showResults"  onclick="return calculateResults()" class="btn btn-primary show-results">
+          <button id="showResults" class="btn btn-primary show-results">
             Show results
           </button>
 
@@ -175,7 +154,7 @@
                 <span style="flex:3" class="col col-2 col-self-baseline"><h3>{{name}}</h3></span>
 
                 <span class="col col-2 col-self-baseline col-contents-right">
-                  <input name="serving-amount" class="input input-number input-number-small" type="number" min="1" value="1">
+                  <input name="serving-amount" class="input input-number input-number-small" type="number" min="1" value="{{ servingAmount }}">
                   <select class="input input-select" name="serving-size" id="{{.}}Serving">
                     <option value="6">Filet (6 oz)</option>
                     <option value="6">Can (6 oz)</option>
