@@ -110,6 +110,15 @@ strong {
   font-size: 0.8em;
 }
 
+.list {
+  list-style-type: disc;
+}
+
+.note {
+  margin: 1em 0;
+  color: #898D99;
+}
+
 .flex-grid {
   margin: 0 auto;
   padding: 1em;
@@ -150,6 +159,7 @@ strong {
 
 .col-contents-right {
   text-align: end;
+  min-width: 190px;
 }
 
 /* Spacing helpers */
@@ -182,6 +192,95 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/* Buttons and Button Groups */
+.btn {
+  font-weight: bold;
+  text-align: center;
+}
+
+.btn-primary {
+  width: 75%;
+  margin: 1em 0;
+  padding: 1.5em 2.25em;
+  font-size: 1.125em;
+  border: none;
+  border-radius: 6px;
+  background-color: #014494;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #00224a;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  margin: 1em 0;
+  padding: 1em 2em;
+  background-color: #fff;
+  border: 2px solid #014494;
+  color: #014494;
+  font-size: 1em;
+  border-radius: 6px;
+  width: 75%;
+}
+
+.btn-primary + .btn-secondary,
+.btn-secondary + .btn-secondary {
+  margin-top: 0;
+}
+
+.btn-secondary:hover {
+  color: #ffffff;
+  background-color: #00224a;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-group {
+  display: flex;
+}
+
+.btn-group .btn-group-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.btn-group .btn {
+  background-color: #d8d8d8;
+  color: #585858;
+  /*border: 1px solid #309303;*/
+  border-radius: 6px;
+  padding: 14px 23px;
+  cursor: pointer;
+}
+
+.btn-group .btn:not(:last-child) {
+  border-right: none;
+  /* Prevent double borders */
+}
+
+.btn-group .btn:last-child {
+  border-radius: 0 6px 6px 0;
+}
+
+.btn-group .btn:nth-child(2) {
+  border-radius: 6px 0 0 6px;
+}
+
+.btn-group input[type=radio]:checked + label {
+  background-color: #309303;
+  color: white;
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #3e8e41;
 }
 
 /* Inputs */
@@ -254,89 +353,6 @@ form {
 /* Workflow helpers */
 .question-box.display-none {
   display: none;
-}
-
-/* Buttons and Button Groups */
-.btn {
-  font-weight: bold;
-  text-align: center;
-}
-
-.btn-primary {
-  width: 75%;
-  margin: 2em 0;
-  padding: 1.5em 2.25em;
-  font-size: 1.125em;
-  border: none;
-  border-radius: 6px;
-  background-color: #014494;
-  color: #ffffff;
-}
-
-.btn-primary:hover {
-  background-color: #00224a;
-  cursor: pointer;
-}
-
-.btn-secondary {
-  border: 2px solid #014494;
-  color: #014494;
-  margin: 2em 0;
-  padding: 1em 2em;
-  font-size: 1em;
-  border-radius: 6px;
-  width: 75%;
-}
-
-.btn-secondary:hover {
-  color: #ffffff;
-  background-color: #00224a;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.btn-group {
-  display: flex;
-}
-
-.btn-group .btn-group-input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-.btn-group .btn {
-  background-color: #d8d8d8;
-  color: #585858;
-  /*border: 1px solid #309303;*/
-  border-radius: 6px;
-  padding: 14px 23px;
-  cursor: pointer;
-}
-
-.btn-group .btn:not(:last-child) {
-  border-right: none;
-  /* Prevent double borders */
-}
-
-.btn-group .btn:last-child {
-  border-radius: 0 6px 6px 0;
-}
-
-.btn-group .btn:nth-child(2) {
-  border-radius: 6px 0 0 6px;
-}
-
-.btn-group input[type=radio]:checked + label {
-  background-color: #309303;
-  color: white;
-}
-
-/* Add a background color on hover */
-.btn-group button:hover {
-  background-color: #3e8e41;
 }
 
 .question-box {
@@ -413,6 +429,12 @@ form {
 #fishList th {
   padding: 1em;
 }
+#fishList th.asc {
+  color: green;
+}
+#fishList th.dsc {
+  color: red;
+}
 
 #fishList td {
   padding: 0.25em 1em;
@@ -470,7 +492,6 @@ form {
 }
 
 .close {
-  background-image: url("/icons/close.svg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 16px;

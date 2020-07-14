@@ -1,58 +1,17 @@
-/*
-  Typography
-    Headers : font-family: 'Fjalla One', sans-serif;
-    Body : font-family: 'Open Sans', sans-serif;
-*/
-html,
-body,
-button,
-input,
-select {
-  color: #292929;
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
-}
+/* Error: Undefined variable.
+ *    ,
+ * 65 |   color: $type-body-light;
+ *    |          ^^^^^^^^^^^^^^^^
+ *    '
+ *   sass/typography.scss 65:10  root stylesheet */
 
-h1,
-h2,
-h3,
-h4 {
-  font-family: "Fjalla One", sans-serif;
-  text-align: center;
-  letter-spacing: 0.015em;
-  color: #292929;
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Undefined variable.\a    \2577 \a 65 \2502    color: $type-body-light;\a    \2502           ^^^^^^^^^^^^^^^^\a    \2575 \a   sass/typography.scss 65:10  root stylesheet";
 }
-
-h1 {
-  font-size: 3em;
-  margin: 1em 0;
-}
-
-h2 {
-  font-size: 2em;
-  margin: 0.75em 0;
-}
-
-h3 {
-  font-size: 1.5em;
-  line-height: 1.25em;
-  margin: 0.5em 0;
-}
-
-p, label, li {
-  line-height: 1.5em;
-}
-
-p {
-  margin: 0.5em 0;
-}
-
-strong {
-  font-weight: bold;
-}
-
-.font-small {
-  font-size: 0.8em;
-}
-
-/*# sourceMappingURL=typography.css.map */

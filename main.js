@@ -57,7 +57,7 @@ $.getJSON("fish-list.json")
   .done(function (dat) {
     data = dat;
     console.log("success", dat)
-    renderMustacheTemplate();
+    renderFishList();
 
     runTheFishApp(data);
   })
@@ -68,7 +68,7 @@ $.getJSON("fish-list.json")
     console.log("complete");
   });
 
-function renderMustacheTemplate() {
+function renderFishList() {
   var template = $("#template").html();
   var html = Mustache.to_html(template, data);
   $('#fishList').html(html);
@@ -287,13 +287,13 @@ function runTheFishApp(allFishData) {
     });
 
     // Now that the data is in place, render the results list
-    function render() {
+    function renderResults() {
       var template = $("#fishResultsTemplate").html();
       var html = Mustache.render(template, fishResults);
       $('#fishResults').html(html);
     }
 
-    render();
+    renderResults();
 
     // Select lists - generic function to change selected value
     function selectElement(id, valueToSelect) {
@@ -312,17 +312,14 @@ function runTheFishApp(allFishData) {
 } // End run fishapp
 
 
-// Remove cards when x is clicked
-function removeCard(item) {
-  var cardToRemove = $(item).data('remove');
-  console.log("card we wanna remove", cardToRemove)
-  $("#card" + cardToRemove).remove();
+// Remove fish when x is clicked
+function removeFish(item) {
+  var fishToRemove = $(item).data('remove');
+  console.log("card we wanna remove", fishToRemove)
+  $("#fishResult_" + fishToRemove).remove();
+  $("#selectedFish_" + fishToRemove).remove();
+  $("#fish_" + fishToRemove).prop( "checked", false );
 }
-
-// TODO Select all input text when we focus
-$("input[type='number']").on("click", function () {
-  $(this).select();
-});
 
 // TODO Select a fish by clicking anywhere in the row
 $("#fishList td").on("click", function () {
@@ -380,13 +377,13 @@ function sortTable(n) {
       /*check if the two rows should switch place,
       based on the direction, asc or desc:*/
       if (dir == "asc") {
-        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        if (x.querySelector("label").innerHTML.toLowerCase() > y.querySelector("label").innerHTML.toLowerCase()) {
           //if so, mark as a switch and break the loop:
           shouldSwitch = true;
           break;
         }
       } else if (dir == "desc") {
-        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+        if (x.querySelector("label").innerHTML.toLowerCase() < y.querySelector("label").innerHTML.toLowerCase()) {
           //if so, mark as a switch and break the loop:
           shouldSwitch = true;
           break;
@@ -411,8 +408,11 @@ function sortTable(n) {
   }
 }
 
+$( document ).ready(function() {
+
 // Get the modal
 var modal = document.getElementById("servingModal");
+console.log("get modal", document.getElementById("servingModal"))
 
 // Get the button that opens the modal
 var btn = document.getElementById("openServingModal");
@@ -437,4 +437,6 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+
+});
 

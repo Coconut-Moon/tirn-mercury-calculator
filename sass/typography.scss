@@ -55,3 +55,12 @@ strong {
 .font-small {
   font-size: .8em;
 }
+
+.list {
+  list-style-type: disc;
+}
+
+.note {
+  margin: 1em 0;
+  color: $type-body-light;
+}
