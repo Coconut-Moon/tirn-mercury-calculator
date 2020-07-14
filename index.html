@@ -31,12 +31,13 @@
             name="weight"
             min="1"
             max="999"
+            value="160"
             class="input input-number y-1"
           />
           <div class="btn-group">
             <input
               type="radio"
-              class="btn-group-input"
+              class="btn-group-input weight-measure"
               name="weightUnits"
               id="Lbs"
               value="lbs"
@@ -46,7 +47,7 @@
 
             <input
               type="radio"
-              class="btn-group-input"
+              class="btn-group-input weight-measure"
               name="weightUnits"
               id="Kgs"
               value="kgs"
@@ -95,7 +96,7 @@
 
           <form id="servingSize" class="calculate-results">
             <h2 class="mb-0">Choose serving sizes</h2>
-            <p class="mb-1"><a href="#">One serving is 6 to 8 ounces</a></p>
+            <p class="mb-1"><a id="openServingModal">One serving is 6 to 8 ounces</a></p>
 
             <ul id="selectedFish" class="selected-fish">
               Select a fish above.
@@ -109,8 +110,8 @@
                 </span>
                 <span class="col col-2 col-contents-right">
                   <input name="serving-amount" class="input input-number input-number-small" type="number" min="1" value="1" data-index="{{ index }}">
-                  <select class="input input-select" name="serving-size" data-index="{{ index }}">
-                    <option value="6">Filet (6 oz)</option>
+                  <select class="input input-select" name="serving-ounces" data-index="{{ index }}">
+                    <option value="8">Filet (8 oz)</option>
                     <option value="6">Can (6 oz)</option>
                     <option value="2">Sushi roll (2 oz)</option>
                     <option value="1">Ounces</option>
@@ -123,46 +124,47 @@
 
           </form>
 
-          <button id="showResults" class="btn btn-primary show-results">
+          <button id="showResults" onclick="calculateResults()" class="btn btn-primary show-results">
             Show results
           </button>
 
-          <a id="backToWeight">BACK</a>
+          <button id="backToWeight" class="btn btn-secondary">BACK</button>
         </div>
 
         <div class="question-box results" id="results">
           <h2>Results</h2>
 
-          <p>Your mercury exposure is <span class="highlight">50% over</span> the safe limit</p>
+          <p>Your mercury exposure is <span id="mercuryExposureMessage" class="highlight"></span> of the safe limit</p>
 
           <div id="chart"></div>
           <!--<canvas id="myChart" width="400" height="400"></canvas>-->
 
-          <p>Based on a weight of [X] [units]. <a href="#">Edit</a> <p>
+          <p id="weightResultsMessage"> <a href="#">Edit</a> <p>
 
             <h2>Your choices</h2>
 
           <div id="fishResults">
+            <p>Blank state</p>
 
           </div>
 
           <script id="fishResultsTemplate" type="text/template">
             {{#.}}
-            <div class="card">
+            <div class="card" id="card{{ index }}">
               <div class="row-2col">
 
                 <span style="flex:3" class="col col-2 col-self-baseline"><h3>{{name}}</h3></span>
 
                 <span class="col col-2 col-self-baseline col-contents-right">
-                  <input name="serving-amount" class="input input-number input-number-small" type="number" min="1" value="{{ servingAmount }}">
-                  <select class="input input-select" name="serving-size" id="{{.}}Serving">
-                    <option value="6">Filet (6 oz)</option>
+                  <input id="{{ index }}_Servings" name="serving-amount" class="input input-number input-number-small" type="number" min="1" value="{{ serving-amount }}" data-index="{{ index }}">
+                  <select class="input input-select" name="serving-ounces" id="{{ index }}_ServingUnits" data-index="{{ index }}" data-servings="{{ serving-ounces }}">
+                    <option value="8">Filet (8 oz)</option>
                     <option value="6">Can (6 oz)</option>
                     <option value="2">Sushi roll (2 oz)</option>
                     <option value="1">Ounces</option>
                     <option value="28.35">Grams</option>
                   </select>
-                  <a class="close" title="Remove fish" href="#"></a>
+                  <a class="close" title="Remove fish" onClick="removeCard(this)" data-remove="{{ index }}"></a>
                 </span>
 
               </div>
@@ -182,10 +184,10 @@
                 <div class="message-content">
                   <p><strong>Mercury</strong></p>
                   <p>
-                   {{mercury-exposure}} of total mercury exposure
+                   {{mercuryexposurepercent}}% of total mercury exposure
                   </p>
                   <div class="mercury-level-wrapper">
-                    <div style="width:{{mercury-exposure}};" class="mercury-level-percent"></div>
+                    <div style="width:{{mercuryexposurepercent}}%;" class="mercury-level-percent"></div>
                   </div>
                 </div>
               </div>
@@ -224,8 +226,12 @@
             </div>
 
             {{/.}}
-          </script>
 
+            {{^.}}
+              No fish selected.
+            {{/.}}
+          </script>
+          <a class="btn btn-secondary" id="editFish">EDIT FISH</a>
           <a class="btn btn-secondary" id="backToStart">BACK</a>
         </div>
       </div>
@@ -234,5 +240,15 @@
       <p><a href="#">About this calculator</a></p>
       <p><a href="#">Calculadora en Español</a></p>
     </footer>
+
+    <!-- The Modal -->
+    <div id="servingModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Some text in the Modal..</p>
+      </div>
+    </div>
+
   </body>
 </html>

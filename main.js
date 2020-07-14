@@ -102,6 +102,8 @@ function runTheFishApp(allFishData) {
     return selectedFishArray;
   }
 
+  var selectedFish
+
   //Render serving selector for each selected fish
   // The box's status has changed.
   $(document).on('change', '.fish', function () {
@@ -111,7 +113,7 @@ function runTheFishApp(allFishData) {
       return $(this).data("index");
     }).get();
 
-    const selectedFish = returnSelectedFishData(selectedFishData);
+    selectedFish = returnSelectedFishData(selectedFishData);
 
     // THESE ARE YOUR FISHES!!!!!
     console.log("These are your returned fishes", selectedFish)
@@ -124,156 +126,197 @@ function runTheFishApp(allFishData) {
 
     renderSelectedFishTemplate();
 
-    // calculate results when user clicks "Show Results"
-    document.getElementById("showResults").addEventListener("click", function (event) {
 
-      // Don't reload the page
-      event.preventDefault()
+  }); // End document change fish function
 
-      // An object array for serving sizes and quantities
-      var fishAmounts = [];
+  // calculate results when user clicks "Show Results"
+  document.getElementById("showResults").addEventListener("click", function (event) {
 
-      // In the selected fish list, pull the serving sizes and quantities into individual objects.
-      $('#selectedFish li').each(function (index, value) {
-        fishAmounts.push({
-          servingAmount: $("input[name='serving-amount']", this).map(function () {
-            return $(this).val();
-          }).get(), servingSize: $("select[name='serving-size']", this).map(function () {
-            return $(this).val();
-          }).get()
-        });
+    // Don't reload the page
+    event.preventDefault()
+
+    // An object array for serving sizes and quantities
+    var fishAmounts = [];
+
+    // In the selected fish list, pull the serving sizes and quantities into individual fish
+    $('#selectedFish li').each(function () {
+
+      // Set selected serving amount
+      servingAmountWeekly = $("input[name='serving-amount']", this).map(function () {
+        return $(this).val();
+      }).get()
+
+      // Set selected measure in ounces
+      servingOuncesWeekly = $("select[name='serving-ounces']", this).map(function () {
+        return $(this).val();
+      }).get()
+
+      // Calculate total ounces
+      servingOuncesWeeklyTotal = servingAmountWeekly * servingOuncesWeekly
+
+      // Convert total ounces to grams
+      servingTotalGrams = servingOuncesWeeklyTotal * 28.35
+
+      // Calculate daily grams
+      servingTotalGramsDaily = servingTotalGrams / 7
+
+      // Add data to each fish
+      fishAmounts.push({
+        "serving-amount": servingAmountWeekly,
+        "serving-ounces": servingOuncesWeekly,
+        "serving-grams-weekly": servingTotalGrams,
+        "serving-grams-daily": servingTotalGramsDaily
       });
+    });
+    console.log("Amounts array", fishAmounts);
 
-      console.log("Amounts array", fishAmounts);
+    // Merge our sizes and quantities with the selected fish
+    let fishResults = fishAmounts.map((item, i) => Object.assign({}, item, selectedFish[i]));
+    console.log("fish results", fishResults);
 
-      // Merge our sizes and quantities with the selected fish
-      let fishResults = fishAmounts.map((item, i) => Object.assign({}, item, selectedFish[i]));
+    // Get user-entered weight
+    var weight = document.getElementById("weight").value;
 
-      console.log("fish results", fishResults);
+    // Get user-entered weight unit (pounds/kilograms)
+    var weightUnits =  document.querySelector('.weight-measure:checked').value;
 
-      // Sample data for testing. TODO - delete when this is working.
-      var fishResultsStatic = [{
-        "name": "Anchovies",
-        "serving-amount": "6",
-        "serving-measure": "ounces",
-        "mercury": "0.103",
-        "mercury-exposure": "25%",
-        "message": "It is best to avoid anchovy caught in the Mediterranean due to them being caught at a rate that is too high for them to replenish, a phenomenon known as overfishing.",
-        "index": "0"
-      },
-      {
-        "name": "Bass - Freshwater",
-        "serving-amount": "6",
-        "serving-measure": "ounces",
-        "mercury": "0.17",
-        "mercury-exposure": "25%",
-        "message": "Largemouth bass are one of the top recreational ﬁsh species in the U.S., resulting in being stocked throughout the U.S. to provide recreational fishing opportunities outside of their native range. Some countries have reported negative impacts resulting from the introduction of largemouth bass in non-native waters.",
-        "index": "2"
-      },
-      {
-        "name": "Mahi Mahi - Dorado - Dolphinfish",
-        "serving-amount": "6",
-        "serving-measure": "ounces",
-        "mercury": "0.16",
-        "mercury-exposure": "50%",
-        "bycatch-level": "High impact on other species",
-        "bycatch-message": "Most fisheries utilize longlines to catch Mahi Mahi -- a fishing method that is notorius for accidentally catching and injuring sea turtles, sharks, and seabirds.",
-        "message": "Although Mahi Mahi is considered to have low to moderate mercury levels, most of the U.S. commercial harvest of Pacific mahi mahi comes from the Hawaii longline fishing fleet, the conditions of which have been likened to human trafficking, slavery and human rights abuses.",
-        "index": "44"
-      },
-      {
-        "name": "Monkfish",
-        "serving-amount": "6",
-        "serving-measure": "ounces",
-        "mercury": "0.174",
-        "mercury-exposure": "50%",
-        "bycatch-level": "High impact on other species",
-        "bycatch-message": "Monkfish are caught via bottom trawls or set gillnets in the U.S. These methods catch large rates of other species including at-risk fish species like Atlantic cod, flounder, and Atlantic sturgeon. Fishing limits are frequently exceeded."
-      },
-      {
-        "name": "Orange Roughy - Red Roughy, Slimehead, Deep Sea Perch",
-        "serving-amount": "6",
-        "serving-measure": "ounces",
-        "mercury": "0.513",
-        "mercury-exposure": "50%",
-        "bycatch-level": "High impact on other species",
-        "bycatch-message": "Orange Roughy is caught by bottom trawls where ancient seamounts live, destroying this habitat in New Zealand and capturing high amounts of coral as well as black oreos and smooth oreos, vulnerable fish species.",
-        "message": "It is best to avoid eating Orange Roughy. In addition to being high in mercury, Orange Roughy has seen dramatic declines in many fisheries."
-      },
-      {
-        "name": "Oysters - Pacific",
-        "serving-amount": "6",
-        "serving-measure": "ounces",
-        "mercury": "0.513",
-        "mercury-exposure": "50%",
-        "microplastics-message": "Filter feeders such as oysters draw in and filter out particles in seawater. Studies of microplastics in the deep sea found plastic particles in every single filter feeder that was studied.",
-        "message": "Oysters can contain a higher amount of heavy metals in their bodies because they mainly grow on the ocean floor and can accumulate heavy metals from industrial pollution that have sunk to the bottom of the ocean."
-      },
-      {
-        "name": "Sardine",
-        "serving-amount": "6",
-        "serving-measure": "ounces",
-        "mercury": "0.079",
-        "mercury-exposure": "50%",
-        "message": "The Pacific sardine fishery was at one time the largest fishery in North America, but seasons have been continually postponed due to population collapse. Scientists worry that it could be a long road to sardine population recovery."
-      },
-      {
-        "name": "Scallop",
-        "serving-amount": "6",
-        "serving-measure": "ounces",
-        "mercury": "0.04",
-        "mercury-exposure": "50%",
-        "microplastics-message": "Filter feeders such as scallops draw in and filter out particles in seawater. Studies of microplastics in the deep sea found plastic particles in every single filter feeder that was studied.",
-        "message": "Scallop dredges cause severe damage to seafloor habitat. In addition, endangered sea turtles and other species can be caught incidentally and are discarded, often dead or dying, as bycatch."
-      },
-      {
-        "name": "Sole",
-        "serving-amount": "6",
-        "serving-measure": "ounces",
-        "mercury": "0.086",
-        "mercury-exposure": "50%",
-        "bycatch-level": "High impact to other species and ocean floor",
-        "bycatch-message": "Wild-caught sole is caught by bottom trawls, a non selective form of fishing that results in seafloor destruction. Bycatch includes some species that are depleted. Management is better in the U.S. than Canadian sources. farmed sole with wastewater treatment is the best choice",
-        "message": "Because of high amounts of pollution and industrial waste, flatfish varieties like sole fish are more likely to contain dangerous contaminants that build up in the tissues of fish."
-      },
-      {
-        "name": "Squid",
-        "serving-amount": "6",
-        "serving-measure": "ounces",
-        "mercury": "0.044",
-        "mercury-exposure": "50%",
-        "bycatch-level": "High impact to other species",
-        "bycatch-message": "Squid is caught off the California coast via purse seine, a non-selective fishing method that captures everything that it surrounds, including protected species like sea turtles. Squid is caught in Japan via purse seine and jig, or a ring of thin, very sharp barbless wire hooks. Rather than hooking the squid in the mouth, the wire hooks snag the squid's tentacles as the squid attacks the lure.",
-        "message": "Many international squid fisheries are responsible for depleting squid at rates too high for the species to replenish, or are likely to catch these diminishing populations. Avoid squid caught in China, Indonesia, Thailand, and Argentina. "
-      },
-      {
-        "name": "Tilapia",
-        "serving-amount": "6",
-        "serving-measure": "ounces",
-        "mercury": "0.019",
-        "mercury-exposure": "25%",
-        "message": "Tilapia is a farmed fish. Avoid any Tilapia from China due to illegal use of antibiotics, invasiveness risk, and disease issues.",
-        "microplastics-message": "Tilapia has been found to ingest microplastics.",
-        "index": 67
-      }];
+    // Convert pounds to kilograms
+    if (weightUnits == "lbs") {
+      weightKilos = weight * 0.4535924
+    }
+    console.log("Weight in kilos", weightKilos);
 
+    // Add daily mercury exposure per fish to object
+    fishResults.forEach(function (element) {
+      // For each fish, daily mercury exposure = (Mercury content * daily grams) / weight in kilos
+      element.mercuryexposuredaily = (Number(element["mercury"]) * Number(element["serving-grams-daily"])) / weightKilos;
+    });
+    console.log("fishResults, now with more mercury",fishResults);
 
-      // Now that the data is in place, render the results list
-      function render() {
+    //Set EPA recommended total daily mercury exposure (in grams per ounce of fish)
+    const EPADailyExposureLimit = 0.1
 
-        var template = $("#fishResultsTemplate").html();
-        var html = Mustache.render(template, fishResults);
-        $('#fishResults').html(html);
+    // Sum function - Add property values in a given Array
+    Array.prototype.sum = function (prop) {
+      var total = 0
+      for (var i = 0, _len = this.length; i < _len; i++) {
+        total += Number(this[i][prop])
       }
+      return total
+    }
 
-      render();
+    // Calculate user's total daily mercury exposure
+    const userDailyExposure = fishResults.sum("mercuryexposuredaily");
+    console.log("Mercury exposure sum total", userDailyExposure );
 
+    // Add percent of total mercury exposure to each fish in fishlist
+    fishResults.forEach(function (element) {
+      // For each fish, percent of mercury exposure = element.mercuryexposuredaily /userDailyExposure
+      element.mercuryexposurepercent = Math.round((Number(element["mercuryexposuredaily"]) / userDailyExposure) * 100);
+    });
+    console.log("fishResults, now with exposure percent",fishResults);
+
+    // Calculate total mercury exposure compared to EPA limit
+    const userTotalExposurePercent = (userDailyExposure / EPADailyExposureLimit) * 100;
+    console.log("Percentage consumed daily", userTotalExposurePercent);
+
+    // Display the "Total exposure" message
+    document.getElementById("mercuryExposureMessage").innerHTML = `${Math.round(userTotalExposurePercent)}%`;
+
+    // Display the weight message
+    document.getElementById("weightResultsMessage").innerHTML = `Based on a weight of ${weight} ${weightUnits}`;
+
+    // Remove contents of existing chart so we don't duplicate them if we re-calculate
+    $("#chart").empty();
+
+    // Le chart
+    $(function () {
+
+      var options = {
+        series: [{
+          data: [Math.round(userTotalExposurePercent)]
+        }],
+        chart: {
+          type: 'bar',
+          height: 350,
+          width: "100%"
+        },
+        annotations: {
+          yaxis: [{
+            y: 100,
+            borderColor: '#00E396',
+            label: {
+              borderColor: '#00E396',
+              style: {
+                color: '#fff',
+                background: '#00E396',
+              },
+              text: 'Recommended limit'
+            }
+          }]
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+          }
+        },
+        dataLabels: {
+          enabled: true
+        },
+        xaxis: {
+          categories: ['Mercury'],
+        },
+        grid: {
+          xaxis: {
+            lines: {
+              show: true
+            }
+          }
+        },
+        yaxis: {
+          reversed: false,
+          axisTicks: {
+            show: true
+          }
+        }
+      };
+
+      var chart = new ApexCharts(document.querySelector("#chart"), options);
+      chart.render();
 
     });
 
-  });
+    // Now that the data is in place, render the results list
+    function render() {
+      var template = $("#fishResultsTemplate").html();
+      var html = Mustache.render(template, fishResults);
+      $('#fishResults').html(html);
+    }
+
+    render();
+
+    // Select lists - generic function to change selected value
+    function selectElement(id, valueToSelect) {
+      let element = document.getElementById(id);
+      element.value = valueToSelect;
+    }
+
+    // Set fish results select lists to correct amounts via a data attribute
+    $('#fishResults select').each(function () {
+      selectElement($(this).attr('id'), $(this).data('servings'))
+    });
+
+  }); // End calculate results
 
 
+} // End run fishapp
+
+
+// Remove cards when x is clicked
+function removeCard(item) {
+  var cardToRemove = $(item).data('remove');
+  console.log("card we wanna remove", cardToRemove)
+  $("#card" + cardToRemove).remove();
 }
 
 // TODO Select all input text when we focus
@@ -286,65 +329,11 @@ $("#fishList td").on("click", function () {
   $(this).select();
 });
 
-// Le chart
-$(function () {
-
-  var options = {
-    series: [{
-      data: [50]
-    }],
-    chart: {
-      type: 'bar',
-      stacked: true,
-      stackType: '100%',
-      height: 350,
-      width: "100%"
-    },
-    annotations: {
-      yaxis: [{
-        y: 100,
-        borderColor: '#00E396',
-        label: {
-          borderColor: '#00E396',
-          style: {
-            color: '#fff',
-            background: '#00E396',
-          },
-          text: 'Y annotation'
-        }
-      }]
-    },
-    plotOptions: {
-      bar: {
-        horizontal: false,
-      }
-    },
-    dataLabels: {
-      enabled: true
-    },
-    xaxis: {
-      categories: ['Mercury'],
-    },
-    grid: {
-      xaxis: {
-        lines: {
-          show: true
-        }
-      }
-    },
-    yaxis: {
-      reversed: false,
-      axisTicks: {
-        show: true
-      }
-    }
-  };
-
-  var chart = new ApexCharts(document.querySelector("#chart"), options);
-  chart.render();
-
-});
-
+// TODO: Reset fish results and recalculate everything when we:
+// Click "calculate results", remove a fish from results, change the servings, change the units, we want to:
+// Recalculate results
+// Update fish results
+// Update fish selections
 
 // Filter list of fish
 function filterFishList() {
@@ -419,6 +408,33 @@ function sortTable(n) {
         switching = true;
       }
     }
+  }
+}
+
+// Get the modal
+var modal = document.getElementById("servingModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("openServingModal");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  event.preventDefault()
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
   }
 }
 
