@@ -18,11 +18,15 @@
   background-color: $brand-01;
   color: #ffffff;
 
-}
+  &:hover {
+    background-color: $brand-02;
+    cursor: pointer;
+  }
 
-.btn-primary:hover {
-  background-color: $brand-02;
-  cursor: pointer;
+  &:disabled {
+    background-color: gray;
+  } 
+
 }
 
 .btn-secondary {

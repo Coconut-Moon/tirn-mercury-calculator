@@ -68,46 +68,54 @@ margin-bottom: 1.25em;
 
 #fishList {
   width: 100%;
-}
 
-.header-fishlist {
-  margin-bottom: 0;
-  padding: .25em;
-  text-align: left;
-  font-weight: bold;
-}
+  tr {
+    height: 32px;
 
-.header-fishlist th:nth-child(2) {
-  text-align: right;
-}
-
-#fishList tr {
-  height: 32px;
-}
-
-#fishList th {
-  padding: 1em;
-
-  &.asc {
-    color: green;
+    &:hover {
+      background-color: aliceblue;
+      cursor: pointer;
+    }
   }
 
-  &.dsc {
-    color: red;
+  .header-fishlist {
+    margin-bottom: 0;
+    text-align: left;
+    font-weight: bold;
+
+    th {
+      vertical-align: bottom;
+      padding: .25em 1em .25em 0;
+
+      &:nth-child(3) {
+        text-align: right;
+      }
+
+      &.asc {
+        &:after { content: '\25B2'; }
+      }
+
+      &.dsc {
+        &:after { content: '\25BC'; }
+      }
+    }
+
   }
-}
 
-#fishList td {
-  padding: .25em 1em;
-}
+  input {
+    margin: .25em 1em;
+  }
 
-#fishList tr:hover {
-  background-color: aliceblue;
-  cursor: pointer;
-}
+  label
+  {
+    display: block;
+    padding: .25em 1em .25em 0;
 
-#fishList .mercury-exposure {
-  float: right;
+    &.mercury-exposure {
+      text-align: right;
+    }
+  }
+
 }
 
 .selected-fish {

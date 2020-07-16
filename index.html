@@ -17,6 +17,8 @@
       <div class="col">
         <h1>What's the catch?</h1>
 
+        <div class="google-json-results"></div>
+
         <hr>
 
         <div class="question-box question-one" id="questionOne">
@@ -89,16 +91,19 @@
 
           <script id="template" type="text/template">
             <tr class="header-fishlist">
-              <th class="asc" onclick="sortTable(0)">Fish</th>
-              <th onclick="sortTable(1)">Mercury per oz</th>
+              <th></th>
+              <th class="asc"><a href="javascript:sortTable(1)">Fish</a></th>
+              <th><a href="javascript:sortTable(2)">Mercury per oz</a></th>
             </tr>
             {{#.}}
             <tr>
               <td>
                 <input class="fish" type="checkbox" id="fish_{{ index }}" name="fish" value="{{ name }}" data-index="{{ index }}">
-                <label for="fish">{{ name }}</label>
               </td>
-              <td><span class="mercury-exposure">{{ mercury }}</span></td>
+              <td>
+                <label for="fish_{{ index }}">{{ name }}</label>
+              </td>
+              <td><label for="fish_{{ index }}" class="mercury-exposure">{{ mercury }}</label></td>
             </tr>
             {{/.}}
           </script>
@@ -137,7 +142,7 @@
 
           </form>
 
-          <button id="showResults" class="btn btn-primary show-results">
+          <button id="showResults" class="btn btn-primary show-results" disabled="disabled">
             Show results
           </button>
 

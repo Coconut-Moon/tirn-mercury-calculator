@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url(https://fonts.googleapis.com/css2?family=Fjalla+One&family=Open+Sans:wght@300;400;700&display=swap);
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
@@ -210,10 +211,12 @@ form {
   background-color: #014494;
   color: #ffffff;
 }
-
 .btn-primary:hover {
   background-color: #00224a;
   cursor: pointer;
+}
+.btn-primary:disabled {
+  background-color: gray;
 }
 
 .btn-secondary {
@@ -292,6 +295,14 @@ form {
   margin-bottom: 1em;
   box-sizing: border-box;
   height: 2.5em;
+  -webkit-appearance: none;
+}
+
+.input.input-select {
+  background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+) no-repeat 95% 50%;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .input.input-lg {
@@ -410,43 +421,40 @@ form {
 #fishList {
   width: 100%;
 }
-
-.header-fishlist {
-  margin-bottom: 0;
-  padding: 0.25em;
-  text-align: left;
-  font-weight: bold;
-}
-
-.header-fishlist th:nth-child(2) {
-  text-align: right;
-}
-
 #fishList tr {
   height: 32px;
 }
-
-#fishList th {
-  padding: 1em;
-}
-#fishList th.asc {
-  color: green;
-}
-#fishList th.dsc {
-  color: red;
-}
-
-#fishList td {
-  padding: 0.25em 1em;
-}
-
 #fishList tr:hover {
   background-color: aliceblue;
   cursor: pointer;
 }
-
-#fishList .mercury-exposure {
-  float: right;
+#fishList .header-fishlist {
+  margin-bottom: 0;
+  text-align: left;
+  font-weight: bold;
+}
+#fishList .header-fishlist th {
+  vertical-align: bottom;
+  padding: 0.25em 1em 0.25em 0;
+}
+#fishList .header-fishlist th:nth-child(3) {
+  text-align: right;
+}
+#fishList .header-fishlist th.asc:after {
+  content: "▲";
+}
+#fishList .header-fishlist th.dsc:after {
+  content: "▼";
+}
+#fishList input {
+  margin: 0.25em 1em;
+}
+#fishList label {
+  display: block;
+  padding: 0.25em 1em 0.25em 0;
+}
+#fishList label.mercury-exposure {
+  text-align: right;
 }
 
 .selected-fish {
