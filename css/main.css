@@ -81,7 +81,7 @@ h4 {
 
 h1 {
   font-size: 3em;
-  margin: 1em 0;
+  margin: 1em 0 0.5em 0;
 }
 
 h2 {
@@ -92,7 +92,6 @@ h2 {
 h3 {
   font-size: 1.5em;
   line-height: 1.25em;
-  margin: 0.5em 0;
 }
 
 p, label, li {
@@ -244,8 +243,8 @@ form {
 
 .btn-group {
   display: flex;
+  /* Add a background color on hover */
 }
-
 .btn-group .btn-group-input {
   position: absolute;
   opacity: 0;
@@ -253,35 +252,27 @@ form {
   height: 0;
   width: 0;
 }
-
 .btn-group .btn {
   background-color: #d8d8d8;
   color: #585858;
-  /*border: 1px solid #309303;*/
   border-radius: 6px;
   padding: 14px 23px;
   cursor: pointer;
 }
-
 .btn-group .btn:not(:last-child) {
   border-right: none;
   /* Prevent double borders */
 }
-
 .btn-group .btn:last-child {
   border-radius: 0 6px 6px 0;
 }
-
 .btn-group .btn:nth-child(2) {
   border-radius: 6px 0 0 6px;
 }
-
 .btn-group input[type=radio]:checked + label {
   background-color: #309303;
   color: white;
 }
-
-/* Add a background color on hover */
 .btn-group button:hover {
   background-color: #3e8e41;
 }
@@ -293,6 +284,7 @@ form {
   border: 3px solid #d8d8d8;
   border-radius: 2px;
   margin-bottom: 1em;
+  padding: 6px;
   box-sizing: border-box;
   height: 2.5em;
   -webkit-appearance: none;
@@ -310,7 +302,7 @@ form {
 }
 
 .input-number-small {
-  width: 2.5em;
+  width: 3em;
 }
 
 /* The Modal (background) */
@@ -334,36 +326,37 @@ form {
   background-color: rgba(0, 0, 0, 0.4);
   /* Black w/ opacity */
 }
+.modal img {
+  width: 100px;
+  /* text-align: center; */
+  margin: 0 1em 0 0;
+  display: block;
+  float: left;
+}
+.modal .icon-close-x {
+  float: right;
+}
+.modal .btn-primary {
+  width: 100%;
+}
 
 /* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto;
-  /* 15% from the top and centered */
+  margin: 50px auto;
+  max-width: 560px;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
-  /* Could be more or less, depending on screen size */
 }
-
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+@media (min-width: 576px) {
+  .modal-content {
+    width: 50%;
+  }
 }
 
 /* Workflow helpers */
-.question-box.display-none {
-  display: none;
+.display-none {
+  display: none !important;
 }
 
 .question-box {
@@ -499,17 +492,22 @@ form {
   margin-top: 0;
 }
 
-.close {
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 16px;
+.icon-close-x {
+  /* background-size: 16px; */
   display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin-left: 1em;
+  /* width: 18px; */
+  height: 39px;
+  font-size: 1.5em;
+  margin-left: 0.5em;
+  vertical-align: middle;
 }
-.close:hover {
+.icon-close-x span {
+  display: inline-block;
+  vertical-align: middle;
+}
+.icon-close-x:hover {
   background-color: #c2c1c1;
+  cursor: pointer;
 }
 
 .icon {
@@ -559,12 +557,16 @@ form {
   background-image: url("/icons/human.svg");
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: auto 70%;
+  background-size: auto 60%;
   width: 100%;
 }
 
 .apexcharts-canvas {
   margin: 0 auto;
+}
+
+.loading {
+  background-image: url(../assets/img/placeholder.gif);
 }
 
 /*# sourceMappingURL=main.css.map */

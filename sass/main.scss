@@ -9,8 +9,8 @@
 @import 'modals.scss';
 
 /* Workflow helpers */
-.question-box.display-none {
-  display: none;
+.display-none {
+  display: none !important;
 }
 
 .question-box {
@@ -171,18 +171,24 @@ margin-bottom: 1.25em;
   margin-top: 0;
 }
 
-.close {
-  //background-image: url('/icons/close.svg');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 16px;
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  margin-left: 1em;
+.icon-close-x {
+      /* background-size: 16px; */
+      display: inline-block;
+      /* width: 18px; */
+      height: 39px;
+      font-size: 1.5em;
+      margin-left: .5em;
+      vertical-align: middle;
+
+      //Additional wrapper for vertical alignment
+      span {
+        display: inline-block;
+        vertical-align: middle;
+      }
 
     &:hover {
       background-color: #c2c1c1;
+      cursor: pointer;
     }
 }
 
@@ -240,10 +246,14 @@ margin-bottom: 1.25em;
   background-image: url('/icons/human.svg');
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: auto 70%;
+  background-size: auto 60%;
   width: 100%;
 }
 
 .apexcharts-canvas {
   margin:0 auto;
+}
+
+.loading {
+  background-image: url(../assets/img/placeholder.gif);
 }

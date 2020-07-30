@@ -1,8 +1,10 @@
 // Navigate
 $(function () {
-  $("#NextQuestion").click(function () {
+  $(".navigate-fish-list").click(function () {
     $(".question-one").addClass("display-none")
     $(".question-two").removeClass("display-none")
+    $(".results").addClass("display-none")
+    window.scrollTo(0, 0);
   });
 });
 
@@ -10,22 +12,27 @@ $(function () {
   $("#backToWeight").click(function () {
     $(".question-two").addClass("display-none")
     $(".question-one").removeClass("display-none")
+    window.scrollTo(0, 0);
   });
 });
 
-//$(function () {
-//  $("#showResults").click(function () {
-//    $(".question-two").addClass("display-none")
-//    $(".results").removeClass("display-none")
-//  });
-// });
+$(function () {
+    $("#showResults").click(function () {
+    $(".question-two").addClass("display-none")
+    $(".results").removeClass("display-none")
+    window.scrollTo(0, 0);
+  });
+ });
 
 $(function () {
   $("#backToStart").click(function () {
     $(".results").addClass("display-none")
     $(".question-one").removeClass("display-none")
+    window.scrollTo(0, 0);
   });
 });
+
+
 
 // Store user's weight and units
 function storeWeight() {
@@ -60,11 +67,13 @@ var url =
   spreadsheetID +
   '/1/public/full?alt=json';
 
+
 // Retrieve fish data
 $.getJSON(url, function (data) {
 
-  var entry = data.feed.entry;
   var googleFishData = []
+
+  var entry = data.feed.entry;
 
   // Format fish data to something we can read a bit more easily
   $(entry).each(function () {
@@ -87,10 +96,12 @@ $.getJSON(url, function (data) {
   })
   console.log("New fish data from the GOOOG", googleFishData)
 
+  // Map spreadsheet fish data to a json object
+  renderSelectedFishList(googleFishData);
+
   // Populate the list of fish
   renderFishList(googleFishData);
 
-  runTheFishApp(googleFishData);
 });
 
 function renderFishList(googleFishData) {
@@ -99,18 +110,16 @@ function renderFishList(googleFishData) {
   $('#fishList').html(html);
 }
 
-// This takes the user's selections from the fish finder thingy
-  // And matches the INDEX of that fish with the full json file of all fishy data
-  // So that we can build a new array of fish results to use to calculate the calculations
- 
-function runTheFishApp(allFishData) {
+function renderSelectedFishList(allFishData) {
   allFishData = allFishData || [];
 
-  function returnSelectedFishData(selectedFishData) {
-    selectedFishData = selectedFishData || null;
+  // Match selected fish to full dataset by INDEX.
+  // Build new array of fish results to use to run the calculations
+  function returnSelectedFishData(selectedFishIDs) {
+    selectedFishIDs = selectedFishIDs || null;
     const selectedFishArray = [];
     // maps through the user's selections
-    selectedFishData.map(selectedFish => {
+    selectedFishIDs.map(selectedFish => {
       // maps through all of the the data
       allFishData.map(fish => {
         // conditional to compare the fish
@@ -124,24 +133,16 @@ function runTheFishApp(allFishData) {
     return selectedFishArray;
   }
 
-  // TODO - Delete
-  function myCoolFunction(myVariableA, myVariableB) {
-    return myVariableA + myVariableB
-  }
-  console.log(myCoolFunction("4", "6"))
-
-  // The user's selected fish that we'll be running the calculations on
-  var selectedFish
-
   // Render serving selector for each selected fish when the checkbox status changes
   $(document).on('change', '.fish', function () {
 
     // This is the array of selected fish you are creating an array with to send to the returnSelectedFish function (logged out below)
-    const selectedFishData = $("#fishList input:checkbox:checked").map(function () {
+    const selectedFishIDs = $("#fishList input:checkbox:checked").map(function () {
       return $(this).data("index");
     }).get();
+    console.log("selectedFishIDs", selectedFishIDs)
 
-    selectedFish = returnSelectedFishData(selectedFishData);
+    selectedFish = returnSelectedFishData(selectedFishIDs);
 
     // THESE ARE YOUR FISHES!!!!!
     console.log("These are your returned fishes", selectedFish)
@@ -149,7 +150,7 @@ function runTheFishApp(allFishData) {
     // Send fish data to the template
     function renderSelectedFishTemplate() {
       var template = $("#selectedFishTemplate").html();
-      var html = Mustache.to_html(template, returnSelectedFishData(selectedFishData));
+      var html = Mustache.to_html(template, returnSelectedFishData(selectedFishIDs));
       $('#selectedFish').html(html);
     }
 
@@ -181,6 +182,8 @@ function runTheFishApp(allFishData) {
 } // End run fishapp
 
 function calculateResults(selectedFish) {
+
+  console.log("first selectedFish in calculate", selectedFish);
 
   // An object array for serving sizes and quantities
   var fishAmounts = [];
@@ -220,6 +223,7 @@ function calculateResults(selectedFish) {
   // Merge our sizes and quantities with the selected fish
   let fishResults = fishAmounts.map((item, i) => Object.assign({}, item, selectedFish[i]));
   console.log("fish results", fishResults);
+  console.log("last selectedFish in calculate", selectedFish);
 
   // Get user-entered weight
   var weight = document.getElementById("weight").value;
@@ -230,6 +234,8 @@ function calculateResults(selectedFish) {
   // Convert pounds to kilograms
   if (weightUnits == "lbs") {
     weightKilos = weight * 0.4535924
+  } else {
+    weightKilos = weight
   }
   console.log("Weight in kilos", weightKilos);
 
@@ -285,19 +291,19 @@ function calculateResults(selectedFish) {
       }],
       chart: {
         type: 'bar',
-        height: 350,
+        height: 250,
         width: "100%",
         stackType: "100%"
       },
       annotations: {
         yaxis: [{
           y: 100,
-          borderColor: '#00E396',
+          borderColor: '#FFBABA',
           label: {
-            borderColor: '#00E396',
+            borderColor: '#FFBABA',
             style: {
               color: '#fff',
-              background: '#00E396',
+              background: '#FFBABA',
             },
             text: 'Recommended limit'
           }
@@ -312,7 +318,7 @@ function calculateResults(selectedFish) {
         enabled: true
       },
       xaxis: {
-        categories: ['Mercury'],
+        categories: ['Mercury level'],
       },
       grid: {
         xaxis: {
@@ -358,12 +364,16 @@ function calculateResults(selectedFish) {
 
 // Remove fish when x is clicked
 function removeFish(item) {
-  var fishToRemove = $(item).data('remove');
+  var fishToRemove = $(item).data('remove')
   console.log("card we wanna remove", fishToRemove)
-  $("#fishResult_" + fishToRemove).remove();
-  $("#selectedFish_" + fishToRemove).remove();
-  $("#fish_" + fishToRemove).prop("checked", false);
-}
+  $("#fishResult_" + fishToRemove).remove()
+  $("#selectedFish_" + fishToRemove).remove()
+  $("#fish_" + fishToRemove).prop("checked", false)
+  console.log("selectedfish in removefish", selectedFish)
+
+  //renderSelectedFishList(data);
+  calculateResults(selectedFish);
+};
 
 // TODO: Reset fish results and recalculate everything when we:
 // Click "calculate results", remove a fish from results, change the servings, change the units, we want to:
@@ -391,7 +401,7 @@ function filterFishList() {
   }
 }
 
-// Sort by mercury level
+// Sort list of fish
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("fishList");
@@ -400,6 +410,10 @@ function sortTable(n) {
   dir = "asc";
   /*Make a loop that will continue until
   no switching has been done:*/
+
+  // $('#fishList').addClass("loading")
+  // $('#fishList td').addClass("display-none")
+
   while (switching) {
     //start by saying: no switching is done:
     switching = false;
@@ -450,6 +464,10 @@ function sortTable(n) {
 }
 
 $(document).ready(function () {
+  if ($('#selectedFish').is(':empty')){
+    $('#selectedFish').html('foo');
+  }
+
   /* Modal controls */
   // Get the modal
   var modal = document.getElementById("servingModal");
@@ -458,7 +476,8 @@ $(document).ready(function () {
   var btn = document.getElementById("openServingModal");
   // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("close")[0];
-  // When the user clicks on the button, open the modal
+  // Get the <button> element that closes the modal
+
   btn.onclick = function () {
     event.preventDefault()
     modal.style.display = "block";
@@ -467,6 +486,7 @@ $(document).ready(function () {
   span.onclick = function () {
     modal.style.display = "none";
   }
+
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function (event) {
     if (event.target == modal) {

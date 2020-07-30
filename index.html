@@ -8,7 +8,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src=https://cdn.jsdelivr.net/npm/chart.js></script>
     <link rel="stylesheet" type="text/css" href="css/main.css" />
   </head>
   <body>
@@ -16,10 +15,6 @@
     <main class="flex-grid">
       <div class="col">
         <h1>What's the catch?</h1>
-
-        <div class="google-json-results"></div>
-
-        <hr>
 
         <div class="question-box question-one" id="questionOne">
           <p>
@@ -64,19 +59,16 @@
           </div>
           <p class="note">Your weight determines how much mercury you can safely consume.</p>
           <button
-            id="NextQuestion"
-            class="btn btn-primary"
+            id="OpenFishList"
+            class="btn btn-primary navigate-fish-list"
             onclick="storeWeight()"
           >
             Next question
           </button>
 
-
         </div>
 
-        <hr>
-
-        <div class="question-box question-two" id="questionTwo">
+        <div class="question-box question-two display-none" id="questionTwo">
 
           <p>
             What types of seafood do you eat <strong class="highlight"> in one week?</strong>
@@ -132,7 +124,7 @@
                     <option value="28.35">Grams</option>
                   </select>
                 </span>
-                <a class="close" title="Remove fish" onClick="removeFish(this)" data-remove="{{ index }}">&times;</a>
+                <a class="icon-close-x" title="Remove fish" onClick="removeFish(this)" data-remove="{{ index }}"><span>&times;</span></a>
               </li>
               {{/.}}
               {{^.}}
@@ -149,19 +141,14 @@
           <button id="backToWeight" class="btn btn-secondary">BACK</button>
         </div>
 
-        <hr>
-
-        <div class="question-box results" id="results">
+        <div class="question-box display-none foo results" id="results">
           <h2>Results</h2>
 
           <p>Your mercury exposure is <span id="mercuryExposureMessage" class="highlight"></span> of the safe limit</p>
-
+          <p class="note" style="margin-top:0;font-size:.75em;" id="weightResultsMessage"><p>
           <div id="chart"></div>
-          <!--<canvas id="myChart" width="400" height="400"></canvas>-->
 
-          <p id="weightResultsMessage"> <a href="#">Edit</a> <p>
-
-            <h2>Your choices</h2>
+          <h2>Your choices</h2>
 
           <div id="fishResults">
             <p class="note">Select a fish from the list.</p>
@@ -186,7 +173,7 @@
                   </select>
                 </span>
 
-                <a class="close" title="Remove fish" onClick="removeFish(this)" data-remove="{{ index }}">&times;</a>
+                <a class="icon-close-x" title="Remove fish" onClick="removeFish(this)" data-remove="{{ index }}"><span>&times;</span></a>
 
               </div>
 
@@ -239,7 +226,6 @@
               {{/microplastics-message}}
 
               {{#footnote}}
-                <hr>
                 <p class="font-small">
                   {{footnote}}
                 </p>
@@ -253,25 +239,36 @@
             <p class="note">Select a fish from the list.</p>
             {{/.}}
           </script>
-          <button class="btn btn-secondary" id="editFish">EDIT FISH</button>
-          <button class="btn btn-secondary" id="backToStart">BACK</button>
+          <button class="btn btn-secondary navigate-fish-list" id="editFish">Edit selected fish</button>
+          <button class="btn btn-secondary" id="backToStart">Start over</button>
         </div>
       </div>
-      <hr>
 
     </main>
-    <hr>
+
     <footer class="flex-grid">
       <p><a href="#">About this calculator</a></p>
-      <p><a href="#">Calculadora en Español</a></p>
     </footer>
 
     <!-- The Modal -->
     <div id="servingModal" class="modal">
       <!-- Modal content -->
       <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Some text in the Modal..</p>
+        <span class="close icon-close-x">&times;</span>
+        <h2>Common serving sizes</h2>
+          <img src="img/serving-filet@2x.png" alt="large fish filet">
+          <p>A typical serving of fish (steak or fillet) is about 6 to 8 ounces for an adult.</p>
+          <br />
+          <img src="img/serving-sushi@2x.png" alt="piece of sushi">
+          <p>A sushi order is 2 to 4 ounces per type.</p>
+          <br />
+          <br />
+          <img src="img/serving-can@2x.png" alt="Can of tuna">
+          <p>A standard can of tuna contains 6 ounces.</p>
+          <br />
+          <br />
+          <!-- <button class="btn btn-primary close">Close</button> -->
+
       </div>
     </div>
 

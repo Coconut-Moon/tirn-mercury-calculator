@@ -5,6 +5,7 @@
   border: 3px solid #d8d8d8;
   border-radius: 2px;
   margin-bottom: 1em;
+  padding: 6px;
   box-sizing: border-box;
   height: 2.5em;
   -webkit-appearance: none;
@@ -22,7 +23,7 @@
 }
 
 .input-number-small {
-  width: 2.5em;
+  width: 3em;
 }
 
 /*# sourceMappingURL=inputs.css.map */
