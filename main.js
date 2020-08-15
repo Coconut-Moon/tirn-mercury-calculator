@@ -34,17 +34,17 @@ $(function () {
 
 
 
-// Store user's weight and units
+// Store user's weight and units for later calculation
 function storeWeight() {
-  var weight = document.getElementById('weight').value;
+  const weight = document.getElementById('weight').value;
 
   //TODO: comment out log troubleshooting
   console.log(weight);
 
-  var weightUnits = document.getElementsByName('weightUnits');
+  const weightUnits = document.getElementsByName('weightUnits');
 
   //TODO: comment out log troubleshooting
-  for (var i = 0, length = weightUnits.length; i < length; i++) {
+  for (let i = 0, length = weightUnits.length; i < length; i++) {
     if (weightUnits[i].checked) {
 
       console.log(weightUnits[i].value);
@@ -55,8 +55,15 @@ function storeWeight() {
   }
 }
 
-/* Get list of fish from google spreadsheet (owned by TIRN) */
+// Display the list of fish on the page
 
+function renderFishList(googleFishData) {
+  var template = $("#template").html();
+  var html = Mustache.to_html(template, googleFishData);
+  $('#fishList').html(html);
+}
+
+/* Get list of fish from google spreadsheet (owned by TIRN) */
 
 // ID of the Google Spreadsheet
 var spreadsheetID = '1Boy1UKFhf_wMjJ6wHHFWAEdRTZ3QxK0f9rntOSkUjmM';
@@ -66,7 +73,6 @@ var url =
   'https://spreadsheets.google.com/feeds/list/' +
   spreadsheetID +
   '/1/public/full?alt=json';
-
 
 // Retrieve fish data
 $.getJSON(url, function (data) {
@@ -101,13 +107,10 @@ $.getJSON(url, function (data) {
 
 });
 
-function renderFishList(googleFishData) {
-  var template = $("#template").html();
-  var html = Mustache.to_html(template, googleFishData);
-  $('#fishList').html(html);
-}
-
+// Display the list of selected fish
 function renderSelectedFishList(allFishData) {
+
+  // Container for fish data
   allFishData = allFishData || [];
 
   // Match selected fish to full dataset by INDEX.
@@ -195,23 +198,23 @@ function calculateResults(selectedFish) {
   $('#selectedFish li').each(function () {
 
     // Set selected serving amount
-    servingAmountWeekly = $("input[name='serving-amount']", this).map(function () {
+    const servingAmountWeekly = $("input[name='serving-amount']", this).map(function () {
       return $(this).val();
     }).get()
 
     // Set selected measure in ounces
-    servingOuncesWeekly = $("select[name='serving-ounces']", this).map(function () {
+    const servingOuncesWeekly = $("select[name='serving-ounces']", this).map(function () {
       return $(this).val();
     }).get()
 
     // Calculate total ounces
-    servingOuncesWeeklyTotal = servingAmountWeekly * servingOuncesWeekly
+    const servingOuncesWeeklyTotal = servingAmountWeekly * servingOuncesWeekly
 
     // Convert total ounces to grams
-    servingTotalGrams = servingOuncesWeeklyTotal * 28.35
+    const servingTotalGrams = servingOuncesWeeklyTotal * 28.35
 
     // Calculate daily grams
-    servingTotalGramsDaily = servingTotalGrams / 7
+    const servingTotalGramsDaily = servingTotalGrams / 7
 
     // Add data to each fish
     fishAmounts.push({
@@ -225,27 +228,25 @@ function calculateResults(selectedFish) {
   console.log("Amounts array", fishAmounts);
 
   // Merge our sizes and quantities with the selected fish
-  let fishResults = fishAmounts.map((item, i) => Object.assign({}, item, selectedFish[i]));
+  const fishResults = fishAmounts.map((item, i) => Object.assign({}, item, selectedFish[i]));
   console.log("fish results", fishResults);
-  console.log("last selectedFish in calculate", selectedFish);
 
   // --- do the actual calculations - separate function?
 
   // Get user-entered weight
-  var weight = document.getElementById("weight").value;
+  const weight = document.getElementById("weight").value;
 
   // Get user-entered weight unit (pounds/kilograms)
-  var weightUnits = document.querySelector('.weight-measure:checked').value;
+  const weightUnits = document.querySelector('.weight-measure:checked').value;
 
   // Convert pounds to kilograms
-  if (weightUnits == "lbs") {
-    weightKilos = weight * 0.4535924
-  } else {
-    weightKilos = weight
-  }
+  let weightKilos = weight;
+  if (weightUnits === "lbs") {
+    weightKilos = weight * 0.4535924;
+  };
   console.log("Weight in kilos", weightKilos);
 
-  // Add daily mercury exposure per fish to object
+  // Add daily mercury exposure per fish to Fish Results
   fishResults.forEach(function (element) {
     // For each fish, daily mercury exposure = (Mercury content * daily grams) / weight in kilos
     element.mercuryexposuredaily = (Number(element["mercury"]) * Number(element["serving-grams-daily"])) / weightKilos;
@@ -351,6 +352,7 @@ function calculateResults(selectedFish) {
     var template = $("#fishResultsTemplate").html();
     var html = Mustache.render(template, fishResults);
     $('#fishResults').html(html);
+    console.log("Fish Results, as rendered", fishResults);
   }
   renderResults();
 
@@ -377,26 +379,26 @@ function calculateResults(selectedFish) {
 
 }; // End calculate results
 
-// Remove fish when x is clicked
-function removeFish(item) {
-  var fishToRemove = $(item).data('remove')
-  console.log("card we wanna remove", fishToRemove)
-  $("#fishResult_" + fishToRemove).remove()
-  $("#selectedFish_" + fishToRemove).remove()
-  $("#fish_" + fishToRemove).prop("checked", false)
-  console.log("selectedfish in removefish", selectedFish)
-
-  //renderSelectedFishList(data);
-  //calculateResults(selectedFish);
-};
-
 // TODO: Reset fish results and recalculate everything when we:
 // Click "calculate results", remove a fish from results, change the servings, change the units, we want to:
 // Recalculate results
 // Update fish results
 // Update fish selections
+// Remove fish
 
-//
+// Remove fish when x is clicked
+function removeFish(item) {
+  var fishToRemove = $(item).data('remove')
+  console.log("fish we wanna remove", fishToRemove)
+  $("#selectedFish_" + fishToRemove).remove()
+  $("#fish_" + fishToRemove).prop("checked", false)
+  $("#fishResult_" + fishToRemove).remove()
+
+    renderSelectedFishList();
+    calculateResults(selectedFish);
+};
+
+// Recalculate results when any input changes (may need to target this better)
 $(document).change(function () {
   $('.input').change(function(){
     //renderSelectedFishList(data);
