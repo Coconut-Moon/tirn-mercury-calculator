@@ -1,10 +1,12 @@
 .flex-grid {
+  width: 100%;
   margin: 0 auto;
   padding: 1em;
 }
+
 @media (min-width: 576px) {
   .flex-grid {
-    width: 50%;
+    width: 80%;
   }
 }
 
@@ -18,10 +20,12 @@
 .row-2col {
   justify-content: space-between;
   display: flex;
+  flex-flow: wrap;
 }
 
 .col {
   flex: 1;
+  width: 100%;
 }
 
 .col-2 {
@@ -37,7 +41,6 @@
 }
 
 .col-contents-right {
-  text-align: end;
   min-width: 190px;
 }
 
@@ -54,10 +57,12 @@
   margin-bottom: 1em;
 }
 
-footer.flex-grid {
-  margin-top: 1em;
-  flex-flow: column;
-  align-items: end;
+.y-1 {
+  margin-bottom: 0.5em;
+}
+
+.y-3 {
+  margin-bottom: 1.25em;
 }
 
 /* Alignment helpers */
@@ -71,6 +76,24 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+footer.flex-grid {
+  margin-top: 1em;
+  flex-flow: column;
+  align-items: end;
+}
+
+@media (min-width: 768px) {
+  .question-box.results {
+    flex-direction: row;
+  }
+}
+.question-box.results .col {
+  align-self: start;
+}
+.question-box.results #results-overview {
+  text-align: center;
 }
 
 /*# sourceMappingURL=grid.css.map */

@@ -2,13 +2,18 @@
 .btn {
   font-weight: bold;
   text-align: center;
+  transition: background-color .5s;
+}
+
+.btn-primary, .btn-secondary {
+  max-width: 500px;
+  padding: 1em 2em;
+  text-decoration: none;
 }
 
 .btn-primary {
   width: 75%;
-
   margin: 1em 0;
-  padding: 1.5em 2.25em;
 
   font-size: 1.125em;
 
@@ -25,7 +30,7 @@
 
   &:disabled {
     background-color: gray;
-  } 
+  }
 
 }
 
@@ -41,6 +46,13 @@
   font-size: 1em;
   border-radius: 6px;
   width: 75%;
+
+  &:hover {
+    color: #ffffff;
+    background-color: $brand-02;
+    cursor: pointer;
+    transition: 0.3s;
+  }
 }
 
 .btn-primary + .btn-secondary,
@@ -49,11 +61,27 @@
   margin-top: 0;
 }
 
-.btn-secondary:hover {
-  color: #ffffff;
-  background-color: $brand-02;
-  cursor: pointer;
-  transition: 0.3s;
+.btn-bar {
+  width: 100%;
+  padding: 0 1.5em;
+  margin-bottom: 1em;
+  display: flex;
+
+  .btn {
+        background-color: $brand-05;
+        color: white;
+        border: none;
+        padding: 1em;
+        border-radius: 0;
+        display: inline-block;
+        margin: .5em;
+        font-size: 13px;
+        flex-grow: 1;
+
+    &:hover {
+      background-color: $brand-02;
+    }
+  }
 }
 
 .btn-group {

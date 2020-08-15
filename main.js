@@ -82,16 +82,13 @@ $.getJSON(url, function (data) {
         "index": Number(this.gsx$id.$t),
         "name": this.gsx$fish.$t,
         "mercury": Number(this.gsx$mercurylevel.$t),
+        "mercury-rating": this.gsx$mercuryrating.$t,
         "message": this.gsx$message.$t,
         "index": Number(this.gsx$id.$t),
         "bycatch-level": this.gsx$bycatchlevel.$t,
         "bycatch-message": this.gsx$bycatchmessage.$t,
         "microplastics-message": this.gsx$microplasticsmessage.$t
       }
-    )
-    // Column names are name, age, etc.
-    $('.google-json-results').prepend(
-      //'<h2>' + this.gsx$fish.$t + '</h2><p>' + this.gsx$mercurylevel.$t + '</p>'
     )
   })
   console.log("New fish data from the GOOOG", googleFishData)
@@ -181,11 +178,17 @@ function renderSelectedFishList(allFishData) {
 
 } // End run fishapp
 
+/* Calculate Results of fish selection */
+
 function calculateResults(selectedFish) {
 
-  console.log("first selectedFish in calculate", selectedFish);
+  //-------- Update list of selected fish with user selected values - separate function?
+  // This should update when a user
+  // * Selects a new fish
+  // * Changes a fish input (serving, weight)
+  // * Removes a fish
 
-  // An object array for serving sizes and quantities
+  // Container for serving sizes and quantities
   var fishAmounts = [];
 
   // In the selected fish list, pull the serving sizes and quantities into individual fish
@@ -218,12 +221,15 @@ function calculateResults(selectedFish) {
       "serving-grams-daily": servingTotalGramsDaily
     });
   });
+
   console.log("Amounts array", fishAmounts);
 
   // Merge our sizes and quantities with the selected fish
   let fishResults = fishAmounts.map((item, i) => Object.assign({}, item, selectedFish[i]));
   console.log("fish results", fishResults);
   console.log("last selectedFish in calculate", selectedFish);
+
+  // --- do the actual calculations - separate function?
 
   // Get user-entered weight
   var weight = document.getElementById("weight").value;
@@ -273,72 +279,72 @@ function calculateResults(selectedFish) {
   const userTotalExposurePercent = (userDailyExposure / EPADailyExposureLimit) * 100;
   console.log("Percentage consumed daily", userTotalExposurePercent);
 
-  // Display the "Total exposure" message
-  document.getElementById("mercuryExposureMessage").innerHTML = `${Math.round(userTotalExposurePercent)}%`;
+  // ------------- Render some values on the  results page and footer - separate function?
+
+  //Render total mercury exposure message
+  document.getElementById("mercuryDailyExposureRawMessage").innerHTML = userDailyExposure;
+
+  //Render total mercury exposure message
+  document.getElementById("mercuryExposureRawMessage").innerHTML = userTotalExposurePercent;
 
   // Display the weight message
   document.getElementById("weightResultsMessage").innerHTML = `Based on a weight of ${weight} ${weightUnits}`;
 
-  // Remove contents of existing chart so we don't duplicate them if we re-calculate
-  $("#chart").empty();
+  // ------ Render the chart - separate function?
 
-  // Le chart
-  $(function () {
+  // Le new chart
 
-    var options = {
-      series: [{
-        data: [Math.round(userTotalExposurePercent)]
-      }],
-      chart: {
-        type: 'bar',
-        height: 250,
-        width: "100%",
-        stackType: "100%"
-      },
-      annotations: {
-        yaxis: [{
-          y: 100,
-          borderColor: '#FFBABA',
-          label: {
-            borderColor: '#FFBABA',
-            style: {
-              color: '#fff',
-              background: '#FFBABA',
-            },
-            text: 'Recommended limit'
-          }
-        }]
-      },
-      plotOptions: {
-        bar: {
-          horizontal: false,
-        }
-      },
-      dataLabels: {
-        enabled: true
-      },
-      xaxis: {
-        categories: ['Mercury level'],
-      },
-      grid: {
-        xaxis: {
-          lines: {
-            show: true
-          }
-        }
-      },
-      yaxis: {
-        reversed: false,
-        axisTicks: {
-          show: true
-        }
-      }
-    };
+  var totalMercuryOverage = userDailyExposure - EPADailyExposureLimit;
+  console.log('total mercury overage',totalMercuryOverage )
 
-    var chart = new ApexCharts(document.querySelector("#chart"), options);
-    chart.render();
+  // Calculate height of the overage bar
+  var chartExposureOverageBar = Math.max(0, Math.floor(((userDailyExposure - EPADailyExposureLimit) / userDailyExposure) * 100));
+  console.log("overage height",chartExposureOverageBar+ '%');
 
-  });
+  // Calculate height of the recommended bar bar
+  var chartExposureRecBar = Math.max(0, Math.floor((userDailyExposure / EPADailyExposureLimit) * 100));
+  console.log("rec height",chartExposureRecBar + '%');
+
+  // Use jquery to set the values appropriately
+  var chartOverage = $('#mercuryExposureOverageBar');
+  var chartRec = $('#mercuryExposureRecBar');
+
+  if (userDailyExposure > EPADailyExposureLimit)
+    {
+
+      // Display the "Total exposure" message
+      document.getElementById("mercuryExposureMessage").innerHTML = `${Math.round(totalMercuryOverage * 1000)}% over`;
+      console.log('total mercury overage',totalMercuryOverage )
+
+      $(chartOverage)
+        .attr('height', chartExposureOverageBar + '%')
+        .attr('y', 0);
+      $(chartRec)
+        .attr('height', chartExposureRecBar + '%')
+        .attr('y', chartExposureOverageBar + '%');
+
+      // Change the first text element
+      $('#chartPercentage100').text(Math.floor(userTotalExposurePercent) + '%');
+      $('#chartPercentage80').text(Math.floor(userTotalExposurePercent * .8) + '%');
+      $('#chartPercentage60').text(Math.floor(userTotalExposurePercent * .6) + '%');
+      $('#chartPercentage40').text(Math.floor(userTotalExposurePercent * .4) + '%');
+      $('#chartPercentage20').text(Math.floor(userTotalExposurePercent * .2) + '%');
+
+    } else {
+
+      // Display the "Total exposure" message
+      document.getElementById("mercuryExposureMessage").innerHTML = `${Math.round(userTotalExposurePercent)}% of`;
+
+      $(chartOverage)
+        .attr('height', 0)
+        .attr('y', 0);
+      $(chartRec)
+        .attr('height', chartExposureRecBar + '%')
+        .attr('y', Math.max(0, (100 - chartExposureRecBar)) + '%');
+
+    }
+
+  // --- render the results cards - separate function?
 
   // Now that the data is in place, render the results list
   function renderResults() {
@@ -346,8 +352,17 @@ function calculateResults(selectedFish) {
     var html = Mustache.render(template, fishResults);
     $('#fishResults').html(html);
   }
-
   renderResults();
+
+  // Render data in the footer
+  function renderRawData() {
+    var template = $("#fishResultsRawDataTemplate").html();
+    var html = Mustache.render(template, fishResults);
+    $('#fishResultsRawData').html(html);
+  }
+  renderRawData();
+
+  // Update the user inputs on the results page to match those on the selection page
 
   // Select lists - generic function to change selected value
   function selectElement(id, valueToSelect) {
@@ -372,7 +387,7 @@ function removeFish(item) {
   console.log("selectedfish in removefish", selectedFish)
 
   //renderSelectedFishList(data);
-  calculateResults(selectedFish);
+  //calculateResults(selectedFish);
 };
 
 // TODO: Reset fish results and recalculate everything when we:
@@ -380,6 +395,16 @@ function removeFish(item) {
 // Recalculate results
 // Update fish results
 // Update fish selections
+
+//
+$(document).change(function () {
+  $('.input').change(function(){
+    //renderSelectedFishList(data);
+    calculateResults(selectedFish);
+    console.log('Inputs bound');
+  });
+
+});
 
 // Filter list of fish
 function filterFishList() {
@@ -464,8 +489,21 @@ function sortTable(n) {
 }
 
 $(document).ready(function () {
-  if ($('#selectedFish').is(':empty')){
-    $('#selectedFish').html('foo');
+
+  // Accordion
+  var acc = document.getElementsByClassName("accordion");
+  var i;
+
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var panel = this.nextElementSibling;
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        panel.style.display = "block";
+      }
+    });
   }
 
   /* Modal controls */

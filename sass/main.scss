@@ -8,6 +8,28 @@
 @import 'inputs.scss';
 @import 'modals.scss';
 
+/* Animation */
+
+/* make keyframes that tell the start state and the end state of our object */
+@-webkit-keyframes fadeIn { from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
+
+.fade-in {
+	opacity:0;  /* make things invisible upon start */
+	-webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+	-moz-animation:fadeIn ease-in 1;
+	animation:fadeIn ease-in 1;
+
+	-webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+	-moz-animation-fill-mode:forwards;
+	animation-fill-mode:forwards;
+
+	-webkit-animation-duration:.2s;
+	-moz-animation-duration:.2s;
+	animation-duration:.2s;
+}
+
 /* Workflow helpers */
 .display-none {
   display: none !important;
@@ -24,172 +46,25 @@
   text-align: center;
 }
 
-/* Weight validation */
+/* Validation */
 #weight:invalid {
-  border-color: red;
+  border-color: $ui-warning-required;
 }
 
-/* Spacing helpers */
-.y-1 {
-  margin-bottom: 0.5em;
-}
-
-.y-3 {
-margin-bottom: 1.25em;
-}
-
-/* Misc */
-.highlight {
-  background-color: #FFEF9A;
-  font-weight: bold;
-  color: #00224a;
-}
-
-/* Fish selector */
-
-#filterFish {
-  background-image: url('/icons/search-solid.svg');
-  background-repeat: no-repeat;
-  background-position: 16px 10px;
-  padding-left: 54px;
-  background-size: 24px;
-  margin-bottom: -3px;
-  width: 100%;
-  z-index: 1;
-}
-
-.list-wrapper {
-  max-height: 31vh;
-  border: 3px solid #d8d8d8;
-  overflow: scroll;
-  box-sizing: border-box;
-  width: 100%;
-}
-
-#fishList {
-  width: 100%;
-
-  tr {
-    height: 32px;
-
-    &:hover {
-      background-color: aliceblue;
-      cursor: pointer;
-    }
-  }
-
-  .header-fishlist {
-    margin-bottom: 0;
-    text-align: left;
-    font-weight: bold;
-
-    th {
-      vertical-align: bottom;
-      padding: .25em 1em .25em 0;
-
-      &:nth-child(3) {
-        text-align: right;
-      }
-
-      &.asc {
-        &:after { content: '\25B2'; }
-      }
-
-      &.dsc {
-        &:after { content: '\25BC'; }
-      }
-    }
-
-  }
-
-  input {
-    margin: .25em 1em;
-  }
-
-  label
-  {
-    display: block;
-    padding: .25em 1em .25em 0;
-
-    &.mercury-exposure {
-      text-align: right;
-    }
-  }
-
-}
-
-.selected-fish {
-  width: 100%;
-
-  li {
-    justify-content: space-between;
-    display: flex;
-  }
-}
-
-
-/* Cards */
-.card {
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px 0px #787878;
-  margin-top: 1.5em;
-  padding: 1.5em 2em;
-
-  h3, h4 {
-    text-align: left;
-  }
-
-  .message {
-    display: flex;
-    margin: 0 auto 1em;
-
-    p:first-child {
-      margin-top: 0;
-    }
-
-    .message-content {
-      width: 100%;
-    }
-
-    .message-main {
-      font-size: 1.25em;
-    }
-
-  }
-
-  .message:first-child {
-    margin-top: 0;
-  }
-
-  .message:last-child {
-    margin-bottom: 0;
-  }
-
-}
-
-#fishResults .card:first-child {
-  margin-top: 0;
-}
-
+/* Icons */
 .icon-close-x {
-      /* background-size: 16px; */
-      display: inline-block;
-      /* width: 18px; */
-      height: 39px;
-      font-size: 1.5em;
-      margin-left: .5em;
-      vertical-align: middle;
+  float: right;
+  width: 24px;
+  height: 24px;
+  display: block;
+  border-radius: 100px;
+  text-align: center;
+  font-size: 1.5em;
 
-      //Additional wrapper for vertical alignment
-      span {
-        display: inline-block;
-        vertical-align: middle;
-      }
-
-    &:hover {
-      background-color: #c2c1c1;
-      cursor: pointer;
-    }
+  &:hover {
+    background-color: $ui-gray-02;
+    cursor: pointer;
+  }
 }
 
 .icon {
@@ -208,52 +83,320 @@ margin-bottom: 1.25em;
   margin-right: 1em;
 
   &.toxin {
-    background-image: url(/icons/toxin.svg);
+    background-image: url('../icons/toxin.svg');
   }
 
   &.microplastics {
-    background-image: url(/icons/microplastics.svg);
+    background-image: url('../icons/microplastics.svg');
   }
 
   &.bycatch {
-    background-image: url(/icons/bycatch.svg);
+    background-image: url('../icons/bycatch.svg');
   }
 
 }
 
-.mercury-level-wrapper {
+
+/* Misc */
+.highlight {
+  background-color: $ui-highlight-yellow;
+  font-weight: bold;
+  color: $brand-02;
+}
+
+/* Dot indicators */
+.dot {
+  height: 12px;
+  width: 12px;
+  background-color: $ui-gray-01;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.mercury-recommended{
+  background-color: $chart-04;
+}
+
+.mercury-overage {
+  background-color: $chart-05;
+}
+
+/* Fish selector */
+#filterFish {
+  background-image: url('../icons/search-solid.svg');
+  background-repeat: no-repeat;
+  background-position: 16px 10px;
+  padding-left: 54px;
+  background-size: 24px;
+  margin-bottom: -3px;
   width: 100%;
-  border: thin solid gray;
-  height: 7px;
-  border-radius: 7px;
+  max-width: 500px;
+  z-index: 1;
+}
 
-  /* The animation code */
-  @keyframes width {
-    from {width: 0%;}
-    to {width: 25%;}
+
+/* Fish List */
+
+.list-wrapper {
+  max-height: 31vh;
+  border: 3px solid $ui-gray-01;
+  overflow: scroll;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 500px;
+
+  #fishList {
+    width: 100%;
+    max-width: 500px;
+
+    tr {
+      height: 32px;
+
+      &:hover {
+        background-color: $ui-blue-01;
+      }
+    }
+
+    .header-fishlist {
+      margin-bottom: 0;
+      text-align: left;
+      font-weight: bold;
+
+      th {
+        vertical-align: bottom;
+        padding: .25em 1em .25em 0;
+
+        &:nth-child(3) {
+          text-align: right;
+        }
+
+        &.asc {
+          &:after { content: '\25B2'; }
+        }
+
+        &.dsc {
+          &:after { content: '\25BC'; }
+        }
+      }
+
+    }
+
+    input {
+      margin: .25em 1em;
+      cursor: pointer;
+    }
+
+    td {
+      cursor: pointer;
+    }
+
+    label
+    {
+      display: block;
+      padding: .25em 1em .25em 0;
+      cursor: pointer;
+
+
+      &.mercury-exposure {
+        text-align: right;
+
+        .dot {
+          height: 12px;
+          width: 12px;
+          background-color: $ui-gray-02;
+          border-radius: 50%;
+          display: inline-block;
+        }
+
+        &.mercury-rating-best .dot {background-color: $chart-01;}
+        &.mercury-rating-good .dot {background-color: $chart-02;}
+        &.mercury-rating-avoid .dot {background-color: $chart-03;}
+
+      }
+    }
+
+  }
+}
+
+/* Selected Fish */
+.selected-fish {
+  width: 100%;
+  max-width: 500px;
+
+  .col-contents-right {
+    text-align: end;
   }
 
-  .mercury-level-percent {
-    background-color: #309303;
-    animation-name: example;
-    animation-duration: 4s;
-    height: 100%;
+  li {
+    justify-content: space-between;
+    display: flex;
+  }
+}
+
+/* Results raw data */
+
+.results-data {
+  text-align: left;
+  margin-bottom: 2em;
+
+  h3 {
+    text-align: left;
+  }
+
+  h3, table, p {
+    margin-top: 1em;
+  }
+
+  table {
+    width: 100%;
+
+    th {
+      font-weight: bold;
+    }
+
+    td, th {
+      padding: .8em;
+      text-align: left;
+      border: thin solid gray;
+      vertical-align: bottom;
+    }
   }
 
 }
 
-#chart {
-  background-image: url('/icons/human.svg');
+.fishResultsRawData {
+  overflow-x: scroll;
+}
+
+
+
+/* Results - list of fish */
+
+#fishResults {
+  width: 100%;
+  margin: 0 1.5em;
+
+  .card:first-child {
+    margin-top: 0;
+  }
+
+  .card {
+    // border-radius: 8px;
+    // box-shadow: 0px 4px 8px 0px $ui-gray-04;
+    margin-top: 1.5em;
+    padding: 1.5em 2em;
+    background-color: $ui-gray-04;
+
+    h3, h4 {
+      text-align: left;
+      margin: 0.20em 1em 0.2em 0;
+      min-width: 100px;
+      color: $type-body-light;
+    }
+
+    .message {
+      display: flex;
+      margin: 0 auto 1em;
+
+      p:first-child {
+        margin-top: 0;
+      }
+
+      .message-content {
+        width: 100%;
+      }
+
+      .message-main {
+        font-size: 1em;
+      }
+
+    }
+
+    .message:first-child {
+      margin-top: 0;
+    }
+
+    .message:last-child {
+      margin-bottom: 0;
+    }
+
+  }
+
+  .mercury-level-wrapper {
+    width: 100%;
+    border: thin solid $ui-gray-02;
+    height: 7px;
+    border-radius: 7px;
+    background-color: #ffffff;
+
+    .mercury-level-percent {
+      background-color: $chart-01;
+      animation-name: example;
+      animation-duration: 4s;
+      height: 100%;
+    }
+
+    &.mercury-rating-best {
+      border-color: $chart-01;
+      .mercury-level-percent {
+        background-color: $chart-01;
+      }
+    }
+    &.mercury-rating-good {
+      border-color: $chart-02;
+      .mercury-level-percent {
+        background-color: $chart-02;
+      }
+    }
+    &.mercury-rating-avoid {
+      border-color: $chart-03;
+      .mercury-level-percent {
+        background-color: $chart-03;
+      }
+    }
+
+  }
+
+}
+
+
+/* Results Chart */
+
+#chart-homemade {
+  background-image: url('../icons/human.svg');
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: auto 60%;
+  background-size: auto 90%;
+  height: 260px;
   width: 100%;
-}
-
-.apexcharts-canvas {
-  margin:0 auto;
+  text-align: center;
 }
 
 .loading {
-  background-image: url(../assets/img/placeholder.gif);
+  background-image: url('../assets/img/placeholder.gif');
+}
+
+/* About section */
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #ccc;
+}
+
+.panel {
+  padding: 1.25em;
+  display: none;
+  background-color: white;
+  overflow: hidden;
 }

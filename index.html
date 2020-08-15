@@ -4,10 +4,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Style-Type" content="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
     <title>Seafood health and sustainability calculator</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link rel="stylesheet" type="text/css" href="css/main.css" />
   </head>
   <body>
@@ -74,7 +74,7 @@
             What types of seafood do you eat <strong class="highlight"> in one week?</strong>
           </p>
 
-          <input class="input input-lg input-text" type="text" id="filterFish" onclick="this.select();" onkeyup="filterFishList()" placeholder="Search for fish.."
+          <input class="input input-lg input-text" type="text" id="filterFish" onclick="this.select();" onkeyup="filterFishList()" placeholder="Search for fish..."
           />
 
           <div class="list-wrapper">
@@ -95,7 +95,7 @@
               <td>
                 <label for="fish_{{ index }}">{{ name }}</label>
               </td>
-              <td><label for="fish_{{ index }}" class="mercury-exposure">{{ mercury }}</label></td>
+              <td><label for="fish_{{ index }}" class="mercury-exposure mercury-rating-{{mercury-rating}}">{{ mercury }} <span class="dot" title="{{mercury-rating}}"></span></label></td>
             </tr>
             {{/.}}
           </script>
@@ -110,7 +110,7 @@
 
             <script id="selectedFishTemplate" type="text/template">
               {{#.}}
-              <li id="selectedFish_{{ index }}" class="servings" data-index="{{ index }}">
+              <li id="selectedFish_{{ index }}" class="servings fade-in" data-index="{{ index }}">
                 <span class="col col-2">
                   <label for="{{ name }}">{{ name }}</label>
                 </span>
@@ -141,113 +141,191 @@
           <button id="backToWeight" class="btn btn-secondary">BACK</button>
         </div>
 
-        <div class="question-box display-none foo results" id="results">
-          <h2>Results</h2>
+        <div class="question-box display-none results" id="results">
 
-          <p>Your mercury exposure is <span id="mercuryExposureMessage" class="highlight"></span> of the safe limit</p>
-          <p class="note" style="margin-top:0;font-size:.75em;" id="weightResultsMessage"><p>
-          <div id="chart"></div>
+          <div id="results-overview" class="col">
+            <h2><span id="mercuryExposureMessage" class="highlight"></span> the safe mercury limit</h2>
+            <p class="note" style="margin-top:0;font-size:.75em;" id="weightResultsMessage"><p>
 
-          <h2>Your choices</h2>
-
-          <div id="fishResults">
-            <p class="note">Select a fish from the list.</p>
+            <div id="chart-homemade">
+              <svg id="mercuryExposureChart" version="1.2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="graph" aria-labelledby="title" role="img" height="260px">
+                <title id="title">A line chart showing some information</title>
+                <g>
+                  <rect id="mercuryExposureOverageBar" width="400" height="50%" style="fill:rgba(255, 0, 4, 0.3)" />
+                <g>
+                  <rect id="mercuryExposureRecBar" width="400" height="50%" y="50%" style="fill:#159deb50"></rect>
+                </g>
+                <g id="chartPercentageText" class="apexcharts-yaxis-texts-g">
+                  <text id="chartPercentage100" font-family="Helvetica, Arial, sans-serif" x="30" y="5%" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-yaxis-label ">
+                    <tspan id="SvgjsTspan1036">100</tspan>
+                  </text>
+                  <text id="chartPercentage80" font-family="Helvetica, Arial, sans-serif" x="30" y="20%" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-yaxis-label ">
+                    <tspan id="SvgjsTspan1038">80</tspan>
+                  </text>
+                  <text id="chartPercentage60" font-family="Helvetica, Arial, sans-serif" x="30" y="40%" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-yaxis-label ">
+                    <tspan id="SvgjsTspan1040">60</tspan>
+                  </text>
+                  <text id="chartPercentage40" font-family="Helvetica, Arial, sans-serif" x="30" y="60%" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-yaxis-label ">
+                    <tspan id="SvgjsTspan1042">40</tspan>
+                  </text>
+                  <text id="chartPercentage20" font-family="Helvetica, Arial, sans-serif" x="30" y="80%" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-yaxis-label ">
+                    <tspan id="SvgjsTspan1044">20</tspan>
+                  </text>
+                  <text id="chartPercentage0" font-family="Helvetica, Arial, sans-serif" x="30" y="95%" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="apexcharts-text apexcharts-yaxis-label "><tspan id="SvgjsTspan1046">0</tspan></text></g>
+              </svg>
+            </div>
+            <p class="note">
+              <span class="dot mercury-recommended"></span> <abbr>EPA</abbr> recommended limit <br>
+              <span class="dot mercury-overage"></span> Percent over the limit
+            </p>
 
           </div>
 
-          <script id="fishResultsTemplate" type="text/template">
-            {{#.}}
-            <div class="card" id="fishResult_{{ index }}">
-              <div class="row-2col">
+          <div class="results-choices col">
 
-                <span style="flex:3" class="col col-2 col-self-baseline"><h3>{{name}}</h3></span>
+            <div class="navigate-results btn-bar">
+              <a href="#" class="btn btn-secondary navigate-fish-list" id="editFish">Change fish</a>
+              <a href="#" class="btn btn-secondary" id="backToStart">Start over</a>
+            </div>
 
-                <span class="col col-2 col-self-baseline col-contents-right">
-                  <input id="{{ index }}_Servings" name="serving-amount" class="input input-number input-number-small" type="number" min="1" value="{{ serving-amount }}" data-index="{{ index }}" onclick="this.select();">
-                  <select class="input input-select" name="serving-ounces" id="{{ index }}_ServingUnits" data-index="{{ index }}" data-servings="{{ serving-ounces }}">
-                    <option value="8">Filet (8 oz)</option>
-                    <option value="6">Can (6 oz)</option>
-                    <option value="2">Sushi roll (2 oz)</option>
-                    <option value="1">Ounces</option>
-                    <option value="28.35">Grams</option>
-                  </select>
-                </span>
-
-                <a class="icon-close-x" title="Remove fish" onClick="removeFish(this)" data-remove="{{ index }}"><span>&times;</span></a>
-
-              </div>
-
-
-              {{#message}}
-                <div class="message">
-                  <div class="message-content message-main">
-                    <p>
-                      {{message}}
-                    </p>
-                  </div>
-                </div>
-              {{/message}}
-
-              <div class="message">
-                <div class="icon toxin"></div>
-                <div class="message-content">
-                  <p><strong>Mercury</strong></p>
-                  <p>
-                   {{mercuryexposurepercent}}% of total mercury exposure
-                  </p>
-                  <div class="mercury-level-wrapper">
-                    <div style="width:{{mercuryexposurepercent}}%;" class="mercury-level-percent"></div>
-                  </div>
-                </div>
-              </div>
-
-              {{#bycatch-message}}
-                <div class="message">
-                  <div class="icon bycatch"></div>
-                  <div class="message-content">
-                    <p><strong>{{bycatch-level}}</strong></p>
-                    <p>
-                      {{bycatch-message}}
-                    </p>
-                  </div>
-                </div>
-              {{/bycatch-message}}
-
-              {{#microplastics-message}}
-                <div class="message">
-                  <div class="icon microplastics"></div>
-                  <div class="message-content">
-                    <p><strong>Microplastics</strong></p>
-                    <p>
-                      {{microplastics-message}}
-                    </p>
-                  </div>
-                </div>
-              {{/microplastics-message}}
-
-              {{#footnote}}
-                <p class="font-small">
-                  {{footnote}}
-                </p>
-              {{/footnote}}
+            <div id="fishResults">
+              <p class="note">Select a fish from the list.</p>
 
             </div>
 
-            {{/.}}
+            <script id="fishResultsTemplate" type="text/template">
+              {{#.}}
+              <div class="card" id="fishResult_{{ index }}">
+                <a class="icon-close-x" title="Remove fish" onClick="removeFish(this)" data-remove="{{ index }}"><span>&times;</span></a>
+                <div class="row-2col">
 
-            {{^.}}
-            <p class="note">Select a fish from the list.</p>
-            {{/.}}
-          </script>
-          <button class="btn btn-secondary navigate-fish-list" id="editFish">Edit selected fish</button>
-          <button class="btn btn-secondary" id="backToStart">Start over</button>
+                  <h3 style="flex:3" class="col col-2 col-self-baseline">{{name}}</h3>
+
+                  <span class="col col-2 col-self-baseline col-contents-right">
+                    <input id="{{ index }}_Servings" name="serving-amount" class="input input-number input-number-small" type="number" min="1" value="{{ serving-amount }}" data-index="{{ index }}" onclick="this.select();">
+                    <select class="input input-select" name="serving-ounces" id="{{ index }}_ServingUnits" data-index="{{ index }}" data-servings="{{ serving-ounces }}">
+                      <option value="8">Filet (8 oz)</option>
+                      <option value="6">Can (6 oz)</option>
+                      <option value="2">Sushi roll (2 oz)</option>
+                      <option value="1">Ounces</option>
+                      <option value="28.35">Grams</option>
+                    </select>
+                  </span>
+
+                </div>
+
+
+                {{#message}}
+                  <div class="message">
+                    <div class="message-content message-main">
+                      <p>
+                        {{message}}
+                      </p>
+                    </div>
+                  </div>
+                {{/message}}
+
+                <div class="message">
+                  <div class="icon toxin"></div>
+                  <div class="message-content">
+                    <p><strong>Mercury</strong></p>
+                    <p>
+                    {{mercuryexposurepercent}}% of total mercury exposure
+                    </p>
+                    <div class="mercury-level-wrapper mercury-rating-{{mercury-rating}}">
+                      <div style="width:{{mercuryexposurepercent}}%;" class="mercury-level-percent"></div>
+                    </div>
+                  </div>
+                </div>
+
+                {{#bycatch-message}}
+                  <div class="message">
+                    <div class="icon bycatch"></div>
+                    <div class="message-content">
+                      <p><strong>{{bycatch-level}}</strong></p>
+                      <p>
+                        {{bycatch-message}}
+                      </p>
+                    </div>
+                  </div>
+                {{/bycatch-message}}
+
+                {{#microplastics-message}}
+                  <div class="message">
+                    <div class="icon microplastics"></div>
+                    <div class="message-content">
+                      <p><strong>Microplastics</strong></p>
+                      <p>
+                        {{microplastics-message}}
+                      </p>
+                    </div>
+                  </div>
+                {{/microplastics-message}}
+
+                {{#footnote}}
+                  <p class="font-small">
+                    {{footnote}}
+                  </p>
+                {{/footnote}}
+
+              </div>
+
+              {{/.}}
+
+              {{^.}}
+              <p class="note">Select a fish from the list.</p>
+              {{/.}}
+            </script>
+
+          </div>
         </div>
       </div>
 
     </main>
 
-    <footer class="flex-grid">
-      <p><a href="#">About this calculator</a></p>
+    <footer>
+      <button class="accordion">About this calculator &#43;</button>
+      <div class="results-data panel">
+        <ul><li>The data and calculations in this table come from the United States Environmental Protection Agency and Food and Drug Administration. For more information see <a href="https://www.epa.gov/fish-tech/epa-fda-fish-advice-technical-information" target="_blank">EPA-FDA Fish Advice: Technical Information</a></li></ul>
+
+        <h3>Results data</h3>
+
+        <p>Total exposure for all fish is <span id="mercuryDailyExposureRawMessage"></span></p>
+        <p>Total mercury exposure is <span id="mercuryExposureRawMessage"></span></p>
+
+        <div id="fishResultsRawData">
+
+
+        </div>
+
+        <script id="fishResultsRawDataTemplate" type="text/template">
+
+            <table>
+              <tr>
+                <th>Species</th>
+                <th>Base Mercury</th>
+                <th>Total grams</th>
+                <th>Daily grams</th>
+                <th>Total Mercury Exposure</th>
+                <th>Exposure percent</th>
+              </tr>
+              {{#.}}
+              <tr>
+                <td>{{ name }}</td>
+                <td>{{ mercury }}</td>
+                <td>{{ serving-grams-weekly }}</td>
+                <td>{{ serving-grams-daily }}</td>
+                <td>{{ mercuryexposuredaily }}</td>
+                <td>{{ mercuryexposurepercent }}</td>
+              </tr>
+              {{/.}}
+
+            </table>
+
+        </script>
+
+
+      </div>
     </footer>
 
     <!-- The Modal -->
