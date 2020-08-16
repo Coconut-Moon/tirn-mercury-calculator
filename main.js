@@ -56,7 +56,7 @@ function createSelectedFishArray(googleFishData) {
   const selectedFishIDs = $("#fishList input:checkbox:checked").map(function () {
     return $(this).data("id");
   }).get();
-  console.log("selectedFishIDs", selectedFishIDs)
+  //console.log("selectedFishIDs", selectedFishIDs)
 
   // Match selected fish to full dataset by id.
   // Build new array of fish results to use to run the calculations
@@ -73,7 +73,7 @@ function createSelectedFishArray(googleFishData) {
         if (fish.id == selectedFish) {
           // add the data to the results array
           selectedFishArray.push(fish)
-          console.log("fish.id", fish.id)
+          //console.log("fish.id", fish.id)
         }
       })
     })
@@ -81,7 +81,7 @@ function createSelectedFishArray(googleFishData) {
   }
 
   selectedFish = returnSelectedFishData(selectedFishIDs);
-  console.log("selectedFish", selectedFish)
+  //console.log("selectedFish", selectedFish)
 
 }
 
@@ -108,7 +108,7 @@ $.getJSON(url, function (data) {
       }
     )
   })
-  console.log("googleFishData", googleFishData)
+  //console.log("googleFishData", googleFishData)
 
   // Map spreadsheet fish data to a json object
   createSelectedFishArray(googleFishData);
@@ -161,8 +161,6 @@ function calculateResults(selectedFish) {
 
   // In the selected fish list, pull the serving sizes and quantities into individual fish
   $('#selectedFish li').each(function () {
-
-    console.log($('#selectedFish li'))
 
     // Set selected serving amount
     const servingAmountWeekly = $("input[name='serving-amount']", this).map(function () {
@@ -341,33 +339,102 @@ function calculateResults(selectedFish) {
 
 // Remove fish when x is clicked
 function removeFish(fishToRemove) {
-  console.log("fishToRemove", fishToRemove)
+  //console.log("fishToRemove", fishToRemove)
   $("#selectedFish_" + fishToRemove).remove()
   $("#fish_" + fishToRemove).prop("checked", false)
   $("#fishResult_" + fishToRemove).remove()
 
-  console.log("original selectedFish", selectedFish);
   selectedFish.map((thisFish, i) => {
     if (thisFish.id === fishToRemove) {
-      console.log("thisFish.id", thisFish.id)
-      console.log("i", i)
       selectedFish.splice(i, 1)
     }
 
   })
-
-  //createSelectedFishArray();
-  console.log("updated selectedFish", selectedFish);
-  console.log("selectedFish[fishToRemove]", selectedFish[fishToRemove]);
   calculateResults(selectedFish);
 }
 
-// Recalculate results when any input changes (may need to target this better)
-$(document).on('change', '.input', function () {
-  //createSelectedFishArray(data);
+// Recalculate results when select list input changes
+$(document).ready().on('change', '#fishResults select', function () {
+
+  // Update the user inputs on the results page to match those on the selection page
+
+  let currentSelect = $(this).attr("data-id");
+  console.log("Fish results select id",currentSelect)
+
+  let currentValue = $(this).val();
+  console.log("Fish results select value",currentValue)
+
+  // Set fish results select lists to correct amounts via a data attribute
+  $('#selectedFish select').each(function () {
+    thisFish = $(this).attr("data-id")
+    console.log("This Fish",thisFish)
+
+    console.log("selectedfish ID", $(this).attr("data-id"))
+    if ($(this).attr("data-id") === currentSelect) {
+      $(this).val(currentValue)
+    }
+
+    console.log("original selectedFish", selectedFish);
+    selectedFish.map((currentSelect, i) => {
+      if (currentSelect === thisFish) {
+        console.log("thisFish.id", thisFish.id)
+        console.log("i", i)
+        selectedFish[i]["serving-amount"] = currentValue;
+      }
+    })
+
+  });
+
+
   calculateResults(selectedFish);
-  console.log('Inputs bound');
-  console.log('selectedFish input', selectedFish);
+  console.log("Fish results select value 2 ",currentValue)
+  $(document).ready(function () {
+   $(this).val(currentValue)
+  })
+
+
+});
+
+// Recalculate results when select list input changes
+$(document).ready().on('change', '#fishResults input[type="number"]', function () {
+
+  // Update the user inputs on the results page to match those on the selection page
+
+  let currentInput = $(this).attr("data-id");
+  console.log("Fish results select id",currentInput)
+
+  let currentValue = $(this).val();
+  console.log("Fish results select value",currentValue)
+
+  // Set fish results select lists to correct amounts via a data attribute
+  $('#selectedFish input[type="number"').each(function () {
+    thisFish = $(this).attr("data-id")
+    console.log("This Fish",thisFish)
+
+    console.log("selectedfish ID", $(this).attr("data-id"))
+    if ($(this).attr("data-id") === currentInput) {
+      $(this).val(currentValue)
+    }
+
+    console.log("original selectedFish", selectedFish);
+    selectedFish.map((currentInput, i) => {
+      if (currentInput === thisFish) {
+        console.log("thisFish.id", thisFish.id)
+        console.log("i", i)
+        selectedFish[i]["serving-amount"] = currentValue;
+      }
+    })
+
+  });
+
+
+  calculateResults(selectedFish);
+  console.log("Fish results select value 2 ",currentValue)
+  $(document).ready(function () {
+   $(this).val(currentValue)
+  })
+
+
 });
 
 // Filter list of fish
