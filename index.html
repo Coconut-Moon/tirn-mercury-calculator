@@ -61,7 +61,6 @@
           <button
             id="OpenFishList"
             class="btn btn-primary navigate-fish-list"
-            onclick="storeWeight()"
           >
             Next question
           </button>
@@ -90,12 +89,12 @@
             {{#.}}
             <tr>
               <td>
-                <input class="fish" type="checkbox" id="fish_{{ index }}" name="fish" value="{{ name }}" data-index="{{ index }}">
+                <input class="fish" type="checkbox" id="fish_{{ id }}" name="fish" value="{{ name }}" data-id="{{ id }}">
               </td>
               <td>
-                <label for="fish_{{ index }}">{{ name }}</label>
+                <label for="fish_{{ id }}">{{ name }}</label>
               </td>
-              <td><label for="fish_{{ index }}" class="mercury-exposure mercury-rating-{{mercury-rating}}">{{ mercury }} <span class="dot" title="{{mercury-rating}}"></span></label></td>
+              <td><label for="fish_{{ id }}" class="mercury-exposure mercury-rating-{{mercury-rating}}">{{ mercury }} <span class="dot" title="{{mercury-rating}}"></span></label></td>
             </tr>
             {{/.}}
           </script>
@@ -110,13 +109,13 @@
 
             <script id="selectedFishTemplate" type="text/template">
               {{#.}}
-              <li id="selectedFish_{{ index }}" class="servings fade-in" data-index="{{ index }}">
+              <li id="selectedFish_{{ id }}" class="servings fade-in" data-id="{{ id }}">
                 <span class="col col-2">
                   <label for="{{ name }}">{{ name }}</label>
                 </span>
                 <span class="col col-2 col-contents-right">
-                  <input name="serving-amount" class="input input-number input-number-small" type="number" min="1" value="1" data-index="{{ index }}" onclick="this.select();">
-                  <select class="input input-select" name="serving-ounces" data-index="{{ index }}">
+                  <input name="serving-amount" class="input input-number input-number-small" type="number" min="1" value="1" data-id="{{ id }}" onclick="this.select();">
+                  <select class="input input-select" name="serving-ounces" data-id="{{ id }}">
                     <option value="8">Filet (8 oz)</option>
                     <option value="6">Can (6 oz)</option>
                     <option value="2">Sushi roll (2 oz)</option>
@@ -124,7 +123,7 @@
                     <option value="28.35">Grams</option>
                   </select>
                 </span>
-                <a class="icon-close-x" title="Remove fish" onClick="removeFish(this)" data-remove="{{ index }}"><span>&times;</span></a>
+                <a class="icon-close-x" title="Remove fish" onClick="removeFish({{ id }})"><span>&times;</span></a>
               </li>
               {{/.}}
               {{^.}}
@@ -195,15 +194,15 @@
 
             <script id="fishResultsTemplate" type="text/template">
               {{#.}}
-              <div class="card" id="fishResult_{{ index }}">
-                <a class="icon-close-x" title="Remove fish" onClick="removeFish(this)" data-remove="{{ index }}"><span>&times;</span></a>
+              <div class="card" id="fishResult_{{ id }}">
+                <a class="icon-close-x" title="Remove fish" onClick="removeFish({{ id }})"><span>&times;</span></a>
                 <div class="row-2col">
 
                   <h3 style="flex:3" class="col col-2 col-self-baseline">{{name}}</h3>
 
                   <span class="col col-2 col-self-baseline col-contents-right">
-                    <input id="{{ index }}_Servings" name="serving-amount" class="input input-number input-number-small" type="number" min="1" value="{{ serving-amount }}" data-index="{{ index }}" onclick="this.select();">
-                    <select class="input input-select" name="serving-ounces" id="{{ index }}_ServingUnits" data-index="{{ index }}" data-servings="{{ serving-ounces }}">
+                    <input id="{{ id }}_Servings" name="serving-amount" class="input input-number input-number-small" type="number" min="1" value="{{ serving-amount }}" data-id="{{ id }}" onclick="this.select();">
+                    <select class="input input-select" name="serving-ounces" id="{{ id }}_ServingUnits" data-id="{{ id }}" data-servings="{{ serving-ounces }}">
                       <option value="8">Filet (8 oz)</option>
                       <option value="6">Can (6 oz)</option>
                       <option value="2">Sushi roll (2 oz)</option>
