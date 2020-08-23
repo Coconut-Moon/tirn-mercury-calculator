@@ -32,6 +32,15 @@ h1 {
 h2 {
   font-size: 2em;
   margin: .75em 0;
+  line-height: 1.25em;
+
+  &.subheader {
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.5em;
+    margin-top: -.25em;
+    margin-bottom: 1.5em;
+    color: gray;
+  }
 }
 
 h3 {
@@ -47,6 +56,18 @@ p {
   margin: .5em 0;
 }
 
+body a {
+  color: #014494;
+  text-decoration: none;
+  transition: color 0.2s;
+  transition: text-decoration 0.2s;
+
+  &:hover {
+    text-decoration:underline;
+    color:$brand-05;
+  }
+}
+
 strong {
   font-weight: bold;
 }
@@ -57,6 +78,10 @@ strong {
 
 .list {
   list-style-type: disc;
+  margin-bottom: 2em;
+  li {
+    margin-left: 2em;
+  }
 }
 
 .note {

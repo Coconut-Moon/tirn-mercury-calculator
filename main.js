@@ -135,7 +135,8 @@ $(document).on('change', '.fish', function () {
   renderSelectedFishTemplate();
 
   // Enable/disable the results button
-  if ($(this).is(':checked')) {
+  // $("#fishList input:checkbox:checked").length
+  if ($("#fishList input[type='checkbox']:checked").length > 0) {
     //Enable the submit button.
     $('#showResults').attr("disabled", false);
   } else {
@@ -194,7 +195,7 @@ function calculateResults(selectedFish) {
 
   // Merge our sizes and quantities with the selected fish
   const fishResults = fishAmounts.map((item, i) => Object.assign({}, item, selectedFish[i]));
-  console.log("fish results", fishResults);
+  console.log("initial fishResults", fishResults);
 
   // --- do the actual calculations - separate function?
 
@@ -246,12 +247,6 @@ function calculateResults(selectedFish) {
   //console.log("Percentage consumed daily", userTotalExposurePercent);
 
   // ------------- Render some values on the  results page and footer - separate function?
-
-  //Render total mercury exposure message
-  document.getElementById("mercuryDailyExposureRawMessage").innerHTML = userDailyExposure;
-
-  //Render total mercury exposure message
-  document.getElementById("mercuryExposureRawMessage").innerHTML = userTotalExposurePercent;
 
   // Display the weight message
   document.getElementById("weightResultsMessage").innerHTML = `Based on a weight of ${weight} ${weightUnits}`;
@@ -311,12 +306,12 @@ function calculateResults(selectedFish) {
 
   // --- render the results cards - separate function?
 
+  console.log("fishResults, as rendered", fishResults);
   // Now that the data is in place, render the results list
   function renderResults() {
     var template = $("#fishResultsTemplate").html();
     var html = Mustache.render(template, fishResults);
     $('#fishResults').html(html);
-    //console.log("Fish Results, as rendered", fishResults);
   }
   renderResults();
 
@@ -359,26 +354,26 @@ $(document).ready().on('change', '#fishResults select', function () {
   // Update the user inputs on the results page to match those on the selection page
 
   let currentSelect = $(this).attr("data-id");
-  console.log("Fish results select id",currentSelect)
+  //console.log("Fish results select id",currentSelect)
 
   let currentValue = $(this).val();
-  console.log("Fish results select value",currentValue)
+  //console.log("Fish results select value",currentValue)
 
   // Set fish results select lists to correct amounts via a data attribute
   $('#selectedFish select').each(function () {
     thisFish = $(this).attr("data-id")
-    console.log("This Fish",thisFish)
+    //console.log("This Fish",thisFish)
 
-    console.log("selectedfish ID", $(this).attr("data-id"))
+    //console.log("selectedfish ID", $(this).attr("data-id"))
     if ($(this).attr("data-id") === currentSelect) {
       $(this).val(currentValue)
     }
 
-    console.log("original selectedFish", selectedFish);
+    //console.log("original selectedFish", selectedFish);
     selectedFish.map((currentSelect, i) => {
       if (currentSelect === thisFish) {
-        console.log("thisFish.id", thisFish.id)
-        console.log("i", i)
+        //console.log("thisFish.id", thisFish.id)
+        //console.log("i", i)
         selectedFish[i]["serving-amount"] = currentValue;
       }
     })
@@ -388,39 +383,38 @@ $(document).ready().on('change', '#fishResults select', function () {
 
   calculateResults(selectedFish);
   console.log("Fish results select value 2 ",currentValue)
-  $(document).ready(function () {
-   $(this).val(currentValue)
-  })
+  console.log("This", $(this) )
+  $("#" + currentSelect + "_ServingUnits").val(currentValue)
 
 
 });
 
-// Recalculate results when select list input changes
+// Recalculate results when select list number changes
 $(document).ready().on('change', '#fishResults input[type="number"]', function () {
 
   // Update the user inputs on the results page to match those on the selection page
 
   let currentInput = $(this).attr("data-id");
-  console.log("Fish results select id",currentInput)
+  // console.log("Fish results select id",currentInput)
 
   let currentValue = $(this).val();
-  console.log("Fish results select value",currentValue)
+  // console.log("Fish results select value",currentValue)
 
   // Set fish results select lists to correct amounts via a data attribute
   $('#selectedFish input[type="number"').each(function () {
     thisFish = $(this).attr("data-id")
-    console.log("This Fish",thisFish)
+    // console.log("This Fish",thisFish)
 
-    console.log("selectedfish ID", $(this).attr("data-id"))
+    // console.log("selectedfish ID", $(this).attr("data-id"))
     if ($(this).attr("data-id") === currentInput) {
       $(this).val(currentValue)
     }
 
-    console.log("original selectedFish", selectedFish);
+    //console.log("original selectedFish", selectedFish);
     selectedFish.map((currentInput, i) => {
       if (currentInput === thisFish) {
-        console.log("thisFish.id", thisFish.id)
-        console.log("i", i)
+        //console.log("thisFish.id", thisFish.id)
+        //console.log("i", i)
         selectedFish[i]["serving-amount"] = currentValue;
       }
     })
@@ -429,10 +423,11 @@ $(document).ready().on('change', '#fishResults input[type="number"]', function (
 
 
   calculateResults(selectedFish);
+
   console.log("Fish results select value 2 ",currentValue)
-  $(document).ready(function () {
-   $(this).val(currentValue)
-  })
+  console.log("This value pre-change ", $(this).val() )
+  $(this).val(currentValue)
+
 
 
 });
@@ -445,7 +440,7 @@ function filterFishList() {
   table = document.getElementById("fishList");
   tr = table.getElementsByTagName("tr");
   for (i = 0; i < tr.length; i++) {
-    label = tr[i].getElementsByTagName("label")[0];
+    label = tr[i].getElementsByTagName("label")[1];
     if (label) {
       txtValue = label.textContent || label.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {

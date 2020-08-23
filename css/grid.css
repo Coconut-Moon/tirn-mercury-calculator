@@ -1,5 +1,4 @@
 .flex-grid {
-  width: 100%;
   margin: 0 auto;
   padding: 1em;
 }
@@ -41,7 +40,7 @@
 }
 
 .col-contents-right {
-  min-width: 190px;
+  min-width: 195px;
 }
 
 /* Spacing helpers */
@@ -78,10 +77,10 @@ form {
   align-items: center;
 }
 
-footer.flex-grid {
-  margin-top: 1em;
-  flex-flow: column;
-  align-items: end;
+footer {
+  overflow: scroll;
+  width: 80%;
+  margin: 0 auto 5em;
 }
 
 @media (min-width: 768px) {

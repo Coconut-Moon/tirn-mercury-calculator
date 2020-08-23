@@ -8,6 +8,8 @@
     <title>Seafood health and sustainability calculator</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/main.css" />
   </head>
   <body>
@@ -16,14 +18,16 @@
       <div class="col">
         <h1>What's the catch?</h1>
 
+        <h2 class="subheader">Calculate hazards in the seafood you eat.</h2>
+
         <div class="question-box question-one" id="questionOne">
-          <p>
-            Answer two questions to find out if your seafood choices are:
+          <ul>
+            <li>Answer two questions to find out:<li>
             <ul class="list">
-              <li>Low in mercury and other toxins</li>
-              <li>Fished sustainably</li>
+              <li>How much mercury is in the seafood you eat?</li>
+              <li> How do your seafood choices impact the ocean?</li>
             </ul>
-          </p>
+          </ul>
           <br />
           <label for="weight" class="y-1">What is your weight?</label>
           <input
@@ -73,7 +77,7 @@
             What types of seafood do you eat <strong class="highlight"> in one week?</strong>
           </p>
 
-          <input class="input input-lg input-text" type="text" id="filterFish" onclick="this.select();" onkeyup="filterFishList()" placeholder="Search for fish..."
+          <input aria-label="Search for fish" class="input input-lg input-text" type="text" id="filterFish" onclick="this.select();" onkeyup="filterFishList()" placeholder="Search for fish..."
           />
 
           <div class="list-wrapper">
@@ -82,14 +86,25 @@
 
           <script id="template" type="text/template">
             <tr class="header-fishlist">
-              <th></th>
-              <th class="asc"><a href="javascript:sortTable(1)">Fish</a></th>
-              <th><a href="javascript:sortTable(2)">Mercury per oz</a></th>
+              <th scope="col"></th>
+              <th scope="col" class="asc">
+                <button class="btn btn-sort fade-in" tabindex="0" href="javascript:void(0)" onclick="sortTable(1)">
+                  Fish <span class="icon-sort-arrow material-icons"></span>
+                  </button>
+                </th>
+              <th scope="col">
+                <button class="btn btn-sort fade-in" tabindex="0" href="javascript:void(0)" onclick="sortTable(2)">
+                  Mercury per oz <span class="icon-sort-arrow  material-icons"></span>
+                </button>
+              </th>
             </tr>
             {{#.}}
             <tr>
               <td>
-                <input class="fish" type="checkbox" id="fish_{{ id }}" name="fish" value="{{ name }}" data-id="{{ id }}">
+                <label class="input-checkbox" for="fish_{{ id }}">
+                  <input class="fish" type="checkbox" id="fish_{{ id }}" name="fish" value="{{ name }}" data-id="{{ id }}">
+                  <span class="checkmark"></span>
+                </label>
               </td>
               <td>
                 <label for="fish_{{ id }}">{{ name }}</label>
@@ -109,13 +124,15 @@
 
             <script id="selectedFishTemplate" type="text/template">
               {{#.}}
-              <li id="selectedFish_{{ id }}" class="servings fade-in" data-id="{{ id }}">
+              <li id="selectedFish_{{ id }}" class="servings" data-id="{{ id }}">
                 <span class="col col-2">
                   <label for="{{ name }}">{{ name }}</label>
                 </span>
                 <span class="col col-2 col-contents-right">
-                  <input name="serving-amount" class="input input-number input-number-small" type="number" min="1" value="1" data-id="{{ id }}" onclick="this.select();">
-                  <select class="input input-select" name="serving-ounces" data-id="{{ id }}" data-servings="">
+
+                  <input name="serving-amount" aria-label="Number of servings" class="input input-number input-number-small" type="number" min="1" value="1" data-id="{{ id }}" onclick="this.select();">
+
+                  <select aria-label="Type of serving" class="input input-select" name="serving-ounces" data-id="{{ id }}" data-servings="">
                     <option value="8">Filet (8 oz)</option>
                     <option value="6">Can (6 oz)</option>
                     <option value="2">Sushi roll (2 oz)</option>
@@ -137,7 +154,7 @@
             Show results
           </button>
 
-          <button id="backToWeight" class="btn btn-secondary">BACK</button>
+          <button id="backToWeight" class="btn btn-secondary">&lsaquo; Back to weight</button>
         </div>
 
         <div class="question-box display-none results" id="results">
@@ -285,12 +302,6 @@
     <footer>
       <button class="accordion">About this calculator &#43;</button>
       <div class="results-data panel">
-        <ul><li>The data and calculations in this table come from the United States Environmental Protection Agency and Food and Drug Administration. For more information see <a href="https://www.epa.gov/fish-tech/epa-fda-fish-advice-technical-information" target="_blank">EPA-FDA Fish Advice: Technical Information</a></li></ul>
-
-        <h3>Results data</h3>
-
-        <p>Total exposure for all fish is <span id="mercuryDailyExposureRawMessage"></span></p>
-        <p>Total mercury exposure is <span id="mercuryExposureRawMessage"></span></p>
 
         <div id="fishResultsRawData">
 
@@ -299,6 +310,7 @@
 
         <script id="fishResultsRawDataTemplate" type="text/template">
 
+          <h3>Results data</h3>
             <table>
               <tr>
                 <th>Species</th>
@@ -322,6 +334,18 @@
             </table>
 
         </script>
+
+        <p>
+          Mercury exposure is based on <a target="_blank" href="https://www.epa.gov/fish-tech/epa-fda-fish-advice-technical-information">data</a> from the U.S. Food and Drug Administration, which tests fish for mercury, and the U.S. Environmental Protection Agency, which suggests mercury levels that it considers safe for women of childbearing age.
+        </p>
+
+        <p>
+          The agencies <a target="_blank" href="https://www.epa.gov/fish-tech/epa-fda-fish-advice-technical-information">determine</a> mercury exposure by calculating the highest average amount of mercury that could be in a fish when eaten one, two, and three times a week without going over the maximum acceptable mercury intake amount for an average pregnant woman.
+        </p>
+
+        <p>
+          Turtle Island Restoration Network does not share, save, or track any data entered in the calculator. <a target="_blank" href="http://www.seaturtles.org/privacy-policy">View our privacy policy.</a>
+        </p>
 
 
       </div>

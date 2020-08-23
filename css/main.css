@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @import url(https://fonts.googleapis.com/css2?family=Fjalla+One&family=Open+Sans:wght@300;400;700&display=swap);
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
@@ -87,6 +86,14 @@ h1 {
 h2 {
   font-size: 2em;
   margin: 0.75em 0;
+  line-height: 1.25em;
+}
+h2.subheader {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.5em;
+  margin-top: -0.25em;
+  margin-bottom: 1.5em;
+  color: gray;
 }
 
 h3 {
@@ -102,6 +109,17 @@ p {
   margin: 0.5em 0;
 }
 
+body a {
+  color: #014494;
+  text-decoration: none;
+  transition: color 0.2s;
+  transition: text-decoration 0.2s;
+}
+body a:hover {
+  text-decoration: underline;
+  color: #2ba6cb;
+}
+
 strong {
   font-weight: bold;
 }
@@ -112,15 +130,18 @@ strong {
 
 .list {
   list-style-type: disc;
+  margin-bottom: 2em;
+}
+.list li {
+  margin-left: 2em;
 }
 
 .note {
   margin: 1em 0;
-  color: #898D99;
+  color: #585858;
 }
 
 .flex-grid {
-  width: 100%;
   margin: 0 auto;
   padding: 1em;
 }
@@ -162,7 +183,7 @@ strong {
 }
 
 .col-contents-right {
-  min-width: 190px;
+  min-width: 195px;
 }
 
 /* Spacing helpers */
@@ -199,10 +220,10 @@ form {
   align-items: center;
 }
 
-footer.flex-grid {
-  margin-top: 1em;
-  flex-flow: column;
-  align-items: end;
+footer {
+  overflow: scroll;
+  width: 80%;
+  margin: 0 auto 5em;
 }
 
 @media (min-width: 768px) {
@@ -222,45 +243,37 @@ footer.flex-grid {
   font-weight: bold;
   text-align: center;
   transition: background-color 0.5s;
+  cursor: pointer;
 }
 
 .btn-primary, .btn-secondary {
+  color: #ffffff;
+  width: 75%;
   max-width: 500px;
   padding: 1em 2em;
-  text-decoration: none;
-}
-
-.btn-primary {
-  width: 75%;
   margin: 1em 0;
+  text-decoration: none;
   font-size: 1.125em;
   border: none;
   border-radius: 6px;
-  background-color: #014494;
-  color: #ffffff;
+}
+
+.btn-primary {
+  background-color: #2ba6cb;
 }
 .btn-primary:hover {
-  background-color: #00224a;
-  cursor: pointer;
+  background-color: #014494;
 }
 .btn-primary:disabled {
-  background-color: gray;
+  background-color: #787878;
+  cursor: not-allowed;
 }
 
 .btn-secondary {
-  margin: 1em 0;
-  padding: 1em 2em;
-  background-color: #fff;
-  border: 2px solid #014494;
-  color: #014494;
-  font-size: 1em;
-  border-radius: 6px;
-  width: 75%;
+  background-color: #014494;
 }
 .btn-secondary:hover {
-  color: #ffffff;
   background-color: #00224a;
-  cursor: pointer;
   transition: 0.3s;
 }
 
@@ -270,19 +283,18 @@ footer.flex-grid {
 }
 
 .btn-bar {
-  width: 100%;
-  padding: 0 1.5em;
-  margin-bottom: 1em;
+  width: 90%;
+  margin: 0 auto 1em;
   display: flex;
 }
 .btn-bar .btn {
-  background-color: #159deb;
+  background-color: #2ba6cb;
   color: white;
   border: none;
   padding: 1em;
   border-radius: 0;
   display: inline-block;
-  margin: 0.5em;
+  margin: 0 0.5em;
   font-size: 13px;
   flex-grow: 1;
 }
@@ -302,11 +314,12 @@ footer.flex-grid {
   width: 0;
 }
 .btn-group .btn {
-  background-color: #d8d8d8;
-  color: #585858;
+  background-color: #D8D8D8;
+  color: #787878;
   border-radius: 6px;
   padding: 14px 23px;
   cursor: pointer;
+  transition: background-color 0.5s;
 }
 .btn-group .btn:not(:last-child) {
   border-right: none;
@@ -322,6 +335,9 @@ footer.flex-grid {
   background-color: #309303;
   color: white;
 }
+.btn-group input[type=radio]:not(:checked) + label:hover {
+  background-color: #c2c1c1;
+}
 .btn-group button:hover {
   background-color: #3e8e41;
 }
@@ -333,10 +349,9 @@ footer.flex-grid {
   background-color: #ffffff;
   border: 3px solid #d8d8d8;
   border-radius: 2px;
-  margin-bottom: 1em;
   padding: 6px;
   box-sizing: border-box;
-  height: 2.5em;
+  line-height: 1.5em;
   -webkit-appearance: none;
 }
 
@@ -353,6 +368,83 @@ footer.flex-grid {
 
 .input-number-small {
   width: 3em;
+}
+
+/* The container */
+.input-checkbox {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.input-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1em;
+  width: 1em;
+  border: 3px solid #d8d8d8;
+  background-color: white;
+}
+
+/* On mouse-over, add a grey background color */
+.input-checkbox:hover input ~ .checkmark,
+.input-checkbox input:focus ~ .checkmark {
+  border-color: #2ba6cb;
+}
+
+/* When the checkbox is checked, add a blue background */
+.input-checkbox input:checked ~ .checkmark {
+  background-color: #2ba6cb;
+  border-color: #2ba6cb;
+}
+
+.wrapper input:focus + label::before {
+  box-shadow: 0 0 0 3px #ffbf47;
+  outline: 3px solid transparent;
+  /* For Windows high contrast mode. */
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.input-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.input-checkbox .checkmark:after {
+  left: 7px;
+  top: 4px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 /* The Modal (background) */
@@ -452,6 +544,35 @@ footer.flex-grid {
   animation-duration: 0.2s;
 }
 
+/* Fade Background */
+@-o-keyframes fadeIt {
+  0% {
+    background-color: #FFFFFF;
+  }
+  50% {
+    background-color: #AD301B;
+  }
+  100% {
+    background-color: #FFFFFF;
+  }
+}
+@keyframes fadeIt {
+  0% {
+    background-color: #FFFFFF;
+  }
+  50% {
+    background-color: #AD301B;
+  }
+  100% {
+    background-color: #FFFFFF;
+  }
+}
+.backgroundAnimated {
+  background-image: none !important;
+  -o-animation: fadeIt 5s ease-in-out;
+  animation: fadeIt 5s ease-in-out;
+}
+
 /* Workflow helpers */
 .display-none {
   display: none !important;
@@ -482,6 +603,7 @@ footer.flex-grid {
   border-radius: 100px;
   text-align: center;
   font-size: 1.5em;
+  transition: background-color 0.5s;
 }
 .icon-close-x:hover {
   background-color: #c2c1c1;
@@ -536,11 +658,12 @@ footer.flex-grid {
 /* Fish selector */
 #filterFish {
   background-image: url("../icons/search-solid.svg");
-  background-repeat: no-repeat;
   background-position: 16px 10px;
-  padding-left: 54px;
+  background-repeat: no-repeat;
   background-size: 24px;
-  margin-bottom: -3px;
+  border-radius: 2em;
+  padding-left: 54px;
+  margin-bottom: 1em;
   width: 100%;
   max-width: 500px;
   z-index: 1;
@@ -550,6 +673,7 @@ footer.flex-grid {
 .list-wrapper {
   max-height: 31vh;
   border: 3px solid #D8D8D8;
+  border-radius: 6px;
   overflow: scroll;
   box-sizing: border-box;
   width: 100%;
@@ -562,8 +686,14 @@ footer.flex-grid {
 .list-wrapper #fishList tr {
   height: 32px;
 }
+.list-wrapper #fishList tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
 .list-wrapper #fishList tr:hover {
   background-color: aliceblue;
+}
+.list-wrapper #fishList tr:hover .checkmark {
+  border-color: #2ba6cb;
 }
 .list-wrapper #fishList .header-fishlist {
   margin-bottom: 0;
@@ -571,23 +701,63 @@ footer.flex-grid {
   font-weight: bold;
 }
 .list-wrapper #fishList .header-fishlist th {
-  vertical-align: bottom;
-  padding: 0.25em 1em 0.25em 0;
+  padding: 0;
+  background-color: #f2f2f2;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  box-shadow: 8px -1px 8px gray;
+}
+.list-wrapper #fishList .header-fishlist th:nth-child(1) {
+  width: 3em;
+}
+.list-wrapper #fishList .header-fishlist th:nth-child(2) .btn-sort {
+  text-align: left;
+  padding-left: 6px;
 }
 .list-wrapper #fishList .header-fishlist th:nth-child(3) {
   text-align: right;
+  width: 13em;
 }
-.list-wrapper #fishList .header-fishlist th.asc:after {
-  content: "▲";
+.list-wrapper #fishList .header-fishlist th:nth-child(3) .btn-sort {
+  text-align: right;
+  padding-right: 1.4em;
 }
-.list-wrapper #fishList .header-fishlist th.dsc:after {
-  content: "▼";
+.list-wrapper #fishList .header-fishlist th .btn-sort {
+  color: #585858;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  line-height: 3em;
+  padding: 0;
+  margin: 0;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  transition: background-color 0.5s;
+}
+.list-wrapper #fishList .header-fishlist th .btn-sort:hover {
+  background-color: #D8D8D8;
+}
+.list-wrapper #fishList .header-fishlist th .btn-sort .icon-sort-arrow {
+  font-size: 1.5em;
+  vertical-align: text-bottom;
+  color: #2ba6cb;
+  border-radius: 1em;
+  margin-left: 1px;
+}
+.list-wrapper #fishList .header-fishlist th.asc .icon-sort-arrow:after {
+  content: "arrow_upward";
+}
+.list-wrapper #fishList .header-fishlist th.dsc .icon-sort-arrow:after {
+  content: "arrow_downward";
+}
+.list-wrapper #fishList th, .list-wrapper #fishList td {
+  cursor: pointer;
+  padding: 6px;
 }
 .list-wrapper #fishList input {
   margin: 0.25em 1em;
-  cursor: pointer;
-}
-.list-wrapper #fishList td {
   cursor: pointer;
 }
 .list-wrapper #fishList label {
@@ -615,65 +785,61 @@ footer.flex-grid {
   background-color: red;
 }
 
-/* Selected Fish */
+/* Selected Fish Section */
 .selected-fish {
   width: 100%;
   max-width: 500px;
 }
 .selected-fish .col-contents-right {
   text-align: end;
+  margin-right: 0.5em;
 }
 .selected-fish li {
-  justify-content: space-between;
   display: flex;
+  align-items: center;
+  padding-bottom: 1em;
 }
 
-/* Results raw data */
-.results-data {
-  text-align: left;
-  margin-bottom: 2em;
+/* Results page */
+#results-overview h2 {
+  margin-top: 0;
 }
-.results-data h3 {
-  text-align: left;
-}
-.results-data h3, .results-data table, .results-data p {
-  margin-top: 1em;
-}
-.results-data table {
+
+/* Results Chart */
+#chart-homemade {
+  background-image: url("../icons/human.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: auto 90%;
+  height: 260px;
   width: 100%;
-}
-.results-data table th {
-  font-weight: bold;
-}
-.results-data table td, .results-data table th {
-  padding: 0.8em;
-  text-align: left;
-  border: thin solid gray;
-  vertical-align: bottom;
+  text-align: center;
 }
 
-.fishResultsRawData {
-  overflow-x: scroll;
+.loading {
+  background-image: url("../assets/img/placeholder.gif");
 }
 
 /* Results - list of fish */
 #fishResults {
-  width: 100%;
   margin: 0 1.5em;
 }
-#fishResults .card:first-child {
-  margin-top: 0;
+#fishResults .row-2col {
+  margin-bottom: 1em;
 }
 #fishResults .card {
   margin-top: 1.5em;
   padding: 1.5em 2em;
   background-color: #E8EDEF;
 }
+#fishResults .card:first-child {
+  margin-top: 0;
+}
 #fishResults .card h3, #fishResults .card h4 {
   text-align: left;
   margin: 0.2em 1em 0.2em 0;
   min-width: 100px;
-  color: #898D99;
+  color: #585858;
 }
 #fishResults .card .message {
   display: flex;
@@ -726,21 +892,6 @@ footer.flex-grid {
   background-color: red;
 }
 
-/* Results Chart */
-#chart-homemade {
-  background-image: url("../icons/human.svg");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: auto 90%;
-  height: 260px;
-  width: 100%;
-  text-align: center;
-}
-
-.loading {
-  background-image: url("../assets/img/placeholder.gif");
-}
-
 /* About section */
 .accordion {
   background-color: #eee;
@@ -750,7 +901,6 @@ footer.flex-grid {
   width: 100%;
   border: none;
   text-align: left;
-  outline: none;
   font-size: 15px;
   transition: 0.4s;
 }
@@ -764,6 +914,34 @@ footer.flex-grid {
   display: none;
   background-color: white;
   overflow: hidden;
+}
+
+/* Results raw data */
+.results-data {
+  text-align: left;
+  margin-bottom: 2em;
+}
+.results-data h3 {
+  text-align: left;
+}
+.results-data h3, .results-data table, .results-data p {
+  margin-top: 1em;
+}
+.results-data table {
+  width: 100%;
+}
+.results-data table th {
+  font-weight: bold;
+}
+.results-data table td, .results-data table th {
+  padding: 0.8em;
+  text-align: left;
+  border: thin solid gray;
+  vertical-align: bottom;
+}
+
+.fishResultsRawData {
+  overflow-x: scroll;
 }
 
 /*# sourceMappingURL=main.css.map */
