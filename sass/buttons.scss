@@ -108,6 +108,10 @@
 
   input[type="radio"] {
 
+    &:focus + label {
+      outline: 2px aliceblue;
+    }
+
     &:checked + label {
       background-color: #309303;
       color: white;

@@ -8,8 +8,7 @@
     <title>Seafood health and sustainability calculator</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="css/main.css" />
   </head>
   <body>
@@ -50,7 +49,7 @@
               value="lbs"
               checked
             />
-            <label for="Lbs" class="btn">Lbs</label>
+            <label for="Lbs" class="btn" tabindex="0">Lbs</label>
 
             <input
               type="radio"
@@ -59,7 +58,7 @@
               id="Kgs"
               value="kgs"
             />
-            <label for="Kgs" class="btn">Kgs</label>
+            <label for="Kgs" class="btn" tabindex="0">Kgs</label>
           </div>
           <p class="note">Your weight determines how much mercury you can safely consume.</p>
           <button
@@ -77,7 +76,7 @@
             What types of seafood do you eat <strong class="highlight"> in one week?</strong>
           </p>
 
-          <input aria-label="Search for fish" class="input input-lg input-text" type="text" id="filterFish" onclick="this.select();" onkeyup="filterFishList()" placeholder="Search for fish..."
+          <input aria-label="Search for fish" class="input input-lg input-text" type="text" id="filterFish" onclick="this.select();" onkeyup="filterFishList()" placeholder="Search seafood list..."
           />
 
           <div class="list-wrapper">
@@ -89,12 +88,12 @@
               <th scope="col"></th>
               <th scope="col" class="asc">
                 <button class="btn btn-sort fade-in" tabindex="0" href="javascript:void(0)" onclick="sortTable(1)">
-                  Fish <span class="icon-sort-arrow material-icons"></span>
+                  Fish <span class="icon-sort-arrow"></span>
                   </button>
                 </th>
               <th scope="col">
                 <button class="btn btn-sort fade-in" tabindex="0" href="javascript:void(0)" onclick="sortTable(2)">
-                  Mercury per oz <span class="icon-sort-arrow  material-icons"></span>
+                  Mercury per oz <span class="icon-sort-arrow"></span>
                 </button>
               </th>
             </tr>
@@ -116,7 +115,7 @@
 
           <form id="servingSize" class="calculate-results">
             <h2 class="mb-0">Choose serving sizes</h2>
-            <p class="mb-1"><a href="#servingModal" id="openServingModal">One serving is 6 to 8 ounces</a></p>
+            <p class="mb-1"><a href="#servingModal"  tabindex="0" id="openServingModal">One serving is 6 to 8 ounces</a></p>
 
             <ul id="selectedFish" class="selected-fish">
               <p class="note text-center">Select a fish from the list.</p>
@@ -140,7 +139,7 @@
                     <option value="28.35">Grams</option>
                   </select>
                 </span>
-                <a class="icon-close-x" title="Remove fish" onClick="removeFish({{ id }})"><span>&times;</span></a>
+                <a class="icon-close-x" title="Remove fish" tabindex="0" href="javascript:void(0)" onClick="removeFish({{ id }})"><span>&times;</span></a>
               </li>
               {{/.}}
               {{^.}}

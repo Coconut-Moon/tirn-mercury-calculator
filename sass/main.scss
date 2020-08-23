@@ -252,13 +252,14 @@
           }
 
           .icon-sort-arrow {
-            font-size: 1.5em;
+            font-family: FontAwesome;
+            //font-size: 1.5em;
+            line-height: 1.5em;
             vertical-align: text-bottom;
 
             //background-color: none;
             color: $brand-05;
 
-            border-radius: 1em;
             margin-left: 1px;
           }
 
@@ -266,13 +267,13 @@
 
         &.asc .icon-sort-arrow{
           &:after {
-            content: 'arrow_upward';
+            content: '\f062';
           }
         }
 
         &.dsc .icon-sort-arrow{
           &:after {
-            content: 'arrow_downward';
+            content: '\f063';
           }
         }
 

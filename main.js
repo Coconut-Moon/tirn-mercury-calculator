@@ -1,5 +1,4 @@
-// Add compatibility for 'jQuery' to support Wordpress
-(function ($) {
+
 
   // ID of the Google Spreadsheet
   var spreadsheetID = '1Boy1UKFhf_wMjJ6wHHFWAEdRTZ3QxK0f9rntOSkUjmM';
@@ -591,4 +590,4 @@
 
   });
 
-})(jQuery);
+

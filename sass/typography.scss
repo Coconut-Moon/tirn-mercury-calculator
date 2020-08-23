@@ -62,7 +62,7 @@ body a {
   transition: color 0.2s;
   transition: text-decoration 0.2s;
 
-  &:hover {
+  &:hover, &:focus {
     text-decoration:underline;
     color:$brand-05;
   }
