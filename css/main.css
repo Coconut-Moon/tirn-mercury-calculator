@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url(https://fonts.googleapis.com/css2?family=Fjalla+One&family=Open+Sans:wght@300;400;700&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Fjalla+One&family=Open+Sans:wght@300;400;500;600;700&display=swap);
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -292,8 +292,6 @@ footer {
   color: white;
   border: none;
   padding: 1em;
-  border-radius: 0;
-  display: inline-block;
   margin: 0 0.5em;
   font-size: 13px;
   flex-grow: 1;
@@ -399,8 +397,8 @@ footer {
 /* Create a custom checkbox */
 .checkmark {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 10px;
+  left: 9px;
   height: 1em;
   width: 1em;
   border: 3px solid #D8D8D8;
@@ -607,9 +605,12 @@ footer {
   text-align: center;
   font-size: 1.5em;
   transition: background-color 0.5s;
+  color: inherit;
 }
-.icon-close-x:hover {
+.icon-close-x:hover, .icon-close-x:focus {
   background-color: #c2c1c1;
+  text-decoration: none;
+  color: inherit;
   cursor: pointer;
 }
 
@@ -617,14 +618,12 @@ footer {
   flex: 0 0 40px;
   width: 40px;
   height: 40px;
-  background-position: 9px;
+  background-color: #fff;
   background-repeat: no-repeat;
-  background-size: 24px;
   border-radius: 40px;
-  border: thin solid black;
   margin-right: 1em;
 }
-.icon.toxin {
+.icon.icon-toxin {
   background-image: url("../icons/toxin.svg");
 }
 .icon.microplastics {
@@ -757,7 +756,6 @@ footer {
 }
 .list-wrapper #fishList th, .list-wrapper #fishList td {
   cursor: pointer;
-  padding: 6px;
 }
 .list-wrapper #fishList input {
   margin: 0.25em 1em;
@@ -765,27 +763,43 @@ footer {
 }
 .list-wrapper #fishList label {
   display: block;
-  padding: 0.25em 1em 0.25em 0;
+  padding: 0.5em 1em 0.5em 0;
   cursor: pointer;
 }
 .list-wrapper #fishList label.mercury-exposure {
   text-align: right;
 }
-.list-wrapper #fishList label.mercury-exposure .dot {
-  height: 12px;
-  width: 12px;
-  background-color: #c2c1c1;
-  border-radius: 50%;
+.list-wrapper #fishList label.mercury-exposure .mercury-rating {
+  border-radius: 6px;
+  border: thin solid gray;
+  width: 45px;
   display: inline-block;
+  text-transform: uppercase;
+  font-size: 0.7em;
+  text-align: center;
+  margin-left: 0.75em;
+  color: white;
 }
-.list-wrapper #fishList label.mercury-exposure.mercury-rating-best .dot {
+.list-wrapper #fishList label.mercury-exposure .mercury-rating.mercury-rating-best {
   background-color: green;
+  border-color: green;
 }
-.list-wrapper #fishList label.mercury-exposure.mercury-rating-good .dot {
-  background-color: orange;
+.list-wrapper #fishList label.mercury-exposure .mercury-rating.mercury-rating-best::after {
+  content: "best";
 }
-.list-wrapper #fishList label.mercury-exposure.mercury-rating-avoid .dot {
+.list-wrapper #fishList label.mercury-exposure .mercury-rating.mercury-rating-good {
+  background-color: #ff5600;
+  border-color: #ff5600;
+}
+.list-wrapper #fishList label.mercury-exposure .mercury-rating.mercury-rating-good::after {
+  content: "good";
+}
+.list-wrapper #fishList label.mercury-exposure .mercury-rating.mercury-rating-avoid {
   background-color: red;
+  border-color: red;
+}
+.list-wrapper #fishList label.mercury-exposure .mercury-rating.mercury-rating-avoid::after {
+  content: "avoid";
 }
 
 /* Selected Fish Section */
@@ -819,10 +833,6 @@ footer {
   text-align: center;
 }
 
-.loading {
-  background-image: url("../assets/img/placeholder.gif");
-}
-
 /* Results - list of fish */
 #fishResults {
   margin: 0 1.5em;
@@ -839,10 +849,14 @@ footer {
   margin-top: 0;
 }
 #fishResults .card h3, #fishResults .card h4 {
-  text-align: left;
-  margin: 0.2em 1em 0.2em 0;
-  min-width: 100px;
   color: #585858;
+  text-align: left;
+  margin: 0 1em 0.8em 0;
+  min-width: 100px;
+  font-family: "Open sans";
+  font-size: 1.2em;
+  font-weight: 600;
+  letter-spacing: 0;
 }
 #fishResults .card .message {
   display: flex;
@@ -883,10 +897,10 @@ footer {
   background-color: green;
 }
 #fishResults .mercury-level-wrapper.mercury-rating-good {
-  border-color: orange;
+  border-color: #ff5600;
 }
 #fishResults .mercury-level-wrapper.mercury-rating-good .mercury-level-percent {
-  background-color: orange;
+  background-color: #ff5600;
 }
 #fishResults .mercury-level-wrapper.mercury-rating-avoid {
   border-color: red;

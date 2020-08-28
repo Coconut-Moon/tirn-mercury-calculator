@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css2?family=Fjalla+One&family=Open+Sans:wght@300;400;700&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Fjalla+One&family=Open+Sans:wght@300;400;500;600;700&display=swap);
 
 @import 'reset.scss';
 @import 'colors.scss';
@@ -79,29 +79,30 @@
   text-align: center;
   font-size: 1.5em;
   transition: background-color 0.5s;
+  color: inherit;
 
-  &:hover {
+  &:hover, &:focus {
     background-color: $ui-gray-02;
+    text-decoration: none;
+    color: inherit;
     cursor: pointer;
   }
 }
 
 .icon {
-
   flex: 0 0 40px;
   width: 40px;
   height: 40px;
 
-  background-position: 9px;
+  background-color: #fff;
   background-repeat: no-repeat;
-  background-size: 24px;
 
   border-radius: 40px;
-  border: thin solid black;
+  //border: thin solid black;
 
   margin-right: 1em;
 
-  &.toxin {
+  &.icon-toxin {
     background-image: url('../icons/toxin.svg');
   }
 
@@ -131,6 +132,7 @@
   border-radius: 50%;
   display: inline-block;
 }
+
 
 .mercury-recommended{
   background-color: $chart-04;
@@ -282,7 +284,6 @@
 
     th, td {
       cursor: pointer;
-      padding: 6px;
     }
 
     input {
@@ -293,24 +294,49 @@
     label
     {
       display: block;
-      padding: .25em 1em .25em 0;
+      padding: .5em 1em .5em 0;
       cursor: pointer;
 
 
       &.mercury-exposure {
         text-align: right;
 
-        .dot {
-          height: 12px;
-          width: 12px;
-          background-color: $ui-gray-02;
-          border-radius: 50%;
+        .mercury-rating {
+          //width: 100px;
+          border-radius: 6px;
+          border: thin solid gray;
+          width: 45px;
           display: inline-block;
-        }
+          text-transform: uppercase;
+          font-size: .7em;
+          text-align: center;
+          margin-left: .75em;
+          color: white;
 
-        &.mercury-rating-best .dot {background-color: $chart-01;}
-        &.mercury-rating-good .dot {background-color: $chart-02;}
-        &.mercury-rating-avoid .dot {background-color: $chart-03;}
+          // Content inserted here because it messes with the sort function in the template
+
+          &.mercury-rating-best {
+            background-color: $chart-01;
+            border-color: $chart-01;
+            &::after {
+              content: "best";
+            }
+          }
+          &.mercury-rating-good {
+            background-color: $chart-02;
+            border-color: $chart-02;
+            &::after {
+              content: "good";
+            }
+          }
+          &.mercury-rating-avoid {
+            background-color: $chart-03;
+            border-color: $chart-03;
+            &::after {
+              content: "avoid";
+            }
+          }
+        }
 
       }
     }
@@ -356,10 +382,6 @@
   text-align: center;
 }
 
-.loading {
-  background-image: url('../assets/img/placeholder.gif');
-}
-
 /* Results - list of fish */
 
 #fishResults {
@@ -382,10 +404,14 @@
     }
 
     h3, h4 {
-      text-align: left;
-      margin: 0.20em 1em 0.2em 0;
-      min-width: 100px;
       color: $type-body-light;
+      text-align: left;
+      margin: 0 1em 0.8em 0;
+      min-width: 100px;
+      font-family: "Open sans";
+      font-size: 1.2em;
+      font-weight: 600;
+      letter-spacing: 0;
     }
 
     .message {
