@@ -9,10 +9,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.1.0/mustache.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css?rnd=123" />
   </head>
   <body>
-    <script src="main.js"></script>
+    <script src="main.js?rnd=123"></script>
     <main class="flex-grid">
       <div class="col">
         <h1>What's the catch?</h1>
@@ -28,7 +28,7 @@
             </ul>
           </ul>
           <br />
-          <label for="weight" class="y-1">What is your weight?</label>
+          <label for="weight" class="mb-1">What is your weight?</label>
           <input
             type="number"
             id="weight"
@@ -36,7 +36,7 @@
             min="1"
             max="999"
             value="160"
-            class="input input-number y-1"
+            class="input input-number mb-1"
             onclick="this.select();"
             required
           />
@@ -47,18 +47,21 @@
               name="weightUnits"
               id="Lbs"
               value="lbs"
+              aria-label="Weight units - pounds"
               checked
             />
-            <label for="Lbs" class="btn" tabindex="0">Lbs</label>
+            <label for="Lbs" class="btn">Lbs</label>
 
             <input
+
               type="radio"
               class="btn-group-input weight-measure"
               name="weightUnits"
               id="Kgs"
               value="kgs"
+              aria-label="Weight units - kilograms"
             />
-            <label for="Kgs" class="btn" tabindex="0">Kgs</label>
+            <label for="Kgs" class="btn">Kgs</label>
           </div>
           <p class="note">Your weight determines how much mercury you can safely consume.</p>
           <button
@@ -113,9 +116,9 @@
             {{/.}}
           </script>
 
-          <form id="servingSize" class="calculate-results">
+          
             <h2 class="mb-0">Choose serving sizes</h2>
-            <p class="mb-1"><a href="#servingModal"  tabindex="0" id="openServingModal">One serving is 6 to 8 ounces</a></p>
+            <a href="#servingModal" class="mb-1 mt-1" tabindex="0" id="openServingModal">One serving is 6 to 8 ounces</a>
 
             <ul id="selectedFish" class="selected-fish">
               <p class="note text-center">Select a fish from the list.</p>
@@ -147,7 +150,7 @@
               {{/.}}
             </script>
 
-          </form>
+          
 
           <button id="showResults" class="btn btn-primary show-results" disabled="disabled">
             Show results
@@ -168,7 +171,7 @@
                 <g>
                   <rect id="mercuryExposureOverageBar" width="400" height="50%" style="fill:rgba(255, 0, 4, 0.3)" />
                 <g>
-                  <rect id="mercuryExposureRecBar" width="400" height="50%" y="50%" style="fill:#159deb50"></rect>
+                  <rect id="mercuryExposureRecBar" width="400" height="50%" y="50%" style="fill:rgba(21, 157, 235, 0.31)"></rect>
                 </g>
                 <g id="chartPercentageText" class="apexcharts-yaxis-texts-g">
                   <text id="chartPercentage100" font-family="Helvetica, Arial, sans-serif" x="30" y="5%" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="chart-text chart-yaxis-label">

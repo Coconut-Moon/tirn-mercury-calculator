@@ -107,11 +107,11 @@
   input[type="radio"] {
 
     &:focus + label {
-      outline: 2px aliceblue;
+      outline: 2px solid red;
     }
 
     &:checked + label {
-      background-color: #309303;
+      background-color: $brand-03;
       color: white;
     }
 
