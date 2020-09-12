@@ -1,0 +1,971 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css2?family=Fjalla+One&family=Open+Sans:wght@300;400;500;600;700&display=swap);
+/* Override Wordpress injected classes */
+body[data-form-style=minimal] #mercury-calculator-2020 .minimal-form-input {
+  position: unset;
+  padding-top: unset;
+  box-sizing: unset;
+  -webkit-box-sizing: unset;
+  -moz-box-sizing: unset;
+  display: unset;
+  width: unset;
+}
+
+body[data-form-style=minimal] #mercury-calculator-2020 input[type=text] {
+  background-color: unset;
+  box-shadow: unset;
+  -webkit-box-shadow: unset;
+  position: unset;
+  margin: unset;
+  margin-bottom: unset;
+  font-size: unset;
+  padding-top: inherit !important;
+  padding-bottom: inherit !important;
+  padding-left: inherit !important;
+  padding-right: inherit !important;
+}
+
+body[data-form-style=minimal] #mercury-calculator-2020 .minimal-form-input label {
+  position: unset;
+  height: unset;
+  width: unset;
+  top: unset;
+  left: unset;
+  overflow: unset;
+  pointer-events: unset;
+  display: unset;
+  margin: unset;
+}
+
+body[data-form-style=minimal] #mercury-calculator-2020 .minimal-form-input label::before, body[data-form-style=minimal] .minimal-form-input label::after {
+  content: none;
+  position: unset;
+  bottom: unset;
+  left: unset;
+  width: unset;
+  display: unset;
+  height: unset;
+  border-bottom: unset;
+}
+
+input[type=text] {
+  padding: inherit !important;
+}
+
+select {
+  padding: inherit !important;
+  width: unset;
+  border: inherit !important;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  background-color: #fff;
+  box-shadow: unset !important;
+  transition: unset;
+}
+
+#mercury-calculator-2020 {
+  color: #292929;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  /* http://meyerweb.com/eric/tools/css/reset/ 
+     v2.0 | 20110126
+     License: none (public domain)
+  */
+  /* HTML5 display-role reset for older browsers */
+  /*
+    Typography
+      Headers : font-family: 'Fjalla One', sans-serif;
+      Body : font-family: 'Open Sans', sans-serif;
+  */
+  /* Spacing helpers */
+  /* Alignment helpers */
+  /* Misc */
+  /* Buttons and Button Groups */
+  /* Inputs */
+  /* The container */
+  /* Hide the browser's default checkbox */
+  /* Create a custom checkbox */
+  /* On mouse-over, add a grey background color */
+  /* When the checkbox is checked, add a blue background */
+  /* Create the checkmark/indicator (hidden when not checked) */
+  /* Show the checkmark when checked */
+  /* Style the checkmark/indicator */
+  /* Accordion trigger */
+  /* Accordion contents */
+  /* Animation */
+  /* make keyframes that tell the start state and the end state of our object */
+  /* Fade Background */
+  /* Workflow helpers */
+  /* Validation */
+  /* Icons */
+  /* Misc */
+  /* Dot indicators */
+  /* Fish selector */
+  /* Fish List */
+  /* Selected Fish Section */
+  /* Results page */
+  /* Results Chart */
+  /* Results - list of fish */
+  /* Results raw data */
+}
+#mercury-calculator-2020 html, #mercury-calculator-2020 body, #mercury-calculator-2020 div, #mercury-calculator-2020 span, #mercury-calculator-2020 applet, #mercury-calculator-2020 object, #mercury-calculator-2020 iframe,
+#mercury-calculator-2020 h1, #mercury-calculator-2020 h2, #mercury-calculator-2020 h3, #mercury-calculator-2020 h4, #mercury-calculator-2020 h5, #mercury-calculator-2020 h6, #mercury-calculator-2020 p, #mercury-calculator-2020 blockquote, #mercury-calculator-2020 pre,
+#mercury-calculator-2020 a, #mercury-calculator-2020 abbr, #mercury-calculator-2020 acronym, #mercury-calculator-2020 address, #mercury-calculator-2020 big, #mercury-calculator-2020 cite, #mercury-calculator-2020 code,
+#mercury-calculator-2020 del, #mercury-calculator-2020 dfn, #mercury-calculator-2020 em, #mercury-calculator-2020 img, #mercury-calculator-2020 ins, #mercury-calculator-2020 kbd, #mercury-calculator-2020 q, #mercury-calculator-2020 s, #mercury-calculator-2020 samp,
+#mercury-calculator-2020 small, #mercury-calculator-2020 strike, #mercury-calculator-2020 strong, #mercury-calculator-2020 sub, #mercury-calculator-2020 sup, #mercury-calculator-2020 tt, #mercury-calculator-2020 var,
+#mercury-calculator-2020 b, #mercury-calculator-2020 u, #mercury-calculator-2020 i, #mercury-calculator-2020 center,
+#mercury-calculator-2020 dl, #mercury-calculator-2020 dt, #mercury-calculator-2020 dd, #mercury-calculator-2020 ol, #mercury-calculator-2020 ul, #mercury-calculator-2020 li,
+#mercury-calculator-2020 fieldset, #mercury-calculator-2020 form, #mercury-calculator-2020 label, #mercury-calculator-2020 legend,
+#mercury-calculator-2020 table, #mercury-calculator-2020 caption, #mercury-calculator-2020 tbody, #mercury-calculator-2020 tfoot, #mercury-calculator-2020 thead, #mercury-calculator-2020 tr, #mercury-calculator-2020 th, #mercury-calculator-2020 td,
+#mercury-calculator-2020 article, #mercury-calculator-2020 aside, #mercury-calculator-2020 canvas, #mercury-calculator-2020 details, #mercury-calculator-2020 embed,
+#mercury-calculator-2020 figure, #mercury-calculator-2020 figcaption, #mercury-calculator-2020 footer, #mercury-calculator-2020 header, #mercury-calculator-2020 hgroup,
+#mercury-calculator-2020 menu, #mercury-calculator-2020 nav, #mercury-calculator-2020 output, #mercury-calculator-2020 ruby, #mercury-calculator-2020 section, #mercury-calculator-2020 summary,
+#mercury-calculator-2020 time, #mercury-calculator-2020 mark, #mercury-calculator-2020 audio, #mercury-calculator-2020 video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+#mercury-calculator-2020 article, #mercury-calculator-2020 aside, #mercury-calculator-2020 details, #mercury-calculator-2020 figcaption, #mercury-calculator-2020 figure,
+#mercury-calculator-2020 footer, #mercury-calculator-2020 header, #mercury-calculator-2020 hgroup, #mercury-calculator-2020 menu, #mercury-calculator-2020 nav, #mercury-calculator-2020 section {
+  display: block;
+}
+#mercury-calculator-2020 body {
+  line-height: 1;
+}
+#mercury-calculator-2020 ol, #mercury-calculator-2020 ul {
+  list-style: none;
+}
+#mercury-calculator-2020 blockquote, #mercury-calculator-2020 q {
+  quotes: none;
+}
+#mercury-calculator-2020 blockquote:before, #mercury-calculator-2020 blockquote:after,
+#mercury-calculator-2020 q:before, #mercury-calculator-2020 q:after {
+  content: "";
+  content: none;
+}
+#mercury-calculator-2020 table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+#mercury-calculator-2020 button,
+#mercury-calculator-2020 input,
+#mercury-calculator-2020 select {
+  color: #292929;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+}
+#mercury-calculator-2020 h1,
+#mercury-calculator-2020 h2,
+#mercury-calculator-2020 h3,
+#mercury-calculator-2020 h4 {
+  font-family: "Fjalla One", sans-serif;
+  text-align: center;
+  letter-spacing: 0.015em;
+  color: #292929;
+}
+#mercury-calculator-2020 h1 {
+  font-size: 3em;
+  margin: 1em 0 0.5em 0;
+}
+#mercury-calculator-2020 h2 {
+  font-size: 2em;
+  margin: 0.75em 0;
+  line-height: 1.25em;
+}
+#mercury-calculator-2020 h2.subheader {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.5em;
+  margin-top: -0.25em;
+  margin-bottom: 1.5em;
+  color: gray;
+}
+#mercury-calculator-2020 h3 {
+  font-size: 1.5em;
+  line-height: 1.25em;
+}
+#mercury-calculator-2020 p, #mercury-calculator-2020 label, #mercury-calculator-2020 li {
+  line-height: 1.5em;
+}
+#mercury-calculator-2020 p {
+  margin: 0.5em 0;
+}
+#mercury-calculator-2020 body a {
+  color: #014494;
+  text-decoration: none;
+  transition: color 0.2s;
+  transition: text-decoration 0.2s;
+}
+#mercury-calculator-2020 body a:hover, #mercury-calculator-2020 body a:focus {
+  text-decoration: underline;
+  color: #2ba6cb;
+}
+#mercury-calculator-2020 strong {
+  font-weight: bold;
+}
+#mercury-calculator-2020 .font-small {
+  font-size: 0.8em;
+}
+#mercury-calculator-2020 .list {
+  list-style-type: disc;
+  margin-bottom: 2em;
+}
+#mercury-calculator-2020 .list li {
+  margin-left: 2em;
+}
+#mercury-calculator-2020 .note {
+  font-size: 0.85em;
+  margin: 1em 0;
+  color: #585858;
+}
+#mercury-calculator-2020 .note.note-callout {
+  border-width: 2px 0;
+  border-color: #D8D8D8;
+  border-style: solid;
+  padding: 2em 1em;
+}
+#mercury-calculator-2020 .mc-icon {
+  font-family: Fontawesome;
+}
+#mercury-calculator-2020 .flex-grid {
+  margin: 0 auto;
+  padding: 1em;
+}
+@media (min-width: 576px) {
+  #mercury-calculator-2020 .flex-grid {
+    width: 80%;
+  }
+}
+#mercury-calculator-2020 .flex-grid,
+#mercury-calculator-2020 .row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#mercury-calculator-2020 .row-2col {
+  justify-content: space-between;
+  display: flex;
+  flex-flow: wrap;
+}
+#mercury-calculator-2020 .col {
+  flex: 1;
+  width: 100%;
+}
+#mercury-calculator-2020 .col-2 {
+  flex: 2;
+}
+#mercury-calculator-2020 .col-self-baseline {
+  align-self: baseline;
+}
+#mercury-calculator-2020 .col-self-center {
+  align-self: center;
+}
+#mercury-calculator-2020 .col-contents-right {
+  min-width: 195px;
+}
+#mercury-calculator-2020 .mb-0 {
+  margin-bottom: 0;
+}
+#mercury-calculator-2020 .mb-1 {
+  margin-bottom: 0.5em;
+}
+#mercury-calculator-2020 .mb-2 {
+  margin-bottom: 1em;
+}
+#mercury-calculator-2020 .mb-3 {
+  margin-bottom: 1.5em;
+}
+#mercury-calculator-2020 .mt-1 {
+  margin-top: 0.5em;
+}
+#mercury-calculator-2020 .mt-2 {
+  margin-top: 1em;
+}
+#mercury-calculator-2020 .mt-3 {
+  margin-top: 1.5em;
+}
+#mercury-calculator-2020 .text-center {
+  text-align: center;
+}
+#mercury-calculator-2020 form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#mercury-calculator-2020 footer {
+  width: 80%;
+  margin: 0 auto 5em;
+}
+@media (min-width: 820px) {
+  #mercury-calculator-2020 .question-box.results {
+    flex-direction: row;
+  }
+}
+#mercury-calculator-2020 .question-box.results .col {
+  align-self: start;
+}
+#mercury-calculator-2020 .question-box.results #results-overview {
+  text-align: center;
+}
+#mercury-calculator-2020 .btn {
+  font-weight: bold;
+  text-align: center;
+  transition: background-color 0.5s;
+  cursor: pointer;
+}
+#mercury-calculator-2020 .btn-primary, #mercury-calculator-2020 .btn-secondary {
+  color: #ffffff;
+  width: 75%;
+  max-width: 500px;
+  padding: 1em 2em;
+  margin: 1em 0;
+  text-decoration: none;
+  font-size: 1.125em;
+  border: none;
+  border-radius: 6px;
+}
+#mercury-calculator-2020 .btn-primary {
+  background-color: #2ba6cb;
+}
+#mercury-calculator-2020 .btn-primary:hover {
+  background-color: #014494;
+}
+#mercury-calculator-2020 .btn-primary:disabled {
+  background-color: #787878;
+  cursor: not-allowed;
+}
+#mercury-calculator-2020 .btn-secondary {
+  background-color: #014494;
+}
+#mercury-calculator-2020 .btn-secondary:hover {
+  background-color: #00224a;
+  transition: 0.3s;
+}
+#mercury-calculator-2020 .btn-primary + .btn-secondary,
+#mercury-calculator-2020 .btn-secondary + .btn-secondary {
+  margin-top: 0;
+}
+#mercury-calculator-2020 .btn-bar {
+  width: 90%;
+  margin: 0 auto 1em;
+  display: flex;
+}
+#mercury-calculator-2020 .btn-bar .btn {
+  background-color: #2ba6cb;
+  color: white;
+  border: none;
+  padding: 1em;
+  margin: 0 0.5em;
+  font-size: 13px;
+  flex-grow: 1;
+}
+#mercury-calculator-2020 .btn-bar .btn:hover {
+  background-color: #00224a;
+}
+#mercury-calculator-2020 .btn-bar .btn:focus {
+  outline: 4px solid #2ba6cb;
+}
+#mercury-calculator-2020 .btn-group {
+  display: flex;
+  /* Add a background color on hover */
+}
+#mercury-calculator-2020 .btn-group .btn-group-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+#mercury-calculator-2020 .btn-group .btn {
+  background-color: #D8D8D8;
+  color: #787878;
+  border-radius: 6px;
+  padding: 14px 23px;
+  cursor: pointer;
+  transition: background-color 0.5s;
+}
+#mercury-calculator-2020 .btn-group .btn:not(:last-child) {
+  border-right: none;
+  /* Prevent double borders */
+}
+#mercury-calculator-2020 .btn-group .btn:last-child {
+  border-radius: 0 6px 6px 0;
+}
+#mercury-calculator-2020 .btn-group .btn:nth-child(2) {
+  border-radius: 6px 0 0 6px;
+}
+#mercury-calculator-2020 .btn-group input[type=radio]:focus + label {
+  outline: 4px solid #2ba6cb;
+}
+#mercury-calculator-2020 .btn-group input[type=radio]:checked + label {
+  background-color: #309303;
+  color: white;
+}
+#mercury-calculator-2020 .btn-group input[type=radio]:not(:checked) + label:hover {
+  background-color: #c2c1c1;
+}
+#mercury-calculator-2020 .btn-group button:hover {
+  background-color: #3e8e41;
+}
+#mercury-calculator-2020 .input.input-text,
+#mercury-calculator-2020 .input.input-number,
+#mercury-calculator-2020 .input.input-select {
+  background-color: #ffffff !important;
+  border: 3px solid #d8d8d8 !important;
+  border-radius: 2px;
+  padding: 6px !important;
+  box-sizing: border-box;
+  line-height: 1.5em;
+  -webkit-appearance: none;
+}
+#mercury-calculator-2020 .input.input-select {
+  background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+) no-repeat 95% 50% #fff;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+#mercury-calculator-2020 .input.input-lg {
+  height: 3em;
+}
+#mercury-calculator-2020 .input-number-small {
+  width: 3em;
+}
+#mercury-calculator-2020 .input-checkbox {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#mercury-calculator-2020 .input-checkbox input {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  position: absolute;
+}
+#mercury-calculator-2020 .checkmark {
+  position: absolute;
+  top: 10px;
+  left: 9px;
+  height: 28px;
+  width: 28px;
+  border: 3px solid #D8D8D8;
+  background-color: white;
+}
+#mercury-calculator-2020 .input-checkbox:hover input ~ .checkmark,
+#mercury-calculator-2020 .input-checkbox input:focus ~ .checkmark {
+  border-color: #2ba6cb;
+}
+#mercury-calculator-2020 .input-checkbox input:checked ~ .checkmark {
+  background-color: #2ba6cb;
+  border-color: #2ba6cb;
+}
+#mercury-calculator-2020 .wrapper input:focus + label::before {
+  box-shadow: 0 0 0 3px #ffbf47;
+  outline: 3px solid transparent;
+  /* For Windows high contrast mode. */
+}
+#mercury-calculator-2020 .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+#mercury-calculator-2020 .input-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+#mercury-calculator-2020 .input-checkbox .checkmark:after {
+  left: 9px;
+  top: 4px;
+  width: 7px;
+  height: 14px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+#mercury-calculator-2020 .accordion-trigger {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 14px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  font-size: 14px;
+  transition: 0.4s;
+}
+#mercury-calculator-2020 .accordion-trigger.accordion-trigger-small {
+  max-width: 500px;
+  text-align: center;
+  background-color: unset;
+  color: #014494;
+}
+#mercury-calculator-2020 .accordion-trigger.accordion-trigger-small .mc-icon-accordion-trigger {
+  color: #014494;
+}
+#mercury-calculator-2020 .accordion-trigger.accordion-trigger-small.active, #mercury-calculator-2020 .accordion-trigger.accordion-trigger-small:hover {
+  background-color: #fff;
+}
+#mercury-calculator-2020 .accordion-trigger.active, #mercury-calculator-2020 .accordion-trigger:hover {
+  background-color: #ccc;
+}
+#mercury-calculator-2020 .accordion-trigger .mc-icon-accordion-trigger {
+  background-color: unset;
+  text-decoration: none;
+  margin-right: 0;
+}
+#mercury-calculator-2020 .accordion-trigger .mc-icon-accordion-trigger:after {
+  content: "";
+}
+#mercury-calculator-2020 .accordion-trigger.active .mc-icon-accordion-trigger:after {
+  content: "";
+}
+#mercury-calculator-2020 .accordion-panel {
+  display: none;
+  visibility: hidden;
+  max-height: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 1.25em;
+  background-color: white;
+  border: thin solid #014494;
+  transition: visibility 0s, max-height 0.5s ease;
+}
+#mercury-calculator-2020 .accordion-panel.active {
+  display: block;
+  visibility: visible;
+  max-height: 10000em;
+}
+#mercury-calculator-2020 .accordion-panel.accordion-panel-small {
+  border-top: 4px solid #014494;
+  max-width: 500px;
+}
+#mercury-calculator-2020 .accordion-panel img {
+  width: 100px;
+  margin: 0 1em 0 0;
+  display: block;
+  float: left;
+}
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+    opacity: 1\9 ;
+    /* IE9 only */
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-moz-keyframes fadeIn {
+  from {
+    opacity: 0;
+    opacity: 1\9 ;
+    /* IE9 only */
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    opacity: 1\9 ;
+    /* IE9 only */
+  }
+  to {
+    opacity: 1;
+  }
+}
+#mercury-calculator-2020 .fade-in {
+  opacity: 0;
+  /* make things invisible upon start */
+  -webkit-animation: fadeIn ease-in 1;
+  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+  -moz-animation: fadeIn ease-in 1;
+  animation: fadeIn ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 0.2s;
+  -moz-animation-duration: 0.2s;
+  animation-duration: 0.2s;
+}
+@-o-keyframes fadeIt {
+  0% {
+    background-color: #FFFFFF;
+  }
+  50% {
+    background-color: #AD301B;
+  }
+  100% {
+    background-color: #FFFFFF;
+  }
+}
+@keyframes fadeIt {
+  0% {
+    background-color: #FFFFFF;
+  }
+  50% {
+    background-color: #AD301B;
+  }
+  100% {
+    background-color: #FFFFFF;
+  }
+}
+#mercury-calculator-2020 .backgroundAnimated {
+  background-image: none !important;
+  -o-animation: fadeIt 5s ease-in-out;
+  animation: fadeIt 5s ease-in-out;
+}
+#mercury-calculator-2020 .display-none {
+  display: none !important;
+}
+#mercury-calculator-2020 .question-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#mercury-calculator-2020 .question-one input {
+  width: 144px;
+  text-align: center;
+}
+#mercury-calculator-2020 #weight:invalid {
+  border-color: red;
+}
+#mercury-calculator-2020 .mc-icon-close-x {
+  float: right;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  display: block;
+  border-radius: 100px;
+  text-align: center;
+  font-size: 1.5em;
+  transition: background-color 0.5s;
+  color: inherit;
+}
+#mercury-calculator-2020 .mc-icon-close-x:hover, #mercury-calculator-2020 .mc-icon-close-x:focus {
+  background-color: #c2c1c1;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+#mercury-calculator-2020 .mc-icon {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  border-radius: 40px;
+  margin-right: 1em;
+}
+#mercury-calculator-2020 .mc-icon.mc-icon-toxin {
+  background-image: url("../icons/toxin.svg");
+}
+#mercury-calculator-2020 .mc-icon.microplastics {
+  background-image: url("../icons/microplastics.svg");
+}
+#mercury-calculator-2020 .mc-icon.bycatch {
+  background-image: url("../icons/bycatch.svg");
+}
+#mercury-calculator-2020 .highlight {
+  background-color: #FFEF9A;
+  font-weight: bold;
+  color: #00224a;
+}
+#mercury-calculator-2020 .dot {
+  height: 12px;
+  width: 12px;
+  background-color: #D8D8D8;
+  border-radius: 50%;
+  display: inline-block;
+}
+#mercury-calculator-2020 .mercury-recommended {
+  background-color: #159deb50;
+}
+#mercury-calculator-2020 .mercury-overage {
+  background-color: rgba(255, 0, 4, 0.5);
+}
+#mercury-calculator-2020 #filterFish {
+  background-image: url("../icons/search-solid.svg");
+  background-position: 16px 10px;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  border-radius: 2em;
+  padding-left: 54px !important;
+  margin-bottom: 1em;
+  width: 100%;
+  max-width: 500px;
+}
+#mercury-calculator-2020 .fishlist-wrapper {
+  max-height: 31vh;
+  border: 3px solid #D8D8D8;
+  border-radius: 6px;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 500px;
+}
+#mercury-calculator-2020 .fishlist-wrapper.error {
+  padding: 1em;
+  background-color: #FFEF9A;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList {
+  width: 100%;
+  max-width: 500px;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList tr {
+  height: 32px;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList tr:hover {
+  background-color: aliceblue;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList tr:hover .checkmark {
+  border-color: #2ba6cb;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList .header-fishlist {
+  margin-bottom: 0;
+  text-align: left;
+  font-weight: bold;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList .header-fishlist th {
+  padding: 0;
+  background-color: #f2f2f2;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  box-shadow: 8px -1px 8px gray;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList .header-fishlist th:nth-child(1) {
+  width: 3em;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList .header-fishlist th:nth-child(2) .btn-sort {
+  text-align: left;
+  padding-left: 6px;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList .header-fishlist th:nth-child(3) {
+  text-align: right;
+  width: 13em;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList .header-fishlist th:nth-child(3) .btn-sort {
+  text-align: right;
+  padding-right: 1.4em;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList .header-fishlist th .btn-sort {
+  color: #585858;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  line-height: 3em;
+  padding: 0;
+  margin: 0;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  transition: background-color 0.5s;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList .header-fishlist th .btn-sort:hover {
+  background-color: #D8D8D8;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList .header-fishlist th .btn-sort .mc-icon-sort-arrow {
+  font-family: FontAwesome;
+  line-height: 1.5em;
+  vertical-align: text-bottom;
+  color: #2ba6cb;
+  margin-left: 1px;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList .header-fishlist th.asc .mc-icon-sort-arrow:after {
+  content: "";
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList .header-fishlist th.dsc .mc-icon-sort-arrow:after {
+  content: "";
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList th, #mercury-calculator-2020 .fishlist-wrapper #fishList td {
+  cursor: pointer;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList input {
+  margin: 0.25em 1em;
+  cursor: pointer;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList label {
+  display: block;
+  padding: 0.5em 1em 0.5em 0;
+  cursor: pointer;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList label.mercury-exposure {
+  text-align: right;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList label.mercury-exposure .mercury-rating {
+  border-radius: 6px;
+  border: thin solid gray;
+  width: 45px;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 0.7em;
+  text-align: center;
+  margin-left: 0.75em;
+  color: white !important;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList label.mercury-exposure .mercury-rating.mercury-rating-best {
+  background-color: green;
+  border-color: green;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList label.mercury-exposure .mercury-rating.mercury-rating-best::after {
+  content: "best";
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList label.mercury-exposure .mercury-rating.mercury-rating-good {
+  background-color: #ff5600;
+  border-color: #ff5600;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList label.mercury-exposure .mercury-rating.mercury-rating-good::after {
+  content: "good";
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList label.mercury-exposure .mercury-rating.mercury-rating-avoid {
+  background-color: red;
+  border-color: red;
+}
+#mercury-calculator-2020 .fishlist-wrapper #fishList label.mercury-exposure .mercury-rating.mercury-rating-avoid::after {
+  content: "avoid";
+}
+#mercury-calculator-2020 .selected-fish {
+  width: 100%;
+  max-width: 500px;
+}
+#mercury-calculator-2020 .selected-fish .col-contents-right {
+  text-align: end;
+  margin-right: 0.5em;
+}
+#mercury-calculator-2020 .selected-fish li {
+  display: flex;
+  align-items: center;
+  padding-bottom: 1em;
+}
+#mercury-calculator-2020 #results-overview h2 {
+  margin-top: 0;
+}
+#mercury-calculator-2020 #chart-homemade {
+  background-image: url("../icons/human.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: auto 90%;
+  height: 260px;
+  width: 100%;
+  text-align: center;
+}
+#mercury-calculator-2020 #fishResults {
+  margin: 0 1.5em;
+}
+#mercury-calculator-2020 #fishResults .row-2col {
+  margin-bottom: 1em;
+}
+#mercury-calculator-2020 #fishResults .card {
+  margin-top: 1.5em;
+  padding: 1.5em 2em;
+  background-color: #E8EDEF;
+}
+#mercury-calculator-2020 #fishResults .card:first-child {
+  margin-top: 0;
+}
+#mercury-calculator-2020 #fishResults .card h3, #mercury-calculator-2020 #fishResults .card h4 {
+  color: #585858;
+  text-align: left;
+  margin: 0 1em 0.8em 0;
+  min-width: 100px;
+  font-family: "Open sans";
+  font-size: 1.2em;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+#mercury-calculator-2020 #fishResults .card .message {
+  display: flex;
+  margin: 0 auto 1em;
+}
+#mercury-calculator-2020 #fishResults .card .message p:first-child {
+  margin-top: 0;
+}
+#mercury-calculator-2020 #fishResults .card .message .message-content {
+  width: 100%;
+}
+#mercury-calculator-2020 #fishResults .card .message .message-main {
+  font-size: 1em;
+}
+#mercury-calculator-2020 #fishResults .card .message:first-child {
+  margin-top: 0;
+}
+#mercury-calculator-2020 #fishResults .card .message:last-child {
+  margin-bottom: 0;
+}
+#mercury-calculator-2020 #fishResults .mercury-level-wrapper {
+  width: 100%;
+  border: thin solid #c2c1c1;
+  height: 7px;
+  border-radius: 7px;
+  background-color: #ffffff;
+}
+#mercury-calculator-2020 #fishResults .mercury-level-wrapper .mercury-level-percent {
+  background-color: green;
+  animation-name: example;
+  animation-duration: 4s;
+  height: 100%;
+}
+#mercury-calculator-2020 #fishResults .mercury-level-wrapper.mercury-rating-best {
+  border-color: green;
+}
+#mercury-calculator-2020 #fishResults .mercury-level-wrapper.mercury-rating-best .mercury-level-percent {
+  background-color: green;
+}
+#mercury-calculator-2020 #fishResults .mercury-level-wrapper.mercury-rating-good {
+  border-color: #ff5600;
+}
+#mercury-calculator-2020 #fishResults .mercury-level-wrapper.mercury-rating-good .mercury-level-percent {
+  background-color: #ff5600;
+}
+#mercury-calculator-2020 #fishResults .mercury-level-wrapper.mercury-rating-avoid {
+  border-color: red;
+}
+#mercury-calculator-2020 #fishResults .mercury-level-wrapper.mercury-rating-avoid .mercury-level-percent {
+  background-color: red;
+}
+#mercury-calculator-2020 .results-data {
+  text-align: left;
+  margin-bottom: 2em;
+}
+#mercury-calculator-2020 .results-data h3 {
+  text-align: left;
+}
+#mercury-calculator-2020 .results-data h3, #mercury-calculator-2020 .results-data table, #mercury-calculator-2020 .results-data p {
+  margin-top: 1em;
+}
+#mercury-calculator-2020 .results-data table {
+  width: 100%;
+}
+#mercury-calculator-2020 .results-data table th {
+  font-weight: bold;
+}
+#mercury-calculator-2020 .results-data table td, #mercury-calculator-2020 .results-data table th {
+  padding: 0.8em;
+  text-align: left;
+  border: thin solid gray;
+  vertical-align: bottom;
+}
+#mercury-calculator-2020 .fishResultsRawData {
+  overflow-x: scroll;
+}
+
+/*# sourceMappingURL=main.css.map */

@@ -1,0 +1,532 @@
+@import url(https://fonts.googleapis.com/css2?family=Fjalla+One&family=Open+Sans:wght@300;400;500;600;700&display=swap);
+
+@import 'reset-wp-theme.scss';
+
+#mercury-calculator-2020 {
+
+  color: #292929;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+
+@import 'reset.scss';
+@import 'colors.scss';
+@import 'typography.scss';
+@import 'grid.scss';
+@import 'buttons.scss';
+@import 'inputs.scss';
+@import 'accordions.scss';
+
+/* Animation */
+
+/* make keyframes that tell the start state and the end state of our object */
+@-webkit-keyframes fadeIn { from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
+
+.fade-in {
+	opacity:0;  /* make things invisible upon start */
+	-webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+	-moz-animation:fadeIn ease-in 1;
+	animation:fadeIn ease-in 1;
+
+	-webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+	-moz-animation-fill-mode:forwards;
+	animation-fill-mode:forwards;
+
+	-webkit-animation-duration:.2s;
+	-moz-animation-duration:.2s;
+	animation-duration:.2s;
+}
+
+/* Fade Background */
+@-o-keyframes fadeIt {
+  0%   { background-color: #FFFFFF; }
+  50%  { background-color: #AD301B; }
+  100% { background-color: #FFFFFF; }
+}
+@keyframes fadeIt {
+  0%   { background-color: #FFFFFF; }
+  50%  { background-color: #AD301B; }
+  100% { background-color: #FFFFFF; }
+}
+
+.backgroundAnimated{
+    background-image:none !important;
+         -o-animation: fadeIt 5s ease-in-out;
+            animation: fadeIt 5s ease-in-out;
+}
+
+/* Workflow helpers */
+.display-none {
+  display: none !important;
+}
+
+.question-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.question-one input {
+  width: 144px;
+  text-align: center;
+}
+
+/* Validation */
+#weight:invalid {
+  border-color: $ui-warning-required;
+}
+
+/* Icons */
+.mc-icon-close-x {
+  float: right;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  display: block;
+  border-radius: 100px;
+  text-align: center;
+  font-size: 1.5em;
+  transition: background-color 0.5s;
+  color: inherit;
+
+  &:hover, &:focus {
+    background-color: $ui-gray-02;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+}
+
+.mc-icon {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+
+  background-color: #fff;
+  background-repeat: no-repeat;
+
+  border-radius: 40px;
+  //border: thin solid black;
+
+  margin-right: 1em;
+
+  &.mc-icon-toxin {
+    background-image: url('../icons/toxin.svg');
+  }
+
+  &.microplastics {
+    background-image: url('../icons/microplastics.svg');
+  }
+
+  &.bycatch {
+    background-image: url('../icons/bycatch.svg');
+  }
+
+}
+
+
+/* Misc */
+.highlight {
+  background-color: $ui-highlight-yellow;
+  font-weight: bold;
+  color: $brand-02;
+}
+
+/* Dot indicators */
+.dot {
+  height: 12px;
+  width: 12px;
+  background-color: $ui-gray-01;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+
+.mercury-recommended{
+  background-color: $chart-04;
+}
+
+.mercury-overage {
+  background-color: $chart-05;
+}
+
+/* Fish selector */
+#filterFish {
+  background-image: url('../icons/search-solid.svg');
+  background-position: 16px 10px;
+  background-repeat: no-repeat;
+  background-size: 24px;
+
+  border-radius: 2em;
+
+  padding-left: 54px !important; // Overrides WP theme
+  margin-bottom: 1em;
+
+  width: 100%;
+  max-width: 500px;
+}
+
+
+/* Fish List */
+
+.fishlist-wrapper {
+  max-height: 31vh;
+
+  border: 3px solid $ui-gray-01;
+  border-radius: 6px;
+
+  overflow-y: scroll;
+
+  box-sizing: border-box;
+
+  width: 100%;
+  max-width: 500px;
+
+  &.error {
+    padding:1em;
+    background-color:$ui-highlight-yellow;
+  }
+
+  #fishList {
+    width: 100%;
+    max-width: 500px;
+
+    tr {
+      height: 32px;
+
+      &:nth-child(odd) {
+        background-color: #f2f2f2;
+      }
+
+      &:hover {
+        background-color: $ui-blue-01;
+        .checkmark {
+          border-color: #2ba6cb;
+        }
+      }
+
+    }
+
+    .header-fishlist {
+      margin-bottom: 0;
+      text-align: left;
+      font-weight: bold;
+
+      th {
+        padding: 0;
+        background-color: #f2f2f2;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        box-shadow: 8px -1px 8px gray;
+
+        &:nth-child(1) {
+          width: 3em;
+        }
+
+        &:nth-child(2) {
+
+            .btn-sort {
+              text-align: left;
+              padding-left: 6px;
+            }
+        }
+
+        &:nth-child(3) {
+          text-align: right;
+          width: 13em;
+
+          .btn-sort {
+            text-align: right;
+            padding-right: 1.4em;
+          }
+        }
+
+        .btn-sort {
+          color: #585858;
+
+          // Safari adds "buttonface" style, this fixes that
+          background-color: transparent;
+
+          border: none;
+          cursor: pointer;
+
+          width: 100%;
+          height: 100%;
+          line-height: 3em;
+
+          padding: 0;
+          margin: 0;
+
+          font-size: .75em;
+
+          text-transform: uppercase;
+
+          transition: background-color 0.5s;
+
+          &:hover {
+            background-color: $ui-gray-01;
+          }
+
+          .mc-icon-sort-arrow {
+            font-family: FontAwesome;
+            line-height: 1.5em;
+            vertical-align: text-bottom;
+
+            color: $brand-05;
+
+            margin-left: 1px;
+          }
+
+        }
+
+        &.asc .mc-icon-sort-arrow{
+          &:after {
+            content: '\f062';
+          }
+        }
+
+        &.dsc .mc-icon-sort-arrow{
+          &:after {
+            content: '\f063';
+          }
+        }
+
+      }
+    }
+
+    th, td {
+      cursor: pointer;
+    }
+
+    input {
+      margin: .25em 1em;
+      cursor: pointer;
+    }
+
+    label
+    {
+      display: block;
+      padding: .5em 1em .5em 0;
+      cursor: pointer;
+
+
+      &.mercury-exposure {
+        text-align: right;
+
+        .mercury-rating {
+          //width: 100px;
+          border-radius: 6px;
+          border: thin solid gray;
+          width: 45px;
+          display: inline-block;
+          text-transform: uppercase;
+          font-size: .7em;
+          text-align: center;
+          margin-left: .75em;
+          color: white !important;
+
+          // Content inserted here because it messes with the sort function in the template
+
+          &.mercury-rating-best {
+            background-color: $chart-01;
+            border-color: $chart-01;
+            &::after {
+              content: "best";
+            }
+          }
+          &.mercury-rating-good {
+            background-color: $chart-02;
+            border-color: $chart-02;
+            &::after {
+              content: "good";
+            }
+          }
+          &.mercury-rating-avoid {
+            background-color: $chart-03;
+            border-color: $chart-03;
+            &::after {
+              content: "avoid";
+            }
+          }
+        }
+
+      }
+    }
+  }
+}
+
+/* Selected Fish Section */
+.selected-fish {
+  width: 100%;
+  max-width: 500px;
+
+  .col-contents-right {
+    text-align: end;
+    margin-right: .5em;
+  }
+
+  li {
+    // justify-content: space-between;
+    // display: flex;
+    display: flex;
+    align-items: center;
+    padding-bottom: 1em;
+    //justify-content: center;
+  }
+}
+
+/* Results page */
+#results-overview {
+  h2 {
+    margin-top:0;
+  }
+}
+
+/* Results Chart */
+
+#chart-homemade {
+  background-image: url('../icons/human.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: auto 90%;
+  height: 260px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Results - list of fish */
+
+#fishResults {
+  // width: 100%;
+  margin: 0 1.5em;
+
+  .row-2col {
+    margin-bottom: 1em;
+  }
+
+  .card {
+    // border-radius: 8px;
+    // box-shadow: 0px 4px 8px 0px $ui-gray-04;
+    margin-top: 1.5em;
+    padding: 1.5em 2em;
+    background-color: $ui-gray-04;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    h3, h4 {
+      color: $type-body-light;
+      text-align: left;
+      margin: 0 1em 0.8em 0;
+      min-width: 100px;
+      font-family: "Open sans";
+      font-size: 1.2em;
+      font-weight: 600;
+      letter-spacing: 0;
+    }
+
+    .message {
+      display: flex;
+      margin: 0 auto 1em;
+
+      p:first-child {
+        margin-top: 0;
+      }
+
+      .message-content {
+        width: 100%;
+      }
+
+      .message-main {
+        font-size: 1em;
+      }
+
+    }
+
+    .message:first-child {
+      margin-top: 0;
+    }
+
+    .message:last-child {
+      margin-bottom: 0;
+    }
+
+  }
+
+  .mercury-level-wrapper {
+    width: 100%;
+    border: thin solid $ui-gray-02;
+    height: 7px;
+    border-radius: 7px;
+    background-color: #ffffff;
+
+    .mercury-level-percent {
+      background-color: $chart-01;
+      animation-name: example;
+      animation-duration: 4s;
+      height: 100%;
+    }
+
+    &.mercury-rating-best {
+      border-color: $chart-01;
+      .mercury-level-percent {
+        background-color: $chart-01;
+      }
+    }
+    &.mercury-rating-good {
+      border-color: $chart-02;
+      .mercury-level-percent {
+        background-color: $chart-02;
+      }
+    }
+    &.mercury-rating-avoid {
+      border-color: $chart-03;
+      .mercury-level-percent {
+        background-color: $chart-03;
+      }
+    }
+
+  }
+
+}
+
+
+/* Results raw data */
+
+.results-data {
+  text-align: left;
+  margin-bottom: 2em;
+
+  h3 {
+    text-align: left;
+  }
+
+  h3, table, p {
+    margin-top: 1em;
+  }
+
+  table {
+    width: 100%;
+
+    th {
+      font-weight: bold;
+    }
+
+    td, th {
+      padding: .8em;
+      text-align: left;
+      border: thin solid gray;
+      vertical-align: bottom;
+    }
+  }
+
+}
+
+.fishResultsRawData {
+  overflow-x: scroll;
+}
+
+}

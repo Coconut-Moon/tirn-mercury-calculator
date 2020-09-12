@@ -1,0 +1,112 @@
+/* Inputs */
+
+.input.input-text,
+.input.input-number,
+.input.input-select {
+  background-color: #ffffff !important;
+  border: 3px solid #d8d8d8 !important;
+  border-radius: 2px;
+  //margin-bottom: 1em;
+  padding: 6px !important;
+  box-sizing: border-box;
+  line-height: 1.5em;
+
+  -webkit-appearance:none;
+}
+
+// Select styles for cross-browser consistency
+.input.input-select {
+  background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+) no-repeat 95% 50% #fff;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.input.input-lg {
+  height: 3em;
+}
+
+.input-number-small {
+  width: 3em;
+}
+
+// Custom checkboxes
+/* The container */
+.input-checkbox {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.input-checkbox input {
+  //position: absolute;
+  //opacity: 0;
+  //cursor: pointer;
+  //height: 0;
+  //width: 0;
+  opacity:0;
+  filter:alpha(opacity=0);
+  position:absolute
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 10px;
+  left: 9px;
+  height: 28px;
+  width: 28px;
+  border: 3px solid $ui-gray-01;
+  background-color: white;
+}
+
+/* On mouse-over, add a grey background color */
+.input-checkbox:hover input ~ .checkmark,
+.input-checkbox input:focus ~ .checkmark
+ {
+  border-color: $brand-05;
+}
+
+/* When the checkbox is checked, add a blue background */
+.input-checkbox input:checked ~ .checkmark {
+  background-color: $brand-05;
+  border-color: $brand-05;
+}
+
+.wrapper input:focus + label::before {
+  box-shadow: 0 0 0 3px #ffbf47;
+  outline: 3px solid transparent; /* For Windows high contrast mode. */
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.input-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.input-checkbox .checkmark:after {
+  left: 9px;
+  top: 4px;
+  width: 7px;
+  height: 14px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}

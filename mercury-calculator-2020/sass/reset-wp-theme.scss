@@ -1,0 +1,72 @@
+/* Override Wordpress injected classes */
+
+body[data-form-style="minimal"] #mercury-calculator-2020  .minimal-form-input {
+	position: unset;
+	padding-top: unset;
+	box-sizing: unset;
+	-webkit-box-sizing: unset;
+	-moz-box-sizing: unset;
+  display: unset;
+  width: unset;
+}
+
+body[data-form-style="minimal"]  #mercury-calculator-2020 input[type="text"] {
+  background-color: unset;
+  box-shadow: unset;
+  -webkit-box-shadow: unset;
+  //border: unset;
+  position: unset;
+  margin: unset;
+  margin-bottom: unset;
+  font-size: unset;
+  padding-top: inherit !important;
+  padding-bottom: inherit !important;
+  padding-left: inherit !important;
+  padding-right: inherit !important;
+}
+
+
+
+body[data-form-style="minimal"] #mercury-calculator-2020 .minimal-form-input label {
+	position: unset;
+	height: unset;
+  width: unset;
+  top: unset;
+  left: unset;
+  overflow: unset;
+  pointer-events: unset;
+  display: unset;
+  margin: unset;
+}
+
+
+body[data-form-style="minimal"] #mercury-calculator-2020 .minimal-form-input label::before, body[data-form-style="minimal"] .minimal-form-input label::after {
+
+  content: none;
+  position: unset;
+  bottom: unset;
+  left: unset;
+  width: unset;
+  display: unset;
+  height: unset;
+  border-bottom: unset;
+
+}
+
+input[type="text"] {
+  padding: inherit !important;
+}
+
+select {
+  padding: inherit !important;
+  width: unset;
+  border: inherit !important;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  background-color: #fff;
+  box-shadow: unset !important;
+  transition: unset;
+}
