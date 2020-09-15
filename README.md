@@ -2,6 +2,8 @@
 
 Uses data from the FDA and EPA to calculate mercury and other risks of eating seafood.
 
+[github](https://github.com/outerpress/tirn-mercury-calculator)
+
 **Design notes**
 [Initial Wireframes](https://projects.invisionapp.com/prototype/Mercury-Calculator-Prototype-ck9vl8l7500l1l901y8d0n3fc)
 

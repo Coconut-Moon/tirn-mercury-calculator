@@ -13,6 +13,8 @@ jQuery(document).ready(function ($) {
 
   var selectedFish = []
 
+  var fishResultsArray = []
+
   // Navigate
   $(function () {
     $(".navigate-fish-list").click(function () {
@@ -35,7 +37,14 @@ jQuery(document).ready(function ($) {
     $("#backToStart").click(function () {
       $(".results").addClass("display-none")
       $(".question-one").removeClass("display-none")
+      $("#fishList .fish").prop("checked", false)
       window.scrollTo(0, 0);
+
+      // Remove all the fish
+      for (var i = 0; i < googleFishData.length; i++) {
+        removeFish(i)
+      }
+
     });
   });
 
@@ -205,8 +214,8 @@ jQuery(document).ready(function ($) {
     });
 
     // Merge our sizes and quantities with the selected fish
-    const fishResults = fishAmounts.map((item, i) => Object.assign({}, item, selectedFish[i]));
-    console.log("initial fishResults", fishResults);
+    fishResultsArray = fishAmounts.map((item, i) => Object.assign({}, item, selectedFish[i]));
+    console.log("initial fishResultsArray", fishResultsArray);
 
     // ----- Calculate mercury exposure
 
@@ -223,7 +232,7 @@ jQuery(document).ready(function ($) {
     }
 
     // Add daily mercury exposure per fish to Fish Results
-    fishResults.forEach(function (element) {
+    fishResultsArray.forEach(function (element) {
       // For each fish, daily mercury exposure = (Mercury content * daily grams) / weight in kilos
       element.mercuryexposuredaily = (Number(element["mercury"]) * Number(element["serving-grams-daily"])) / weightKilos;
     });
@@ -241,10 +250,10 @@ jQuery(document).ready(function ($) {
     }
 
     // Calculate user's total daily mercury exposure
-    const userDailyExposure = fishResults.sum("mercuryexposuredaily");
+    const userDailyExposure = fishResultsArray.sum("mercuryexposuredaily");
 
     // Add percent of total mercury exposure to each fish in fishlist
-    fishResults.forEach(function (element) {
+    fishResultsArray.forEach(function (element) {
       // For each fish, percent of mercury exposure = element.mercuryexposuredaily /userDailyExposure
       element.mercuryexposurepercent = Math.round((Number(element["mercuryexposuredaily"]) / userDailyExposure) * 100);
     });
@@ -306,11 +315,11 @@ jQuery(document).ready(function ($) {
 
     // --- render the results cards - separate function?
 
-    console.log("fishResults, as rendered", fishResults);
+    console.log("fishResultsArray, as rendered", fishResultsArray);
     // Now that the data is in place, render the results list
     function renderResults() {
       var template = $("#fishResultsTemplate").html();
-      var html = Mustache.render(template, fishResults);
+      var html = Mustache.render(template, fishResultsArray);
       $('#fishResults').html(html);
     }
     renderResults();
@@ -318,7 +327,7 @@ jQuery(document).ready(function ($) {
     // Render data in the footer
     function renderRawData() {
       var template = $("#fishResultsRawDataTemplate").html();
-      var html = Mustache.render(template, fishResults);
+      var html = Mustache.render(template, fishResultsArray);
       $('#fishResultsRawData').html(html);
     }
     renderRawData();
@@ -339,7 +348,10 @@ jQuery(document).ready(function ($) {
 
     })
     calculateResults(selectedFish);
-  }
+
+    updateResultsInputs()
+
+  };
 
   // Remove fish when x is clicked
   $(document).ready().on('click', '.remove-fish', function () {
@@ -347,74 +359,86 @@ jQuery(document).ready(function ($) {
     console.log(this)
   });
 
-  // Recalculate results when select list input changes
-  $(document).ready().on('change', '#fishResults select', function () {
+  // Recalculate results when serving quantity number changes
+  $(document).ready().on('change', '#fishResults input[type="number"]', function () {
 
     // Update the user inputs on the results page to match those on the selection page
+    let currentInput = parseInt($(this).attr("data-id"));
+
+    let currentValue = $(this).val();
+
+    // Set fish results select lists to correct amounts via a data attribute
+    $('#selectedFish input[type="number"]').each(function () {
+      thisFish = parseInt($(this).attr("data-id"))
+      console.log("This Fish", thisFish)
+
+      if (thisFish === currentInput) {
+        $(this).val(currentValue)
+      }
+
+      selectedFish.map((currentInput, i) => {
+        if (currentInput === thisFish) {
+          selectedFish[i]["serving-amount"] = currentValue;
+        }
+      })
+
+    });
+
+    calculateResults(selectedFish);
+
+    // Set selects to correct value
+    $(this).val(currentValue)
+
+    updateResultsInputs()
+
+  });
+
+  // Recalculate results when serving ounces changes
+  $(document).ready().on('change', '#fishResults select', function () {
+
+    // Get select id and value
 
     let currentSelect = $(this).attr("data-id");
 
     let currentValue = $(this).val();
 
-
     // Set fish results select lists to correct amounts via a data attribute
     $('#selectedFish select').each(function () {
       thisFish = $(this).attr("data-id")
-
       if ($(this).attr("data-id") === currentSelect) {
         $(this).val(currentValue)
       }
 
+      // Update the data with the correct value
       selectedFish.map((currentSelect, i) => {
         if (currentSelect === thisFish) {
-          selectedFish[i]["serving-amount"] = currentValue;
+          selectedFish[i]["serving-ounces"] = currentValue;
         }
       })
-
     });
 
     // Recalculate and render the page
     calculateResults(selectedFish);
 
     // Set selects to correct value
-    $("#" + currentSelect + "_ServingUnits").val(currentValue)
+    updateResultsInputs()
 
 
   });
 
-  // Recalculate results when select list number changes
-  $(document).ready().on('change', '#fishResults input[type="number"]', function () {
+  // Match select lists to their set values
+  function updateResultsInputs() {
 
-    // Update the user inputs on the results page to match those on the selection page
-
-    let currentInput = $(this).attr("data-id");
-
-    let currentValue = $(this).val();
-
-    // Set fish results select lists to correct amounts via a data attribute
-    $('#selectedFish input[type="number"').each(function () {
-      thisFish = $(this).attr("data-id")
-
-      if ($(this).attr("data-id") === currentInput) {
-        $(this).val(currentValue)
+    //Compare each element in that array to it's ID match in fishResults
+    var myStringArray = $('#selectedFish select');
+    var arrayLength = myStringArray.length;
+    for (var i = 0; i < arrayLength; i++) {
+      if ( $('#selectedFish select:eq(' + i +')').attr("data-id") === $('#fishResults select:eq(' + i +')').attr("data-id")) {
+        $('#fishResults select:eq(' + i +')').val( $('#selectedFish select:eq(' + i +')').val() )
       }
-      selectedFish.map((currentInput, i) => {
-        if (currentInput === thisFish) {
+    }
 
-
-          selectedFish[i]["serving-amount"] = currentValue;
-        }
-      })
-
-    });
-
-    calculateResults(selectedFish);
-
-    console.log("Fish results select value 2 ", currentValue)
-    console.log("This value pre-change ", $(this).val())
-    $(this).val(currentValue)
-
-  });
+  };
 
   // Filter list of fish
   function filterFishList() {
@@ -446,10 +470,6 @@ jQuery(document).ready(function ($) {
     dir = "asc";
     /*Make a loop that will continue until
     no switching has been done:*/
-
-    // $('#fishList').addClass("loading")
-    // $('#fishList td').addClass("display-none")
-
     while (switching) {
       //start by saying: no switching is done:
       switching = false;
@@ -509,7 +529,6 @@ jQuery(document).ready(function ($) {
     sortTable(2)
   });
 
-
   $(document).ready(function () {
 
     // Calculate results when user clicks "Show Results"
@@ -550,12 +569,8 @@ jQuery(document).ready(function ($) {
         var panel = this.nextElementSibling;
         if ($(panel).hasClass("active")) {
           $(panel).removeClass("active");
-          //panel.style.visibility = "hidden";
-          //panel.style.maxHeight = "0";
         } else {
           $(panel).addClass("active");
-          //panel.style.visibility = "visible";
-          //panel.style.maxHeight = "10000em";
         }
       });
     }

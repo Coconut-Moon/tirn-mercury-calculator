@@ -17,9 +17,15 @@
 // Select styles for cross-browser consistency
 .input.input-select {
   background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+) no-repeat 95% 50% #fff;
-	-moz-appearance: none;
-	-webkit-appearance: none;
-	appearance: none;
+
+  appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+
+  background-position-x: right;
+  background-size: 1em;
+
+  min-width: 145px;
 }
 
 .input.input-lg {
@@ -60,7 +66,8 @@
 /* Create a custom checkbox */
 .checkmark {
   position: absolute;
-  top: 10px;
+  box-sizing: border-box;
+  top: 5px;
   left: 9px;
   height: 28px;
   width: 28px;
@@ -100,8 +107,8 @@
 
 /* Style the checkmark/indicator */
 .input-checkbox .checkmark:after {
-  left: 9px;
-  top: 4px;
+  left: 7px;
+  top: 1px;
   width: 7px;
   height: 14px;
   border: solid white;

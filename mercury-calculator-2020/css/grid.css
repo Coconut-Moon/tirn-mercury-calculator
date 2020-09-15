@@ -1,11 +1,9 @@
 .flex-grid {
   margin: 0 auto;
-  padding: 1em;
 }
-
-@media (min-width: 576px) {
+@media (min-width: 1000px) {
   .flex-grid {
-    width: 80%;
+    padding: 1em;
   }
 }
 
@@ -40,7 +38,13 @@
 }
 
 .col-contents-right {
-  min-width: 195px;
+  min-width: 200px;
+  text-align: start;
+}
+@media (min-width: 500px) {
+  .col-contents-right {
+    text-align: end;
+  }
 }
 
 /* Spacing helpers */
@@ -86,11 +90,11 @@ form {
 }
 
 footer {
-  width: 80%;
+  width: 100%;
   margin: 0 auto 5em;
 }
 
-@media (min-width: 820px) {
+@media (min-width: 1000px) {
   .question-box.results {
     flex-direction: row;
   }

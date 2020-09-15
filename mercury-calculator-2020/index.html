@@ -26,7 +26,7 @@
           <p>Answer two questions to find out:</p>
             <ul class="list">
               <li>How much mercury is in the seafood you eat?</li>
-              <li> How do your seafood choices impact the ocean?</li>
+              <li>How do your seafood choices impact the ocean?</li>
             </ul>
           </ul>
           <br />
@@ -124,31 +124,36 @@
 
             <button class="accordion-trigger accordion-trigger-small"><span class="mc-icon mc-icon-accordion-trigger"></span> One serving is 6 to 8 ounces</button>
 
-            <div class="accordion-panel accordion-panel-small serving-info">
-              <h3>Common serving sizes</h3>
+            <div class="accordion-panel accordion-panel-small serving-info mb-2">
+              <h3 class="mb-2">Common serving sizes</h3>
+              <div class="row">
               <img src="/mercury-calculator-2020/icons/serving-filet.svg" alt="Large fish fillet">
               <p>A typical serving of fish (steak or fillet) is about 6 to 8 ounces for an adult.</p>
-              <br />
+            </div>
+            <div class="row">
               <img src="/mercury-calculator-2020/icons/serving-sushi.svg" alt="Piece of sushi">
               <p>A sushi order is 2 to 4 ounces per type.</p>
-              <br />
-              <br />
+            </div>
+            <div class="row">
               <img src="/mercury-calculator-2020/icons/serving-can.svg" alt="Can of tuna">
               <p>A standard can of tuna contains 6 ounces.</p>
-              <br />
-              <br />
+            </div>
             </div>
 
-            <ul id="selectedFish" class="selected-fish  mt-2" role="region" aria-live="polite">
+            <ul id="selectedFish" class="selected-fish" role="region" aria-live="polite">
               <p class="note note-callout text-center">Select a fish from the list.</p>
             </ul>
 
             <script id="selectedFishTemplate" type="text/template">
+
               {{#.}}
+
               <li id="selectedFish_{{ id }}" class="servings" data-id="{{ id }}">
+
                 <span class="col col-2">
                   <label for="{{ name }}">{{ name }}</label>
                 </span>
+
                 <span class="col col-2 col-contents-right">
 
                   <input name="serving-amount" aria-label="Number of servings" class="input input-number input-number-small" type="number" min="1" value="1" data-id="{{ id }}" onclick="this.select();">
@@ -160,8 +165,11 @@
                     <option value="1">Ounces</option>
                     <option value="28.35">Grams</option>
                   </select>
+
+                  <a class="mc-icon-close-x remove-fish" title="Remove {{ name }}" tabindex="0" data-id="{{ id }}"><span>&times;</span></a>
+
                 </span>
-                <a class="mc-icon-close-x remove-fish" title="Remove {{ name }}" tabindex="0" data-id="{{ id }}"><span>&times;</span></a>
+
               </li>
               {{/.}}
               {{^.}}
@@ -182,7 +190,7 @@
             <h2><span id="mercuryExposureMessage" class="highlight"></span> the safe mercury limit</h2>
             <p class="note" style="margin-top:0;font-size:.75em;" id="weightResultsMessage"><p>
 
-            <div id="chart-homemade">
+            <div id="results-chart">
               <svg id="mercuryExposureChart" version="1.2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="graph" aria-labelledby="title" role="img" height="260px">
                 <title id="title">Your mercury exposure</title>
                 <g>
@@ -191,22 +199,13 @@
                   <rect id="mercuryExposureRecBar" width="400" height="50%" y="50%" style="fill:rgba(21, 157, 235, 0.31)"></rect>
                 </g>
                 <g id="chartPercentageText" class="apexcharts-yaxis-texts-g">
-                  <text id="chartPercentage100" font-family="Helvetica, Arial, sans-serif" x="30" y="5%" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="chart-text chart-yaxis-label">
-                    <tspan id="SvgjsTspan1036">100</tspan>
-                  </text>
-                  <text id="chartPercentage80" font-family="Helvetica, Arial, sans-serif" x="30" y="20%" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="chart-text chart-yaxis-label">
-                    <tspan id="SvgjsTspan1038">80</tspan>
-                  </text>
-                  <text id="chartPercentage60" font-family="Helvetica, Arial, sans-serif" x="30" y="40%" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="chart-text chart-yaxis-label">
-                    <tspan id="SvgjsTspan1040">60</tspan>
-                  </text>
-                  <text id="chartPercentage40" font-family="Helvetica, Arial, sans-serif" x="30" y="60%" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="chart-text chart-yaxis-label">
-                    <tspan id="SvgjsTspan1042">40</tspan>
-                  </text>
-                  <text id="chartPercentage20" font-family="Helvetica, Arial, sans-serif" x="30" y="80%" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="chart-text chart-yaxis-label">
-                    <tspan id="SvgjsTspan1044">20</tspan>
-                  </text>
-                  <text id="chartPercentage0" font-family="Helvetica, Arial, sans-serif" x="30" y="95%" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="chart-text chart-yaxis-label"><tspan id="SvgjsTspan1046">0</tspan></text></g>
+                  <text id="chartPercentage100" font-family="Open Sans, Helvetica, Arial, sans-serif" x="290" y="5%" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="chart-text chart-yaxis-label">100</text>
+                  <text id="chartPercentage80" font-family="Open Sans, Helvetica, Arial, sans-serif" x="290" y="20%" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="chart-text chart-yaxis-label">80</text>
+                  <text id="chartPercentage60" font-family="Open Sans, Helvetica, Arial, sans-serif" x="290" y="40%" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="chart-text chart-yaxis-label">60</text>
+                  <text id="chartPercentage40" font-family="Open Sans, Helvetica, Arial, sans-serif" x="290" y="60%" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="chart-text chart-yaxis-label">40</text>
+                  <text id="chartPercentage20" font-family="Open Sans, Helvetica, Arial, sans-serif" x="290" y="80%" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="chart-text chart-yaxis-label">20</text>
+                  <text id="chartPercentage0" font-family="Open Sans, Helvetica, Arial, sans-serif" x="290" y="95%" text-anchor="end" dominant-baseline="auto" font-size="11px" font-weight="400" fill="#373d3f" class="chart-text chart-yaxis-label">0</text>
+                </g>
               </svg>
             </div>
             <p class="note">
@@ -224,20 +223,27 @@
             </div>
 
             <div id="fishResults">
-              <p class="note">Select a fish from the list.</p>
+
+              <p class="note note-callout text-center">Select a fish from the list.</p>
 
             </div>
 
             <script id="fishResultsTemplate" type="text/template">
+
               {{#.}}
+
               <div class="card" id="fishResult_{{ id }}">
-                <a class="mc-icon-close-x remove-fish" title="Remove {{ name }}" tabindex="0" data-id="{{ id }}"><span>&times;</span></a>
+
                 <div class="row-2col">
+
+                  <a class="mc-icon-close-x remove-fish" title="Remove {{ name }}" tabindex="0" data-id="{{ id }}"><span>&times;</span></a>
 
                   <h3 style="flex:3" class="col col-2 col-self-baseline">{{name}}</h3>
 
                   <span class="col col-2 col-self-baseline col-contents-right">
+
                     <input id="{{ id }}_Servings" name="serving-amount" class="input input-number input-number-small" type="number" min="1" value="{{ serving-amount }}" data-id="{{ id }}" onclick="this.select();">
+
                     <select class="input input-select" name="serving-ounces" id="{{ id }}_ServingUnits" data-id="{{ id }}" data-servings="{{ serving-ounces }}">
                       <option value="8">Fillet (8 oz)</option>
                       <option value="6">Can (6 oz)</option>
@@ -245,6 +251,7 @@
                       <option value="1">Ounces</option>
                       <option value="28.35">Grams</option>
                     </select>
+
                   </span>
 
                 </div>
@@ -308,7 +315,7 @@
               {{/.}}
 
               {{^.}}
-              <p class="note">Select a fish from the list.</p>
+              <p class="note note-callout text-center">Select a fish from the list.</p>
               {{/.}}
             </script>
 
@@ -318,8 +325,8 @@
 
     </main>
 
-    <footer>
-      <button class="accordion-trigger"><span class="mc-icon mc-icon-accordion-trigger"></span> About this calculator</button>
+    <!-- Display calculation data for troubleshooting -->
+      <button class="accordion-trigger display-none"><span class="mc-icon mc-icon-accordion-trigger"></span> About this calculator</button>
       <div class="accordion-panel results-data">
 
         <div id="fishResultsRawData">
@@ -353,21 +360,9 @@
 
         </script>
 
-        <p>
-          Mercury exposure is based on <a target="_blank" href="https://www.epa.gov/fish-tech/epa-fda-fish-advice-technical-information">data</a> from the U.S. Food and Drug Administration, which tests fish for mercury, and the U.S. Environmental Protection Agency, which suggests mercury levels that it considers safe for women of childbearing age.
-        </p>
-
-        <p>
-          The agencies <a target="_blank" href="https://www.epa.gov/fish-tech/epa-fda-fish-advice-technical-information">determine</a> mercury exposure by calculating the highest average amount of mercury that could be in a fish when eaten one, two, and three times a week without going over the maximum acceptable mercury intake amount for an average pregnant woman.
-        </p>
-
-        <p>
-          Turtle Island Restoration Network does not share, save, or track any data entered in the calculator. <a target="_blank" href="http://www.seaturtles.org/privacy-policy">View our privacy policy.</a>
-        </p>
-
 
       </div>
-    </footer>
+
 
   </div>
 

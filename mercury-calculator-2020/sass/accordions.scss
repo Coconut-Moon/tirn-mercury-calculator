@@ -3,6 +3,7 @@
   background-color: #eee;
   color: #444;
   cursor: pointer;
+  margin-top: 1em;
   padding: 14px;
   width: 100%;
   border: none;
@@ -14,6 +15,7 @@
     max-width: 500px;
     text-align: center;
     background-color: unset;
+    margin-top: 0;
     color: $brand-01;
 
     .mc-icon-accordion-trigger {

@@ -52,4 +52,28 @@ table {
   border-spacing: 0;
 }
 
+input[type=text] {
+  padding: inherit !important;
+}
+
+select {
+  padding: inherit !important;
+  width: unset;
+  border: inherit !important;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  background-color: #fff;
+  box-shadow: unset !important;
+  transition: unset;
+}
+
+.col {
+  position: unset;
+  display: unset;
+  float: unset;
+}
+
 /*# sourceMappingURL=reset.css.map */

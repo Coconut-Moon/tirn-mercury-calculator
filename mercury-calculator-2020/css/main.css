@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url(https://fonts.googleapis.com/css2?family=Fjalla+One&family=Open+Sans:wght@300;400;500;600;700&display=swap);
+@import url("https://fonts.googleapis.com/css2?family=Fjalla+One&family=Open+Sans:wght@300;400;500;600;700&display=swap");
 /* Override Wordpress injected classes */
 body[data-form-style=minimal] #mercury-calculator-2020 .minimal-form-input {
   position: unset;
@@ -48,28 +48,11 @@ body[data-form-style=minimal] #mercury-calculator-2020 .minimal-form-input label
   border-bottom: unset;
 }
 
-input[type=text] {
-  padding: inherit !important;
-}
-
-select {
-  padding: inherit !important;
-  width: unset;
-  border: inherit !important;
-  font-family: inherit;
-  font-weight: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  color: inherit;
-  background-color: #fff;
-  box-shadow: unset !important;
-  transition: unset;
-}
-
 #mercury-calculator-2020 {
   color: #292929;
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
+  margin-bottom: 2em;
   /* http://meyerweb.com/eric/tools/css/reset/ 
      v2.0 | 20110126
      License: none (public domain)
@@ -153,6 +136,27 @@ select {
   border-collapse: collapse;
   border-spacing: 0;
 }
+#mercury-calculator-2020 input[type=text] {
+  padding: inherit !important;
+}
+#mercury-calculator-2020 select {
+  padding: inherit !important;
+  width: unset;
+  border: inherit !important;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  background-color: #fff;
+  box-shadow: unset !important;
+  transition: unset;
+}
+#mercury-calculator-2020 .col {
+  position: unset;
+  display: unset;
+  float: unset;
+}
 #mercury-calculator-2020 button,
 #mercury-calculator-2020 input,
 #mercury-calculator-2020 select {
@@ -234,11 +238,10 @@ select {
 }
 #mercury-calculator-2020 .flex-grid {
   margin: 0 auto;
-  padding: 1em;
 }
-@media (min-width: 576px) {
+@media (min-width: 1000px) {
   #mercury-calculator-2020 .flex-grid {
-    width: 80%;
+    padding: 1em;
   }
 }
 #mercury-calculator-2020 .flex-grid,
@@ -266,7 +269,13 @@ select {
   align-self: center;
 }
 #mercury-calculator-2020 .col-contents-right {
-  min-width: 195px;
+  min-width: 200px;
+  text-align: start;
+}
+@media (min-width: 500px) {
+  #mercury-calculator-2020 .col-contents-right {
+    text-align: end;
+  }
 }
 #mercury-calculator-2020 .mb-0 {
   margin-bottom: 0;
@@ -299,10 +308,10 @@ select {
   align-items: center;
 }
 #mercury-calculator-2020 footer {
-  width: 80%;
+  width: 100%;
   margin: 0 auto 5em;
 }
-@media (min-width: 820px) {
+@media (min-width: 1000px) {
   #mercury-calculator-2020 .question-box.results {
     flex-direction: row;
   }
@@ -426,9 +435,12 @@ select {
 }
 #mercury-calculator-2020 .input.input-select {
   background: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0Ljk1IDEwIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzQ0NDt9PC9zdHlsZT48L2RlZnM+PHRpdGxlPmFycm93czwvdGl0bGU+PHJlY3QgY2xhc3M9ImNscy0xIiB3aWR0aD0iNC45NSIgaGVpZ2h0PSIxMCIvPjxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIxLjQxIDQuNjcgMi40OCAzLjE4IDMuNTQgNC42NyAxLjQxIDQuNjciLz48cG9seWdvbiBjbGFzcz0iY2xzLTIiIHBvaW50cz0iMy41NCA1LjMzIDIuNDggNi44MiAxLjQxIDUuMzMgMy41NCA1LjMzIi8+PC9zdmc+) no-repeat 95% 50% #fff;
+  appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
-  appearance: none;
+  background-position-x: right;
+  background-size: 1em;
+  min-width: 145px;
 }
 #mercury-calculator-2020 .input.input-lg {
   height: 3em;
@@ -455,7 +467,8 @@ select {
 }
 #mercury-calculator-2020 .checkmark {
   position: absolute;
-  top: 10px;
+  box-sizing: border-box;
+  top: 5px;
   left: 9px;
   height: 28px;
   width: 28px;
@@ -484,8 +497,8 @@ select {
   display: block;
 }
 #mercury-calculator-2020 .input-checkbox .checkmark:after {
-  left: 9px;
-  top: 4px;
+  left: 7px;
+  top: 1px;
   width: 7px;
   height: 14px;
   border: solid white;
@@ -498,6 +511,7 @@ select {
   background-color: #eee;
   color: #444;
   cursor: pointer;
+  margin-top: 1em;
   padding: 14px;
   width: 100%;
   border: none;
@@ -509,6 +523,7 @@ select {
   max-width: 500px;
   text-align: center;
   background-color: unset;
+  margin-top: 0;
   color: #014494;
 }
 #mercury-calculator-2020 .accordion-trigger.accordion-trigger-small .mc-icon-accordion-trigger {
@@ -645,11 +660,10 @@ select {
   border-color: red;
 }
 #mercury-calculator-2020 .mc-icon-close-x {
-  float: right;
   width: 24px;
   height: 24px;
   line-height: 24px;
-  display: block;
+  display: inline-block;
   border-radius: 100px;
   text-align: center;
   font-size: 1.5em;
@@ -752,7 +766,7 @@ select {
   box-shadow: 8px -1px 8px gray;
 }
 #mercury-calculator-2020 .fishlist-wrapper #fishList .header-fishlist th:nth-child(1) {
-  width: 3em;
+  min-width: 3em;
 }
 #mercury-calculator-2020 .fishlist-wrapper #fishList .header-fishlist th:nth-child(2) .btn-sort {
   text-align: left;
@@ -773,8 +787,8 @@ select {
   cursor: pointer;
   width: 100%;
   height: 100%;
-  line-height: 3em;
-  padding: 0;
+  line-height: 1.25em;
+  padding: 0.5em 0 0.5em 0;
   margin: 0;
   font-size: 0.75em;
   text-transform: uppercase;
@@ -807,6 +821,7 @@ select {
   display: block;
   padding: 0.5em 1em 0.5em 0;
   cursor: pointer;
+  font-size: 0.875em;
 }
 #mercury-calculator-2020 .fishlist-wrapper #fishList label.mercury-exposure {
   text-align: right;
@@ -847,19 +862,41 @@ select {
   width: 100%;
   max-width: 500px;
 }
-#mercury-calculator-2020 .selected-fish .col-contents-right {
-  text-align: end;
-  margin-right: 0.5em;
-}
 #mercury-calculator-2020 .selected-fish li {
   display: flex;
   align-items: center;
   padding-bottom: 1em;
+  flex-direction: column;
+}
+@media (min-width: 500px) {
+  #mercury-calculator-2020 .selected-fish li {
+    flex-direction: row;
+  }
+}
+#mercury-calculator-2020 .selected-fish li select {
+  width: 73%;
+  min-width: 145px;
+}
+@media (min-width: 500px) {
+  #mercury-calculator-2020 .selected-fish li select {
+    width: unset;
+  }
+}
+#mercury-calculator-2020 .selected-fish li .mc-icon-close-x {
+  float: right;
+  vertical-align: unset;
+  margin-top: 0.3em;
+}
+@media (min-width: 500px) {
+  #mercury-calculator-2020 .selected-fish li .mc-icon-close-x {
+    float: unset;
+    margin-top: unset;
+  }
 }
 #mercury-calculator-2020 #results-overview h2 {
   margin-top: 0;
 }
-#mercury-calculator-2020 #chart-homemade {
+#mercury-calculator-2020 #results-chart {
   background-image: url("../icons/human.svg");
   background-repeat: no-repeat;
   background-position: center center;
@@ -868,16 +905,27 @@ select {
   width: 100%;
   text-align: center;
 }
-#mercury-calculator-2020 #fishResults {
-  margin: 0 1.5em;
+@media (min-width: 1000px) {
+  #mercury-calculator-2020 #fishResults {
+    margin: 0 1.5em;
+  }
 }
 #mercury-calculator-2020 #fishResults .row-2col {
   margin-bottom: 1em;
+  flex-direction: column;
+}
+@media (min-width: 500px) {
+  #mercury-calculator-2020 #fishResults .row-2col {
+    flex-direction: row;
+  }
 }
 #mercury-calculator-2020 #fishResults .card {
   margin-top: 1.5em;
   padding: 1.5em 2em;
   background-color: #E8EDEF;
+}
+#mercury-calculator-2020 #fishResults .card .col-contents-right {
+  margin-right: 8px;
 }
 #mercury-calculator-2020 #fishResults .card:first-child {
   margin-top: 0;
@@ -891,6 +939,15 @@ select {
   font-size: 1.2em;
   font-weight: 600;
   letter-spacing: 0;
+}
+#mercury-calculator-2020 #fishResults .card .mc-icon-close-x {
+  position: absolute;
+  right: 16px;
+}
+@media (min-width: 500px) {
+  #mercury-calculator-2020 #fishResults .card .mc-icon-close-x {
+    margin-top: 6px;
+  }
 }
 #mercury-calculator-2020 #fishResults .card .message {
   display: flex;

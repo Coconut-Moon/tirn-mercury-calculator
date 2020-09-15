@@ -2,14 +2,15 @@
 $base-line-height: 1em;
 
 .flex-grid{
-  // width: 100%;
   margin: 0 auto;
-  padding: 1em;
+  @media (min-width: 1000px) {
+    padding: 1em;
+  }
 }
 
 .flex-grid {
   // Small devices (landscape phones, 576px and up)
-  @media (min-width: 576px) { width: 80%; }
+  // @media (min-width: 576px) { width: 80%; }
 
 }
 
@@ -44,7 +45,12 @@ $base-line-height: 1em;
 }
 
 .col-contents-right {
-  min-width: 195px;
+  min-width: 200px;
+  text-align: start;
+  
+    @media (min-width: 500px) {
+      text-align: end;
+    }
 }
 
 /* Spacing helpers */
@@ -92,14 +98,14 @@ form {
 
 footer {
   //overflow: scroll;
-  width: 80%;
+  width: 100%;
   margin: 0 auto 5em;
 }
 
 .question-box.results {
 
-  // // Medium devices (tablets, 820px and up)
-  @media (min-width: 820px) {
+  // // Medium devices (tablets, 630px and up)
+  @media (min-width: 1000px) {
     flex-direction: row;
    }
 
