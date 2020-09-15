@@ -51,9 +51,9 @@ jQuery(document).ready(function ($) {
   // Display the list of fish on the page
 
   function renderFishList(googleFishData) {
-    var template = $("#template").html();
+    var template = $("#fishListTemplate").html();
     var html = Mustache.to_html(template, googleFishData);
-    $('#fishList').html(html);
+    $('#fishListTable').html(html);
   }
 
   // Create the array of selected fish
@@ -157,7 +157,6 @@ jQuery(document).ready(function ($) {
     renderSelectedFishTemplate();
 
     // Enable/disable the results button
-    // $("#fishList input:checkbox:checked").length
     if ($("#fishList input[type='checkbox']:checked").length > 0) {
       //Enable the submit button.
       $('#showResults').attr("disabled", false);

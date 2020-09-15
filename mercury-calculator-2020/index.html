@@ -86,11 +86,15 @@
           <input id="filterFish" aria-label="Search for fish" class="input input-lg input-text" type="text"  onclick="this.select();" placeholder="Search seafood list..."
           />
 
-          <div class="fishlist-wrapper">
-            <table id="fishList" aria-labelledby="filterFish"></table>
+          <div id="fishListTable" class="fishlist-wrapper">
+
           </div>
 
-          <script id="template" type="text/template">
+          <script id="fishListTemplate" type="text/template">
+            {{^.}}
+              <p class="note note-callout text-center">Loading fish list...</p>
+            {{/.}}
+            <table id="fishList" aria-labelledby="filterFish">
             <tr class="header-fishlist">
               <th scope="col"></th>
               <th scope="col" class="asc">
@@ -118,6 +122,7 @@
               <td><label for="fish_{{ id }}" title="Mercury per ounce" class="mercury-exposure">{{ mercury }} <span class="mercury-rating mercury-rating-{{mercury-rating}}"></span></label></td>
             </tr>
             {{/.}}
+          </table>
           </script>
 
             <p class="mb-0 mt-3"><strong>How much do you eat in one week?</strong></p>
@@ -163,7 +168,7 @@
                     <option value="6">Can (6 oz)</option>
                     <option value="2">Sushi roll (2 oz)</option>
                     <option value="1">Ounces</option>
-                    <option value="28.35">Grams</option>
+                    <option value="0.0353">Grams</option>
                   </select>
 
                   <a class="mc-icon-close-x remove-fish" title="Remove {{ name }}" tabindex="0" data-id="{{ id }}"><span>&times;</span></a>
@@ -249,7 +254,7 @@
                       <option value="6">Can (6 oz)</option>
                       <option value="2">Sushi roll (2 oz)</option>
                       <option value="1">Ounces</option>
-                      <option value="28.35">Grams</option>
+                      <option value="0.0353">Grams</option>
                     </select>
 
                   </span>

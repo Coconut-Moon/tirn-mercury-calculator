@@ -16,14 +16,13 @@ Custom icons are in the Assets folder. Edit with Affinity Designer.
 
 ***Running on Wordpress***
 
-* Upload files to root
-* Create a new page template
-* Enqueue scripts and CSS in functions.php
+* Upload files to root folder
+* Enqueue main.js, main.css, and mustache in functions.php:
 https://stackoverflow.com/questions/17967364/how-to-link-a-script-in-wordpress
-* Embed HTML content (between Body tags) in page using template
+* Add index.html content (marked between comments) to a wordpress HTML block
 
 **Dependencies**
 * Google spreadsheet delivers data as JSON
-* Jquery - This is probably unnecessary. When we move from prototype to real thing, consider removing
-* Mustache.js - This is making life very easy, converting from JSON to html. Replace if there's a better option
+* Jquery
+* Mustache.js
 * Fontawesome Icons
