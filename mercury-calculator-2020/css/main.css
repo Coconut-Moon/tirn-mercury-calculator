@@ -81,6 +81,7 @@ body[data-form-style=minimal] #mercury-calculator-2020 .minimal-form-input label
   /* Animation */
   /* make keyframes that tell the start state and the end state of our object */
   /* Fade Background */
+  /* :not(:required) hides this rule from IE9 and below */
   /* Workflow helpers */
   /* Validation */
   /* Icons */
@@ -644,6 +645,57 @@ body[data-form-style=minimal] #mercury-calculator-2020 .minimal-form-input label
   -o-animation: fadeIt 5s ease-in-out;
   animation: fadeIt 5s ease-in-out;
 }
+@-moz-keyframes three-quarters-loader {
+  0% {
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes three-quarters-loader {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes three-quarters-loader {
+  0% {
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+#mercury-calculator-2020 .three-quarters-loader:not(:required) {
+  -moz-animation: three-quarters-loader 1250ms infinite linear;
+  -webkit-animation: three-quarters-loader 1250ms infinite linear;
+  animation: three-quarters-loader 1250ms infinite linear;
+  border: 8px solid #38e;
+  border-right-color: transparent;
+  border-radius: 16px;
+  box-sizing: border-box;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  text-indent: -9999px;
+  width: 32px;
+  height: 32px;
+  margin: 30px 0;
+  left: 47%;
+}
 #mercury-calculator-2020 .display-none {
   display: none !important;
 }
@@ -976,7 +1028,7 @@ body[data-form-style=minimal] #mercury-calculator-2020 .minimal-form-input label
   background-color: #ffffff;
 }
 #mercury-calculator-2020 #fishResults .mercury-level-wrapper .mercury-level-percent {
-  background-color: green;
+  background-color: #2ba6cb;
   animation-name: example;
   animation-duration: 4s;
   height: 100%;

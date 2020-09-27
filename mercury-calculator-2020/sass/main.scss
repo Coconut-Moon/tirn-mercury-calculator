@@ -19,6 +19,7 @@
 
 /* Animation */
 
+// ----- Fade in
 /* make keyframes that tell the start state and the end state of our object */
 @-webkit-keyframes fadeIn { from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
 @-moz-keyframes fadeIn { from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
@@ -55,6 +56,61 @@
     background-image:none !important;
          -o-animation: fadeIt 5s ease-in-out;
             animation: fadeIt 5s ease-in-out;
+}
+
+
+// ---- Loading spinner - from https://github.com/jlong/css-spinners
+@-moz-keyframes three-quarters-loader {
+  0% {
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes three-quarters-loader {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes three-quarters-loader {
+  0% {
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+/* :not(:required) hides this rule from IE9 and below */
+.three-quarters-loader:not(:required) {
+  -moz-animation: three-quarters-loader 1250ms infinite linear;
+  -webkit-animation: three-quarters-loader 1250ms infinite linear;
+  animation: three-quarters-loader 1250ms infinite linear;
+  border: 8px solid #38e;
+  border-right-color: transparent;
+  border-radius: 16px;
+  box-sizing: border-box;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  text-indent: -9999px;
+  width: 32px;
+  height: 32px;
+  margin: 30px 0;
+  left: 47%;
 }
 
 /* Workflow helpers */
@@ -328,8 +384,7 @@
           margin-left: .75em;
           color: white !important;
 
-          // Content inserted here because it messes with the sort function in the template
-
+          // Content inserted here because it would break the sort function in the template if in the html
           &.mercury-rating-best {
             background-color: $chart-01;
             border-color: $chart-01;
@@ -500,7 +555,7 @@
     background-color: #ffffff;
 
     .mercury-level-percent {
-      background-color: $chart-01;
+      background-color: $brand-05;
       animation-name: example;
       animation-duration: 4s;
       height: 100%;

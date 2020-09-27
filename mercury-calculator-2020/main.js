@@ -251,10 +251,11 @@ jQuery(document).ready(function ($) {
     // Calculate user's total daily mercury exposure
     const userDailyExposure = fishResultsArray.sum("mercuryexposuredaily");
 
-    // Add percent of total mercury exposure to each fish in fishlist
+    // Add total mercury exposure to each fish in fishlist
     fishResultsArray.forEach(function (element) {
       // For each fish, percent of mercury exposure = element.mercuryexposuredaily /userDailyExposure
       element.mercuryexposurepercent = Math.round((Number(element["mercuryexposuredaily"]) / userDailyExposure) * 100);
+      element.mercuryexposureweeklytotal = (Number(element["mercuryexposuredaily"]) * 7).toFixed(3);
     });
 
     // Calculate total mercury exposure compared to EPA limit
