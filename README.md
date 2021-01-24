@@ -11,22 +11,22 @@ Custom icons are in the Assets folder. Edit with Affinity Designer.
 
 **Running locally**
 
-* Run on localhost.
-* Use Sass to generate CSS files.
+* Runs on localhost. If using Python run `python3 -m http.server`
+* Uses Sass to generate CSS files. Run `sass --watch sass:css` inside mercury-calculator-2020 folder
 
-***Running on Wordpress***
+**Running on Wordpress**
 
-* Upload files to root folder
+* Upload mercury-calculator-2020 folder to site root folder
 
 * [Enqueue scripts](https://stackoverflow.com/questions/17967364/how-to-link-a-script-in-wordpress) main.js, main.css, and mustache in functions.php of Salient child theme.
 
-Example - enqueueing scripts so they only show up on the whats-the-catch page:
+Example - enqueueing scripts so they only show up on a single page (replace page-slug with):
 
 ```
 // Mercury Calculator
 add_action('wp_enqueue_scripts', 'load_mercury_calculator');
 function load_mercury_calculator() {
-	if ( is_single('whats-the-catch') ) {
+	if ( is_single('page-slug') ) {
 
 		wp_enqueue_style( 'calculator-styles', '/mercury-calculator-2020/css/main.css', array(), '1.0', 'all' );
 
@@ -38,7 +38,7 @@ function load_mercury_calculator() {
 }
 ```
 
-* Add index.html content (marked between comments) to a wordpress HTML block
+* Add index.html content (marked between comments) to a Salient Raw HTML block.
 
 **Dependencies**
 * Google spreadsheet delivers data as JSON
