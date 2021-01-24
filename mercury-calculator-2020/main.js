@@ -111,6 +111,8 @@ jQuery(document).ready(function ($) {
           "mercury": Number(this.gsx$mercurylevel.$t),
           "mercury-rating": this.gsx$mercuryrating.$t,
           "message": this.gsx$message.$t,
+          "general-alert": this.gsx$generalalert.$t,
+          "general-alert-message": this.gsx$generalalertmessage.$t,
           "bycatch-level": this.gsx$bycatchlevel.$t,
           "bycatch-message": this.gsx$bycatchmessage.$t,
           "microplastics-message": this.gsx$microplasticsmessage.$t
@@ -255,7 +257,8 @@ jQuery(document).ready(function ($) {
     fishResultsArray.forEach(function (element) {
       // For each fish, percent of mercury exposure = element.mercuryexposuredaily /userDailyExposure
       element.mercuryexposurepercent = Math.round((Number(element["mercuryexposuredaily"]) / userDailyExposure) * 100);
-      element.mercuryexposureweeklytotal = (Number(element["mercuryexposuredaily"]) * 7).toFixed(3);
+      element.mercuryexposureepa = Math.round((Number(element["mercuryexposuredaily"]) / EPADailyExposureLimit) * 100);
+      //element.mercuryexposureweeklytotal = (Number(element["mercuryexposuredaily"]) * 7).toFixed(3);
     });
 
     // Calculate total mercury exposure compared to EPA limit

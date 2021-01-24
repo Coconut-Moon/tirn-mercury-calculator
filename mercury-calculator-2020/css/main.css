@@ -737,6 +737,9 @@ body[data-form-style=minimal] #mercury-calculator-2020 .minimal-form-input label
   border-radius: 40px;
   margin-right: 1em;
 }
+#mercury-calculator-2020 .mc-icon.mc-icon-general-alert {
+  background-image: url("../icons/general-alert.svg");
+}
 #mercury-calculator-2020 .mc-icon.mc-icon-toxin {
   background-image: url("../icons/toxin.svg");
 }
@@ -910,6 +913,10 @@ body[data-form-style=minimal] #mercury-calculator-2020 .minimal-form-input label
 #mercury-calculator-2020 .fishlist-wrapper #fishList label.mercury-exposure .mercury-rating.mercury-rating-avoid::after {
   content: "avoid";
 }
+#mercury-calculator-2020 .fishlist-wrapper .no-fish-message {
+  padding: 0 1em;
+  font-size: 0.875em;
+}
 #mercury-calculator-2020 .selected-fish {
   width: 100%;
   max-width: 500px;
@@ -956,6 +963,12 @@ body[data-form-style=minimal] #mercury-calculator-2020 .minimal-form-input label
   height: 260px;
   width: 100%;
   text-align: center;
+}
+#mercury-calculator-2020 .results-chart-key {
+  text-align: left;
+  width: 175px;
+  margin-left: auto;
+  margin-right: auto;
 }
 @media (min-width: 1000px) {
   #mercury-calculator-2020 #fishResults {
@@ -1026,6 +1039,7 @@ body[data-form-style=minimal] #mercury-calculator-2020 .minimal-form-input label
   height: 7px;
   border-radius: 7px;
   background-color: #ffffff;
+  overflow: hidden;
 }
 #mercury-calculator-2020 #fishResults .mercury-level-wrapper .mercury-level-percent {
   background-color: #2ba6cb;

@@ -1,17 +1,12 @@
 
 $base-line-height: 1em;
+$breakpoint-wide:  (min-width: 1000px);
 
 .flex-grid{
   margin: 0 auto;
   @media (min-width: 1000px) {
     padding: 1em;
   }
-}
-
-.flex-grid {
-  // Small devices (landscape phones, 576px and up)
-  // @media (min-width: 576px) { width: 80%; }
-
 }
 
 .flex-grid,
@@ -47,7 +42,7 @@ $base-line-height: 1em;
 .col-contents-right {
   min-width: 200px;
   text-align: start;
-  
+
     @media (min-width: 500px) {
       text-align: end;
     }

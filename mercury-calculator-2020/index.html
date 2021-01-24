@@ -121,7 +121,9 @@
               <td><label for="fish_{{ id }}" title="Mercury per ounce" class="mercury-exposure">{{ mercury }} <span class="mercury-rating mercury-rating-{{mercury-rating}}"></span></label></td>
             </tr>
             {{/.}}
+
           </table>
+          <p class="no-fish-message">Not seeing your fish? Selections are based on <a href="https://www.epa.gov/fish-tech/epa-fda-fish-advice-technical-information" target="_blank">data</a> from the U.S. Food and Drug Administration, which tests commercial fish and shellfish for mercury.<p>
           </script>
 
             <p class="mb-0 mt-3"><strong>How much do you eat in one week?</strong></p>
@@ -140,7 +142,7 @@
             </div>
             <div class="row">
               <img src="/mercury-calculator-2020/icons/serving-can.svg" alt="Can of tuna">
-              <p>A standard can of tuna contains 6 ounces.</p>
+              <p>A standard can of tuna contains 5 ounces.</p>
             </div>
             </div>
 
@@ -164,7 +166,7 @@
 
                   <select aria-label="Type of serving" class="input input-select" name="serving-ounces" data-id="{{ id }}" data-servings="">
                     <option value="8">Fillet (8 oz)</option>
-                    <option value="6">Can (6 oz)</option>
+                    <option value="5">Can (5 oz)</option>
                     <option value="2">Sushi roll (2 oz)</option>
                     <option value="1">Ounces</option>
                     <option value="0.0353">Grams</option>
@@ -191,8 +193,8 @@
         <div class="question-box display-none results" id="results">
 
           <div id="results-overview" class="col">
-            <h2><span id="mercuryExposureMessage" class="highlight"></span> the safe mercury limit</h2>
-            <p class="note" style="margin-top:0;font-size:.75em;" id="weightResultsMessage"><p>
+            <h2>Your choices are <span id="mercuryExposureMessage" class="highlight"></span> the acceptable mercury intake amount</h2>
+            <p>Should be under 100%. <span id="weightResultsMessage"></span>.</p>
 
             <div id="results-chart">
               <svg id="mercuryExposureChart" version="1.2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="graph" aria-labelledby="title" role="img" height="260px">
@@ -212,7 +214,7 @@
                 </g>
               </svg>
             </div>
-            <p class="note">
+            <p class="results-chart-key note">
               <span class="dot mercury-recommended"></span> <abbr>EPA</abbr> recommended limit <br>
               <span class="dot mercury-overage"></span> Percent over the limit
             </p>
@@ -250,7 +252,7 @@
 
                     <select class="input input-select" name="serving-ounces" id="{{ id }}_ServingUnits" data-id="{{ id }}" data-servings="{{ serving-ounces }}">
                       <option value="8">Fillet (8 oz)</option>
-                      <option value="6">Can (6 oz)</option>
+                      <option value="5">Can (5 oz)</option>
                       <option value="2">Sushi roll (2 oz)</option>
                       <option value="1">Ounces</option>
                       <option value="0.0353">Grams</option>
@@ -273,15 +275,27 @@
                 <div class="message">
                   <div class="mc-icon mc-icon-toxin"></div>
                   <div class="message-content">
-                    <p><strong>Mercury exposure</strong></p>
+                    <p><strong>Mercury exposure - {{mercury-rating}}</strong></p>
                     <p>
-                     {{mercuryexposurepercent}}% of all selected fish
+                     {{mercuryexposureepa}}% of the safe limit
                     </p>
                     <div class="mercury-level-wrapper">
-                      <div style="width:{{mercuryexposurepercent}}%;" class="mercury-level-percent"></div>
+                      <div style="width:{{mercuryexposureepa}}%;" class="mercury-level-percent"></div>
                     </div>
                   </div>
                 </div>
+
+                {{#general-alert-message}}
+                  <div class="message">
+                    <div class="mc-icon mc-icon-general-alert"></div>
+                    <div class="message-content">
+                      <p><strong>{{general-alert}}</strong></p>
+                      <p>
+                        {{general-alert-message}}
+                      </p>
+                    </div>
+                  </div>
+                {{/general-alert-message}}
 
                 {{#bycatch-message}}
                   <div class="message">
