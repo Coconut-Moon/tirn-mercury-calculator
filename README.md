@@ -1,13 +1,14 @@
 # Mercury calculator for seaturtles.org.
 
-Uses data from the FDA and EPA to calculate mercury and other risks of eating seafood.
+Uses data from the FDA and EPA to calculate mercury and other risks of eating seafood. [github](https://github.com/outerpress/tirn-mercury-calculator)
 
-[github](https://github.com/outerpress/tirn-mercury-calculator)
+**Dependencies**
 
-**Design notes**
-[Initial Wireframes](https://projects.invisionapp.com/prototype/Mercury-Calculator-Prototype-ck9vl8l7500l1l901y8d0n3fc)
-
-Custom icons are in the Assets folder. Edit with Affinity Designer.
+* Google spreadsheet delivers seafood data as JSON
+* Jquery
+* Mustache.js
+* Fontawesome icons
+* Custom icons
 
 **Running locally**
 
@@ -40,8 +41,6 @@ function load_mercury_calculator() {
 
 * Add index.html content (marked between comments) to a Salient Raw HTML block.
 
-**Dependencies**
-* Google spreadsheet delivers data as JSON
-* Jquery
-* Mustache.js
-* Fontawesome Icons
+**Updating Custom icons**
+
+Custom icons are in the [Assets folder](https://github.com/outerpress/tirn-mercury-calculator/tree/master/mercury-calculator-2020/assets). Editable with Affinity Designer.
