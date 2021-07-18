@@ -27,7 +27,7 @@ Example - enqueueing scripts so they only show up on a single page (replace page
 // Mercury Calculator
 add_action('wp_enqueue_scripts', 'load_mercury_calculator');
 function load_mercury_calculator() {
-	if ( is_single('page-slug') ) {
+	if (is_page_template('template-name.php') ) {
 
 		wp_enqueue_style( 'calculator-styles', '/mercury-calculator-2020/css/main.css', array(), '1.0', 'all' );
 
