@@ -2,12 +2,9 @@ jQuery(document).ready(function ($) {
 
   // ID of the Google Spreadsheet
   var spreadsheetID = '1Boy1UKFhf_wMjJ6wHHFWAEdRTZ3QxK0f9rntOSkUjmM';
-
+  const secretKey = 'REPLACE ME'
   // Json URL
-  var url =
-    'https://spreadsheets.google.com/feeds/list/' +
-    spreadsheetID +
-    '/1/public/full?alt=json';
+  var url =`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetID}/values/Seafood%20list?alt=json&key=${secretKey}`;
 
   var googleFishData = []
 
@@ -99,23 +96,23 @@ jQuery(document).ready(function ($) {
 
   // Retrieve fish data
   $.getJSON(url, function (data) {
-
-    var entry = data.feed.entry;
-
+    console.log(data)
+    var entry = data.values;
+    entry.shift();
     // Format fish data to something we can read a bit more easily
     $(entry).each(function () {
       googleFishData.push(
         {
-          "id": Number(this.gsx$id.$t),
-          "name": this.gsx$fish.$t,
-          "mercury": Number(this.gsx$mercurylevel.$t),
-          "mercury-rating": this.gsx$mercuryrating.$t,
-          "message": this.gsx$message.$t,
-          "general-alert": this.gsx$generalalert.$t,
-          "general-alert-message": this.gsx$generalalertmessage.$t,
-          "bycatch-level": this.gsx$bycatchlevel.$t,
-          "bycatch-message": this.gsx$bycatchmessage.$t,
-          "microplastics-message": this.gsx$microplasticsmessage.$t
+          "id": Number(this[0]),
+          "name": this[1],
+          "mercury": Number(this[2]),
+          "mercury-rating": this[3],
+          "message": this[4],
+          "general-alert": this[5],
+          "general-alert-message": this[6],
+          "bycatch-level": this[7],
+          "bycatch-message": this[8],
+          "microplastics-message": this[9]
         }
       )
     })
